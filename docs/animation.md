@@ -259,7 +259,291 @@ trigger('keyframeTest', [
 ```
 
 ## Complex Animations
+With trigger, state, transition and animations, we already habe a nice bag of tools to work with animations. What's missing is the possibility to create complex ensembles of elements and animations.
 
+There are:
+
++ query to target other elements
++ stagger to play delayed animation on a group of elements
++ group  for parallel animations
++ and sequence for sequential animations
+
+You can alreayd target elements with the animation trigger but there is no possibility to involve children yet. You use query to do so. Here an example.
+
+Create a new component (`ng g component animations/complex-query`) and place 6 of the following elements your template.
+
+```html
+<div class="panel">
+  <h1>Headline 2</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dignissimos ut sit numquam veritatis sapiente error, quas soluta? Illum sequi dolorem cumque incidunt illo deleniti magnam porro consequuntur vero sint!</p>
+  <button>press me</button>
+</div>
+```
+
+Create a `3*n` grid of boxes in your component.
+
+```css
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+```
+
+Now you can animate them once the host component enters the view. By using query('.panel') we can select each panel in the order of their appearance in the DOM and apply an animation. The animation timing is offseted as we use stagger.
+
+
+```typescript
+@Component({
+	animations: [
+		trigger('showBoxesOnLoad', [
+		  transition(':enter', [
+		    query('.panel', [
+		      style({ opacity: 0, transform: 'translateY(-100px)'}),
+		      stagger(-30, [
+		        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
+		      ])
+		    ])
+		  ])
+		])
+	]
+})
+class ComplexQueryComponent {
+	@HostBinding('@showBoxesOnLoad')
+	public showBoxes = true;
+```
+
+That looks nice already. We also want to animate the background color of the host element itself.  By default what you pass into transition is considered as a sequence. You can use a group to animate in parall as you want the background to fade in in parallel:
+
+```
+transition(':enter', [
+	sequence([
+	  animate('3s', style({
+	    backgroundColor: 'hotpink'
+	  })),
+	  query('.panel', [
+	    style({ opacity: 0, transform: 'translateY(-100px)'}),
+	    stagger(-30, [
+	      animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
+	    ])
+	  ])
+	])
+])
+```
+if you want to persist the color (remember nothing after a transition is persisted) you need to provide a state or give the element an explicit background. Prepend your state definition to the transition.
+
+```
+state('true', style({
+	backgroundColor: 'hotpink'
+})),
+transition(':enter', [])
+```
+
+Let's try another animation.
+Headline, Copy and Button should appear one after another and it should be staggered across all panels. So first create a sequenced animation to show one element and stagger that for each panel.
+The difficult thing here is, we stagger the panel animations so they run pretty late. The animation system won't set any initial css values in beforehand, that's your duty. So pick whatever initial value you want, group them if necessary and put them before the actual query with the staggering animations. This way all initial css values are set and wait to be animated.
+
+```
+group([
+		query('h1', [
+		  style({ opacity: 0, transform: 'translateX(-100px)'}),
+		]),
+		query('p', [
+		    style({ opacity: 0, transform: 'translateX(100px)'}),
+		]),
+		query('button', [
+		    style({ opacity: 0, transform: 'translateX(-100px)'}),
+		]),
+	]),
+	query('.panel', [
+		stagger(30, [
+		  sequence([
+		    query('h1', [
+		      animate('250ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
+		    ]),
+		    query('p', [
+		      animate('250ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
+		    ]),
+		    query('button', [
+		      animate('250ms cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 1, transform: 'none' }))
+		    ]),
+		  ])
+	])
+```
+
+
+animations: [ trigger, trigger ] 
+trigger: [ state ] 
+
+## Router Animations
+That sound very special but after everything you learned around animations this is going to be pretty easy. There is only one thing to remember: Your state is the current router patj and you read it from your outlet by exposing the outlet state through the outlet template reference accessor.
+
+```
+<router-outlet #yourOutlet="outlet"></router-outlet>
+```
+Prepare a getter function to extract the current route which you can use as your state.
+
+```
+@ViewChild('yourOutlet') outlet: RouterOutlet;
+get routerState() {
+    return this.outlet.isActivated && this.outlet.activatedRoute.routeConfig.path;
+  }
+```
+
+You can test if it's workign inside your template:
+```
+{{routerState}}
+```
+
+It will output the current route as a string that you will use as your trigger to get a different state per route. Crate a trigger and bit it to your current route.
+
+```
+
+@Component({
+ //...
+  animations: [
+    trigger('routeAnimations', [
+      
+    ])
+  ]
+})
+export class AppComponent {
+  @HostBinding('@routeAnimations')
+  get routerState() {
+	...
+  }
+}
+
+```
+
+You can now create transitions between your router urls.
+
+```
+animations: [
+    trigger('routeAnimations', [
+
+      transition('* <=> *',[
+        query('.content',[
+          style({
+            opacity: 0
+          }),
+          animate('1s', style({
+            opacity: 1
+          }))
+        ])
+
+      ])
+    ])
+  ]
+  
+```
+
+Once you get the hand on nesting trigger, transition, animate, query, style and so on you can quickly create nice animations but it can get crowded. That's why you can read in animations from external files and also reuse animations with paramaters.
+
+## Animate Children
+If you mount the created examples in a router and you apply a routing animation on the router outlet you will see that neither of the children will animate. 
+
+You have to use animateChild() together with query to target the elements that contain your animation (full component tag name, nested class names or target the animation itself with the trigger Name @animationName. You can also target all animations if you want with the following query. It's important to pass optional as no every element with an animation is ready at that point of time.
+
+```
+query('@*', [
+    animateChild()
+], { optional: true })
+```
+
+The query + animateChild is basically the start signal for the child animation. Use it in combination with group or sequence if you animate anything else in your parent animation.
+
+## Reuse animations & params
+Let's look how we can reuse animations and also use params to customize them.
+
+A trigger value has an undocumented second format. Instead of being a string you can use an object with the type {value:string, params: {}}. Params will be passed through to the animation and you can interpolate the values.
+
+```
+
+@HostBinding('@myTrigger')
+public triggerState = {
+	value: 'left',
+	params: {
+		speed: '250ms',
+		backgroundColor: 'yellow'
+	}
+}
+
+trigger('myTrigger', [
+  transition('* => *', [
+	animate('{{speed}}', style({
+   		backgroundColor: '{{backgroundColor}}'
+	}))
+  ])
+]),
+
+stateOne() {
+	this.triggerState = {
+	  value: 'left',
+	  params: {
+	    speed: '250ms',
+	    backgroundColor: 'red'
+	  }
+	};
+}
+stateOne() {
+	this.triggerState = {
+	  value: 'right',
+	  params: {
+	    speed: '2000ms',
+	    backgroundColor: 'green'
+	  }
+	};
+}
+    
+```
+
+Each time you assign a new value to `triggerState` you trigger the animation system because the value of the trigegr changes (here explicitly given with the value fields).
+When the animation is built you can use params provided in the trigger value to interpolate values like we do:
+```
+animate('{{speed}}', style({
+	backgroundColor: '{{backgroundColor}}'
+}))
+```
+
+There is no default value that you can give here (see Animation Package: interpolateParams) so you have to ensure a value all the time.
+
+You can also use observables as a trigger value, looks like this:
+
+```
+private triggerSignalSubject = new BehaviorSubject({
+    value: 'left',
+    params: {
+      speed: '1s',
+      backgroundColor: 'red'
+    }
+  });
+
+public triggerSignalObservable = this.triggerSignalSubject.asObservable();
+```
+
+in your template or host binding use the async operator:
+```
+<div [@myTrigger]="triggerSignalObservable | async">
+  I will be changed by the poweer of a stream
+</div>
+```
+
+You can now feed in values through your stream:
+```
+this.moveSignalSubject.next({
+  value: 'left',
+  params: {
+    speed: '250ms',
+    backgroundColor: 'red'
+  }
+});
+```
+
+There is a nice exmaples what you can do with it:
+https://medium.com/frontend-coach/angular-router-animations-what-they-dont-tell-you-3d2737a7f20b
+
+See teh left/right example where the transition offset is switched depending on the current route being before or after.
 
 ## Other things
 
@@ -272,3 +556,25 @@ You can listen for start and done events to know about the state of the animatio
 </div>
 ```
 
+### Animate same router component 
+when you have {path: ':index', component: ViewComponent}
+your route component won't change so you do not get a :enter.
+
+
+Use RouteReuseStrategy
+via https://medium.com/frontend-coach/angular-router-animations-what-they-dont-tell-you-3d2737a7f20b
+
+```
+{
+	path: 'router-example', pathMatch: 'full',
+	redirectTo: 'router-example/1'
+},
+{
+	path: 'router-example/:index',
+	component: RoutingComponent,
+},
+```
+
+This will reuse a component and if you have a simpel enter opacity effect on the router you will the animation only the first time this component is activated. Any change the only involvdes the given index param won't recreate the component but instead use the observable of the params observable to communicate changes on the params.
+
+The animation system won't get triggered. You can try to override `RouteReuseStrategy`. But did not work for me in a quick example.
