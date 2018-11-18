@@ -473,3 +473,78 @@ Default CD is robust because. It's triggered often and re-evaluate all the expre
 OnPush stops Angular from performing template evaluation in your component and all children. OnPush only allows component template to be evaluated when the input bindings (no object mutation!) have changed or an event occured inside the component itself.
 There is an [nice read](https://blog.mgechev.com/2017/11/11/faster-angular-applications-onpush-change-detection-immutable-part-1/) about real world consequeences.
 
+## Testing Routing
+You use the `RouterTestingModule` in your spec and get references to Location and the Router to start routing and testing the results.
+
+There is no initial navigation triggered in specs so either do it manually to test your default route our navigate explicitly to the route `""`.
+
+Let's add a test for our default route redirect:
+
+In file `app.component.spec.ts` add the router test module together with the routes you want to test. 
+
+
+```typescript
+
+let location: Location;
+let router: Router;
+let fixture;
+
+beforeEach(async(() => {
+	TestBed.configureTestingModule({
+	  imports: [
+	    RouterTestingModule.withRoutes(routes),
+	    WelcomeModule
+	  ],
+	  declarations: [
+	    AppComponent
+	  ],
+	}).compileComponents();
+	
+	router = TestBed.get(Router);
+	location = TestBed.get(Location);
+	
+	fixture = TestBed.createComponent(AppComponent);
+}));
+  
+describe('application routing', () => {
+	it('navigate to "" redirects you to /welcome', fakeAsync(() => {
+	  fixture.ngZone.run(() => router.navigate(['']));
+	  tick();
+	  expect(location.path()).toBe('/welcome');
+	}));
+});
+```
+
+We run navigate inside ngZone otherwise we get a warning. It's a bug filed here: https://github.com/angular/angular/issues/25837
+
+The rest is normal testing business. fakeAsync with tick because routing is async by nature and we use the location to test our expectations.
+
+### Lazy Load Testing
+I also found that snippet in the `router_testing_module.ts` source file. Drop it in your application spec and import all missing modules. 
+
+```
+it('can test lazy loaded modules too', () => {
+  const loader = TestBed.get(NgModuleFactoryLoader);
+
+  @Component({template: 'lazy-loaded'})
+  class LazyLoadedComponent {}
+
+  @NgModule({
+    declarations: [LazyLoadedComponent],
+    imports: [RouterModule.forChild([{path: 'loaded', component: LazyLoadedComponent}])]
+  })
+
+  class LoadedModule {}
+
+  // sets up stubbedModules
+  loader.stubbedModules = {lazyModule: LoadedModule};
+  router.resetConfig([
+    {path: 'lazy', loadChildren: 'lazyModule'},
+  ]);
+
+  router.navigateByUrl('/lazy/loaded');
+});
+```
+
+## other
+schemas: [ NO_ERRORS_SCHEMA ] to disable errors about referenced components if this is what you want.
