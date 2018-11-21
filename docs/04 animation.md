@@ -18,6 +18,7 @@ https://medium.com/google-developer-experts/angular-supercharge-your-router-tran
 http://slides.yearofmoo.com/ng-japan-2017-slides/#/13/0/
 
 
+
 ## States & Transitions
 
 Let's start with a simple usage of the animation system. Our goal is to give the component different backgrounds depending of the current state.
@@ -578,3 +579,6 @@ via https://medium.com/frontend-coach/angular-router-animations-what-they-dont-t
 This will reuse a component and if you have a simpel enter opacity effect on the router you will the animation only the first time this component is activated. Any change the only involvdes the given index param won't recreate the component but instead use the observable of the params observable to communicate changes on the params.
 
 The animation system won't get triggered. You can try to override `RouteReuseStrategy`. But did not work for me in a quick example.
+
+### 3d
+Be careful, opacity force a flat 3d style so you will loose preserve-3d

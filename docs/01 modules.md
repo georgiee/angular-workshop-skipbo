@@ -3,7 +3,7 @@ Let me begin with a question and an answer:
 
 > Question: What would you have ripped out of Angular if you had one breaking change for freee. ?
 
-> Answer: NnggModules
+> Answer: NgModules
 
 That question got asked at the Angular Panel at the end of the two day Angular Connect conference in London.
 

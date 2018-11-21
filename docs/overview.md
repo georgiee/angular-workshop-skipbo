@@ -7,6 +7,8 @@ We will handle the following topics in this workshop while creating a card game 
 You will find many things thta you can use in your daily enterprise business while working on an actual game. This should be more fun and less abstract than working on another TodoList or an imaginary product.
 
 ---
+## RxJs
+
 ## Animation
 A game but also any other UI without animations is boring and not engaging. This being said it's still one of the most ignored aspects of web programming. Let's change this and let's look at Angular Animations to create some nice animations in our game.
 
