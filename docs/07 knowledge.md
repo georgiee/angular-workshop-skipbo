@@ -171,3 +171,11 @@ That read option is what you tell Angular with the keyword. By default it's most
 ```
 
 That's nice handy in many situations.
+
+
+## Bash
+Did you know that you can jump back to the last branch?
+`git checkout -`
+
+if you don't know this maybe you don't know that this origin in the cd command,
+where you can jump back to the last working directory with `cd -`
