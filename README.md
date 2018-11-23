@@ -10,3 +10,7 @@ Checkout this repository and make sure to fetch the submodule too with `git clon
 ## 02 Components
 + [Lession](docs/02-components.md)
 + [Challenge](docs/challenges/02-components/components.md)
+
+## 03 Routing
++ [Lession](docs/03-routing.md)
++ [Challenge](docs/challenges/03-routing/challenge.md)
