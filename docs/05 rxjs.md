@@ -1,6 +1,38 @@
 # RxJS
 RxJS in its version 6 is a core part of the Angular framework so it's worth to learn at least some basics.
 
+Great source to learn rxjs: https://reactive.how/
+
+
+## Debugging
+I see myslef using tap a lot.
+You might find [rxjs-spy](https://github.com/cartant/rxjs-spy) useful.
+
+[withLatestFrom vs combineLatest](https://medium.com/@martinkonicek/rx-combinelatest-vs-withlatestfrom-ccd98cc1cd41)
+
+takeLast vs last & error `EmptyError: no elements in sequence`
+
+toArray() to collect everything
+
+```
+ const keyPressed = (key: string) => fromEvent(window, 'keydown')
+      .pipe(filter((event: KeyboardEvent) => event.key === key));
+	
+	keyPressed('r').pipe(first())
+```
+
+common shortcut with underscore if your are not interested in the value
+```
+subscribe(_ => {
+  
+})
+```
+
+static vs instance methods:
+pipe, merge, interval,
+
+mapTo(true)
+
 ## Dollar Signs
 Have you encountered a dollar sign in source files using rxjs ? Angular has a [small description](https://angular.io/guide/rx-library) about it. Dollar signs help to separata Observables from values more easily.
 
