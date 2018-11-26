@@ -7,7 +7,7 @@ Let me begin with a question and an answer:
 
 That question got asked at the Angular Panel at the end of the two day Angular Connect conference in London.
 
-Igor Minar himself answered this. Not in this shortnes nor in this determination but he talked about the modules thing being unfortunate. 
+Igor Minar himself answered this. Not in this shortnes nor in this determination but he talked about the modules thing being unfortunate.
 
 But it's learnable. I expect everybody to have already a basic knowledge to let's start with a quick overview by looking at all fields of a module.
 
@@ -88,7 +88,7 @@ The accompanying routing module (`this-module-will-do-routing-routing.module.ts`
 That's the place to import other modules to use their components (only if they are listed in its `exports: []` list) or if you have decided to bind a service to a module (by explicitly list the service in their provider array) you can provide access to the service also by importing the module.
 
 ## entryComponents
-Anything component you create without using its template tag in a template (that's called `declarative`) is created imperatively. 
+Anything component you create without using its template tag in a template (that's called `declarative`) is created imperatively.
 
 That's the case for components you use in routers in most cases and Angular will automaticall add those components to the list of entryComponents. That's why you usually not touch this list.
 
@@ -127,9 +127,9 @@ ngAfterViewInit() {
     this.unicornsContainer.createComponent(unicornComponent);
 }
 ```
-This won't run any change detection inside the generated components (because you have not create any input bindings). 
+This won't run any change detection inside the generated components (because you have not create any input bindings).
 
- 
+
 Before ngAfterViewInit:
 https://blog.angularindepth.com/here-is-how-to-get-viewcontainerref-before-viewchild-query-is-evaluated-f649e51315fb
 

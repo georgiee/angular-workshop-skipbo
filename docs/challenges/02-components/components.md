@@ -13,7 +13,7 @@ You will create
 
 `pages/gameplay` to hold our game stage
 a card image
-a card 
+a card
 and a pile
 
 ## Components all over
@@ -81,7 +81,7 @@ Did it work? Indeed, you should see this 💪
 ![gameplay-works](gameplay-works.png)
 
 ## Private Components
-Let's try to use a component inside that GameplayComponent. 
+Let's try to use a component inside that GameplayComponent.
 
 Put this into `gameplay.component.html`
 
@@ -90,7 +90,7 @@ Put this into `gameplay.component.html`
 <skipbo-card-pile></skipbo-card-pile>
 ```
 
-Does it work ? Yes again! 
+Does it work ? Yes again!
 ![card-pile-works](card-pile-works.png)
 
 We did not export `CardPileComponent` and still it works. That's because both components `GameplayComponent` and `CardPileComponent` are declared (`declarations:[]`) in the same modul (`GameModule`). It's kind of a private/protected component limited to the scope of the module.
@@ -161,7 +161,7 @@ The card can really detect if there is a parent pile. We just proofed it by look
 
 That host injecting mechanic is kind of a tighter coupling but in reality not different to passing in properties — so you can absolutely use it when the classic methods are not working or if you would create too much boilercode. That being said: In most cases you shouldn't need such a mechanic as you can simply pass in the information Card is interested in from the parent pile with `@Inputs`.
 
-In other scenarios where you would call methods or bind events oof the parent component you could inject a service in both components to work as the message bus. 
+In other scenarios where you would call methods or bind events oof the parent component you could inject a service in both components to work as the message bus.
 
 Angular for examples uses the `@Host()` pattern heavily in the forms package to get information about groupings.
 
