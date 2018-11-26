@@ -14,3 +14,15 @@ Checkout this repository and make sure to fetch the submodule too with `git clon
 ## 03 Routing
 + [Lession](docs/03-routing.md)
 + [Challenge](docs/challenges/03-routing/challenge.md)
+
+## 04 RxJs
++ [Lession](docs/04-rxjs.md)
++ [Challenge](docs/challenges/04-rxjs/challenge.md)
+
+## 05 Testing
++ [Lession](docs/05-testing.md)
++ Challenge
+
+## 06 Animation
++ [Lession](docs/06-animation.md)
++ Challenge
