@@ -134,6 +134,8 @@ class BasicComponent extends FooTest {}
 Both components extend from our "contract" FooTest (`extends FooTest {}`) that way we can create a flexible helper function to create our components.
 
 ```typescript
+import { Type } from '@angular/core';
+
 describe('FooComponent', () => {
 	let fixture: ComponentFixture<FooTest>;
 	let testInstance: FooTest;
@@ -145,6 +147,7 @@ describe('FooComponent', () => {
 		testInstance = fixture.componentInstance;
 		fooInstance = testInstance.fooInstance;
 	}
+});
 ```
 
 and use it like that:

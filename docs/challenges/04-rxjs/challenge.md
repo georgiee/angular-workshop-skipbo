@@ -1,10 +1,11 @@
 # RxJS
 
 Start with the branch `workshop/04-rxjs-start`.
+We are creating an AI called Oscar 🐙
 
 ## Code changes
 
-I disabled the guard specs to give some room for other specs we might encounter. 
+I disabled the guard specs to give some room for other specs we might encounter.
 
 Most changes come from integrating more parts of the  `skipbo-core`. PlayerService & GameService were updated to expose data and functionality from the core. The GameplayComponent template was updated to display some of the new data.
 
@@ -35,17 +36,17 @@ You can already play. If it's your turn your box (at the bottom) has a hotpink b
 
 You can choose between play stock, play hand, play discard and discard. None of those actions involves selecting a card yet to reduce complexity - we will come that way later.
 
-That means whenever you are pressing a button to place a card and there a multiple cards to chose from or multiple piles to select from then the Skipbo Game Core will decide automatically what's possible. 
+That means whenever you are pressing a button to place a card and there a multiple cards to chose from or multiple piles to select from then the Skipbo Game Core will decide automatically what's possible.
 
 Use the same controls if any other play takes turn.
 
 ## Challenge
-Let's start with the challenge. We will program an AI so we can play against CPU Players 🤓 Our AI is an Octopus 🐙 — as he is a natural fit to card games with his eight arms. 
+Let's start with the challenge. We will program an AI so we can play against CPU Players 🤓 Our AI is an Octopus 🐙 called Oscar — as he is a natural fit to card games with his eight arms.
 
 You will see some log messages from him when you interact with the game. Those log messages are either classic but simple log messages or messages coming from the rxjs-spy which we are using here to make it a little bit easier to spot rxjs events. Here two examples of a normal log message and one coming from `rxjs-spy`.
 
 > Skip-Bo AI 🐙 was born 🌟<br>
-> Tag = 🐙: Game just finished 🏅; notification = subscribe; 
+> Tag = 🐙: Game just finished 🏅; notification = subscribe;
 
 The one from rxjs-spy clearly tells you that it's a tag and when it was called (here because the subscription got active).
 
@@ -53,11 +54,11 @@ The one from rxjs-spy clearly tells you that it's a tag and when it was called (
 ### Redirect on Gameover
 I prepared the game for this task.
 
-+ I disabled the guards and create a default game with three player when you jump directly [into the game](http://localhost:4200/game/play) — what you will do a lot in this challenge. 
++ I disabled the guards and create a default game with three player when you jump directly [into the game](http://localhost:4200/game/play) — what you will do a lot in this challenge.
 + Every player in the game gets only 1 stock card (you win with 0 stock cards)
 + And every player gets only SkipBo cards ( the wild cards matching everywhere).
 
-This means you can easily win every game: 
+This means you can easily win every game:
 Click either on `Play Stock` or on `Auto` (which will call Play Stock in the end). Try it yourself, open the [gameplay page](http://localhost:4200/game/play), click on 'Play Stock' and look into the console.
 
 You should see something like this:
@@ -84,18 +85,18 @@ where `this.destroy$` is a subject the emits onDestroy.
 
 Even better: remove the injection as we won't need it at this place.
 
-</details> 
+</details>
 
-When you are done and it's working 
+When you are done and it's working
 
 1. ESC ato abort game, redirecto to gameover page, unsubscribe in gameplay component.
 
-2. Implement AI to play all cpu turns. 
+2. Implement AI to play all cpu turns.
 
 Sounds good?
 
 ## Gameover Game
-The game itself is working but when you complete or abort the game nobody tells you about it. Well almost nobody — if you watch the console you will see 
+The game itself is working but when you complete or abort the game nobody tells you about it. Well almost nobody — if you watch the console you will see
 
 Start the specs you have two failing tests.
 ![](specs.png)
@@ -106,7 +107,7 @@ Hint: `merge(signal1, signal2)`
 
 Completed with `workshop/04-rxjs-progress-01`
 
-## AI 
+## AI
 Next up is our AI, we will work solely in the file `skipbo-ai.ts` for this task. Checkout `workshop/04-rxjs-progress-02`.
 
 Changed the game to a more random looking but static set of cards so you can compare your results with this guide. The game needs three players otherwise your player's will get different cards.
@@ -159,7 +160,7 @@ Then place a `tag('naivePlacementStrategy result')` just before the `tap()` call
 
 > **Tip:** You can use `mapTo` to specify what the switchMap sould return.
 
-</details> 
+</details>
 
 ### Concept: New Autoplay Algorithm
 If you have completed version V1 you arrived at `workshop/04-rxjs-progress-03`.
@@ -167,7 +168,7 @@ If you have completed version V1 you arrived at `workshop/04-rxjs-progress-03`.
 The autoplay V1 function has one limitation: It's playing only a single card even if you have more cards to build. We can fix this with an interval() operator which will feed our naivePlacementStrategy() with the same player as long there is a card to play.
 
 
-You get those information from the `PlayerTryResult` that is returned from the `naivePlacementStrategyObservable` observable. 
+You get those information from the `PlayerTryResult` that is returned from the `naivePlacementStrategyObservable` observable.
 
 If you reload the game and press `Auto` to use that observable for your own turn you will see the following log:
 
@@ -220,7 +221,7 @@ this._game.newGame$.pipe(
 ).subscribe();
 ```
 
-Let's insert a spy tag to test what's coming back from `naivePlacementStrategyObservable`. 
+Let's insert a spy tag to test what's coming back from `naivePlacementStrategyObservable`.
 
 ```
 tag('🐙: New Game started 🆕'),
@@ -240,7 +241,7 @@ Whenever you click on discard (and give teh turn to the two other players) you w
 
 `{cardPlayed: true, action: 2}` is the information we are interested in. As long as `cardPlayed` is true we know that player could have played another turn and maybe palce another card.
 
-My idea for you is simple: Let's give each player 5 tries to check if there are other cards. We use `switchMap`, `interval(500)`, `take(5)` & `last()`. 
+My idea for you is simple: Let's give each player 5 tries to check if there are other cards. We use `switchMap`, `interval(500)`, `take(5)` & `last()`.
 
 ### Develop: New Autoplay Algorithm
 Replace  your current stream — or just switch to `workshop/04-rxjs-progress-04`.
@@ -336,7 +337,7 @@ switchMap(__ => of(player)
 ),
 ```
 
-Can you find the appropriate place for `naivePlacementStrategyObservable` ? 
+Can you find the appropriate place for `naivePlacementStrategyObservable` ?
 
 If it's working, you should see in the log that the AI will play exactly 5 times. If you reload and immediately click 'discard` to give the turn to Player 1 you will see something liek this (with some logs in betweend).
 
@@ -388,7 +389,7 @@ You will also need `defaultIfEmpty` to fix this error:
 
 You can speed up the cpu players when yo reduce the interval to 50ms and the delay to 250ms.
 
-Now try the following: 
+Now try the following:
 Discard your first hand and then your second hand.
 
 Player 2 will be lucky and can place many cards (> 35) — so many cards that he will win the game. The redirect to the game over page is working but when you watch the console you see the following exception.

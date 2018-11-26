@@ -21,7 +21,7 @@ Checkout this repository and make sure to fetch the submodule too with `git clon
 
 ## 05 Testing
 + [Lession](docs/05-testing.md)
-+ Challenge
++ [Challenge](docs/challenges/05-testing/challenge.md)
 
 ## 06 Animation
 + [Lession](docs/06-animation.md)
