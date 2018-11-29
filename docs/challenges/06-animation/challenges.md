@@ -208,29 +208,46 @@ Receive new cards:<br>
 Branch `workshop/06-animation-progress-06`
 
 ## Animate Stock Flip
-The last challenge is up: Flip the stock card.
+The next challenge is up: Flip the stock card.
 
 To get you started I prepared the branch `workshop/06-animation-progress-07` where I refactored the `FlipCardComponent` a little bit and integrated it in the `CardPileComponent`.
 
-1. Instead fo binding the value of `flipState` directly to the trigger we bind an Observable (yeah back to RxJs 🤩). That way we can manually control if a flip should happen, especially if a flip should happen again. Until now we only could animate from back to ron `back => front` or the when the initial state is already front (`void => front`) when the card is automatically revealed.
+1. Instead fo binding the value of `flipState` directly to the trigger we bind an Observable (yeah back to RxJs 🤩) with `[@flipAnimation]="flipAnimation$ | async`. That way we can manually control if a flip should happen, especially if a flip should happen again. Until now we only could animate from back to ron `back => front` or the when the initial state is already front (`void => front`) when the card is automatically revealed.
 
-2. The `CardPileComponent` now uses the Flipcard component (just switched from `skipbo-card` to `skipbo-flipcard`). This has a huge impact, as all card piles will now flip — at least with the first card.
+2. The `CardPileComponent` now uses the Flipcard component (just switched from `skipbo-card` to `skipbo-flipcard`) to display the top card. Any other card is still using the normal card. This has a huge impact, as all card piles would flip its top card. I disabled it a new boolean input on the CardPileComponent `animateTopCardFlip` that get passed into the Flipcard. There we set `[@.disabled]` in the template to disable the flip animation.
 
-When you look at the frontend you will see that the hand works as before. That's good!
+Your browser shows this now:
+![](stock-flip1.gif)
 
-Also the Stock Card is animating at the beginning. Does this mean the challenge is over already? No really. See the gif:
++ The Stock card flips
++ Any other pile (like the building pile) is not animating
++ Problem: Stock card flips not when the value of the card is updated (here: 1 -> 4) 
 
-![](cardpile-flip.gif)
+Your challenge is to use the new subject `flipAnimationSubject` in `FlipCardComponent` to make the stock card flip again when the value changes. 
 
-You will notice that the Stock Card will flip on load, but when I drag the card 1 to a building pile you see two things:
+You have to work in the `ngOnChanges` callback in the Flipcard. That's the callback invoked whenever an Input changes. We look for changes in the card `value` and the `reveal` value to forward the current state (back or front).
 
-+ The Stock Card is not flipped again
-+ The Building Pile is flipped — that's not intended.
+```
+ngOnChanges(changes: SimpleChanges) {
+    if (changes.value && !changes.value.firstChange && this.animateFlip) {
+	   // how to switch to back before going to front again
+      this.flipAnimationSubject.next(this.flipState);
+    }
+
+    if (changes.revealed) {
+      this.flipAnimationSubject.next(this.flipState);
+    }
+  }
+```
+
+Work in this method. Can you reset the state to `back` when a new card value arrives and immediately after set it to front again ?
+
+Your result should look like this:
+![](stock-flip-complete.gif)
 
 
-Your challenge:
-1. Disable the flip in all other piles.
-2. Make the Stock Card flip again when the values changes
+Branch completed: `workshop/06-animation-progress-08`.
 
-### Disable Flip
-You can disable 
+---
+
+We are done. Congratulations 🏅🙌
