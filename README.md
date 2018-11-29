@@ -34,7 +34,7 @@ How to use headless browsers, use hosting/wrapper components in tests and learn 
 + [Challenge](docs/challenges/05-testing/challenge.md)
 
 ## 06 Animation
-Learn about animations in Angular, how to apply and control them. I nthe challenge we will flip some cards.
+Learn about animations in Angular, how to apply and control them. In the challenge we will flip some cards 🙌
 
 + [Lession](docs/06-animation.md)
-+ Challenge (tbd)
++ [Challenge](docs/challenges/06-animation/challenge.md)
