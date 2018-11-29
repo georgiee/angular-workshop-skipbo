@@ -65,17 +65,24 @@ Learn about animations in Angular, how to apply and control them. In the challen
 
 ## Let's get started
 
+### Editor
 Use whatever coding editor you are comfortable with. if you are unsure I recommend Visual Code Editor (VSCode) from Microsoft.
 
 Make sure you have the following extension (or similar ones in other editors) installed:
 
-+ Angular Language Service <br>
-to get language support in your html templates
++ *Angular Language Service*: to get language support in your html templates
 
-+ tslint
-to be a good citizen in the programming world
++ *tslint*:  to be a good citizen in the programming world
 
-+ Very important: Switch Typescript to the Workspace version (bottom right)
++ Switch Typescript to the Workspace version (bottom right in VSCode). Otherwise you will have problems with Intellisense. That will hunt you in any Angular project.
 
-Start in branch `workshop/start` and install all dependencies with `npm install`.
-The workshop will start with the first chapter: [01-modules](docs/01-modules.md)
+### Code
+Clone this repository. `--recurse-submodules` will include the Angular project itself which is included here only as a submodule.
+
+```bash
+git clone --recurse-submodules https://github.com/georgiee/angular-workshop-skipbo
+```
+
+Switch in branch `workshop/start` and install all dependencies with `npm install`.
+
+→ The workshop will start with the first chapter: [01-modules](docs/01-modules.md)
