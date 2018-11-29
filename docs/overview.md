@@ -35,7 +35,3 @@ Some preparations about component testing and how to do it differently than Angu
 We will talk about micro and macros tasks to make you a confident tester who will finally know what's behind fixture.detectChanges, tick, flush & friends.
 
 ## Tips
-### Opensource
-Create a folder `~/opensource` and whenever you see an interesting project, don't stop with a start on github. Clone it and quickly browse through it. When you are working on a daily project, remember that project and if it fits in the overall complex browse through it again for inspiration about structure & code techniques.
-
-Angular Material is for examples my goto project to look for ideas around RxJS & Testing.

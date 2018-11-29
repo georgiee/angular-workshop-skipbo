@@ -179,3 +179,8 @@ Did you know that you can jump back to the last branch?
 
 if you don't know this maybe you don't know that this origin in the cd command,
 where you can jump back to the last working directory with `cd -`
+
+## Opensource
+Create a folder `~/opensource` and whenever you see an interesting project, don't stop with a start on github. Clone it and quickly browse through it. When you are working on a daily project, remember that project and if it fits in the overall complex browse through it again for inspiration about structure & code techniques.
+
+Angular Material is for examples my goto project to look for ideas around RxJS & Testing.
