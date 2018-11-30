@@ -1,13 +1,12 @@
 # Modules & Injection
 Let me begin with a question and an answer:
 
-> Question: What would you have ripped out of Angular if you had one breaking change for freee. ?
-
+> Question: What would you have ripped out of Angular if you had one breaking change for free. ?
 > Answer: NgModules
 
 That question got asked at the Angular Panel at the end of the two day Angular Connect conference in London.
 
-Igor Minar himself answered this. Not in this shortnes nor in this determination but he talked about the modules thing being unfortunate.
+Igor Minar himself answered this. Not in this shortness nor in this determination but he talked about the modules thing being unfortunate.
 
 But it's learnable. I expect everybody to have already a basic knowledge to let's start with a quick overview by looking at all fields of a module.
 
@@ -16,21 +15,21 @@ Here the interface.
 
 ```typescript
 export interface NgModule {
-	providers?: Provider[];
-	declarations?: Array<Type<any> | any[]>;
-	imports?: Array<Type<any> | ModuleWithProviders<{}> | any[]>;
-	exports?: Array<Type<any> | any[]>;
-	entryComponents?: Array<Type<any> | any[]>;
-	bootstrap?: Array<Type<any> | any[]>;
-	schemas?: Array<SchemaMetadata | any[]>;
-	// skipped: id, jit
+  providers?: Provider[];
+  declarations?: Array<Type<any> | any[]>;
+  imports?: Array<Type<any> | ModuleWithProviders<{}> | any[]>;
+  exports?: Array<Type<any> | any[]>;
+  entryComponents?: Array<Type<any> | any[]>;
+  bootstrap?: Array<Type<any> | any[]>;
+  schemas?: Array<SchemaMetadata | any[]>;
+  // skipped: id, jit
 }
 ```
 
 That's it. Nothing more and we now look at each property.
 
 ### providers
-Before Angular 6 you would put your services here, nowadays it's fine to rely on `providedIn: 'root'` inside the @Injectable decorator. That way you don't have to import the service anywhere, the DI dependency inside your consumers ensure that the service will be loaded and Angular detects that it should be globally provided. The service will be part of the root injector provided by `AppModule`.
+Before Angular 6 you would put your services here, nowadays it's fine to rely on `providedIn: 'root'` inside the `@Injectable` decorator. That way you don't have to import the service anywhere, the DI dependency inside your consumers ensure that the service will be loaded and Angular detects that it should be globally provided. The service will be part of the root injector provided by `AppModule`.
 
 You only use the provider array to override existing services
 or provide other values (like custom factories, tokens, static values) in your dependency injection tree.
@@ -44,15 +43,17 @@ You already know the number one rule: You can declare a class only once. If you 
 You usually create Feature Modules, UI Modules or Shared Modules and improt them often while the declaration of elements are done once in those modules.
 
 ## exports
-That's tighly bound to declarations and it can be confusing because you only list here declarations you want to use outside of the module.
-If you have a UI module to share components you will list ALL components in declarations as well as in exports.
-Ifyou have a feature module where the components are only used internally you don't want to expose them so you never list them.
+That's tightly bound to declarations and it can be confusing because you only list here declarations you want to use outside of the module. Never services.
 
-A typical UI shared module looks so, to save space.
+**Example 1:** You have a UI module to share components you will list ALL components in declarations as well as in exports.
 
-```
+**Example 2:** If you have a feature module where the components are only used internally you don't want to expose them so you never list them in exports.
+
+A typical UI shared module will look like the following code snippet:
+
+```typescript
 const myComponentList = [
-	ComponentA, ComponentB, ComponentC
+  ComponentA, ComponentB, ComponentC
 ];
 
 @NgModule({
@@ -68,14 +69,13 @@ const myComponentList = [
 export class UISharedModule { }
 ```
 
-You can also export modules you imported to provide their functionality to every consumer of your module. The CLI does this if you create a moduel with routing support;
+You can also export modules you imported to provide their functionality to every consumer of your module. The CLI does this if you create a module with routing support;
 
-```
+```bash
 $: ng create m ThisModuleWillDoRouting --routing
 ```
 
-
-The accompanying routing module (`this-module-will-do-routing-routing.module.ts`) contains this to ensure that the actual module can use routing functionalitu (like routerLink).
+The accompanying routing module (`this-module-will-do-routing-routing.module.ts`) contains the following code to ensure that the actual module can use routing functionality (like routerLink) while providing the same functionality to anyone importing the module itself.
 
 ```
 @NgModule({
@@ -85,39 +85,43 @@ The accompanying routing module (`this-module-will-do-routing-routing.module.ts`
 ```
 
 ## imports
-That's the place to import other modules to use their components (only if they are listed in its `exports: []` list) or if you have decided to bind a service to a module (by explicitly list the service in their provider array) you can provide access to the service also by importing the module.
+That's the place to import other modules to use their components/directives/pipes (only if they are listed in its `exports: []` list). If you have decided to bind a service to a module (by explicitly list the service in their provider array) you can provide access to the service also by importing the module.
 
 ## entryComponents
-Anything component you create without using its template tag in a template (that's called `declarative`) is created imperatively.
+Any component you create without using its template tag in a template (that's called `declarative`) is created imperatively. That's the case for components you use in routers.
 
-That's the case for components you use in routers in most cases and Angular will automaticall add those components to the list of entryComponents. That's why you usually not touch this list.
+```typescript
+const routes =[
+  {route: 'some-path', component: MyComponent}
+]l
+```
+MyComponent will be displayed without using the tag `<my-component></my-component>` in any of your templates. In most cases and Angular will automatically add those components to the list of entryComponents. That's why you usually not touch the `entryComponents` list.
 
 Technically we need to tell Angular about it so it can create a component factory which is not automatically generated if a component is not used anywhere.
 
-You can use that factory yourself:
-Create a simple component, put it in the `declarations` list and the `entryComponents`. Don't use its tag nor put it in any router.
+**Example:**<br>
+You can use that factory yourself: Create a simple component, put it in the `declarations` list and the `entryComponents`. _Don't use its html tag (selector) nor put it in any router._
 
 Go into any other component and provide the following additions to the class and template.
 
 Template, create a place to create stuff. We use an ng-container to prevent Angular from creating any element in the DOM but you could use actual html elements too.
 
-Minimal Unicorn component:
+1. Minimal Unicorn component:
 
-```
+```typescript
 @Component({ template: '🦄' })
 export class UnicornComponent { }
-
 ```
 
-Template in any other component to show some unicorns:
+2. Template in any other component to show some unicorns:
 
-```
+```typescript
 <ng-container #unicorns></ng-container>
 ```
 
 Reference the container and dynamically create the unicorns
 
-```
+```typescript
 @ViewChild('unicorns', {read: ViewContainerRef}) unicornsContainer: ViewContainerRef;
 constructor(
     private componentFactoryResolver: ComponentFactoryResolver
@@ -127,11 +131,8 @@ ngAfterViewInit() {
     this.unicornsContainer.createComponent(unicornComponent);
 }
 ```
-This won't run any change detection inside the generated components (because you have not create any input bindings).
 
-
-Before ngAfterViewInit:
-https://blog.angularindepth.com/here-is-how-to-get-viewcontainerref-before-viewchild-query-is-evaluated-f649e51315fb
+This won't run any change detection inside the generated components (because you have not created any input bindings).
 
 ### bootstrap
 From the Angular Docs:
@@ -152,25 +153,25 @@ You will get an error:
 Now place this in your app module:
 ```
 schemas: [
-	CUSTOM_ELEMENTS_SCHEMA
+  CUSTOM_ELEMENTS_SCHEMA
 ]
 ```
 This will tell Angular to ignore elements not known to the framework. That way you can inser [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). The schema is only valid in the current module. If your component is declared in another module you have to unlock the schema in its module.
 
 
 ## Injection
-Injection is a beautiful part of Angular and supports your engeneering efforts by providing a clear way of implement features by composition.
+Injection is a beautiful part of Angular and supports your engineering efforts by providing a clear way of implement features by composition.
 
 You have injected services before I guess. But did you also inject other components, custom tokens, abstract classes to derive actual different classes. There is a lot you can do.
 
 The Injection Hierarchy is a difficult topic and I suggest you read dedicated resources about it.
 
-The official Angular Docs are greate on the topic:
+The official Angular Docs are great on the topic:
 
 + [hierarchical-dependency-injection](https://angular.io/guide/hierarchical-dependency-injection)
 + [ngmodule-faq](https://angular.io/guide/ngmodule-faq)
 
-and there are some interesting deep dives from the community too.
+And there are some interesting deep dives from the community too.
 
 + [angular-dependency-injection-and-tree-shakeable-tokens](https://blog.angularindepth.com/angular-dependency-injection-and-tree-shakeable-tokens-4588a8f70d5d)
 + [a-curios-case-of-the-host-decorator-and-element-injectors-in-angular](https://blog.angularindepth.com/a-curios-case-of-the-host-decorator-and-element-injectors-in-angular-582562abcf0a)
@@ -194,3 +195,4 @@ Injector Types:
 
 ## Resource
 + [Great post by Cyrille Tuzi](https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407)
++ [Before ngAfterViewInit](https://blog.angularindepth.com/here-is-how-to-get-viewcontainerref-before-viewchild-query-is-evaluated-f649e51315fb)
