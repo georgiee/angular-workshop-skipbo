@@ -13,7 +13,7 @@ The two days of our workshop are packed with six chapters. Each chapter includes
 ### Theory Part
 Theory is boring and especially in the case of Angular many, many things can be found in their [outstanding documentation](https://angular.io/docs) already.  Personally I like to read about best practice, untold facts and surprising functionality that isn't part of any documentation.
 
-Personally I like reading documentation and listening to people telling me some unknown facts about stuff I thought I knew already. If there is some room for discussion, great, couln't think of anything ! The theorey part should b
+Personally I like reading documentation and listening to people telling me some unknown facts about stuff I thought I knew already. If there is some room for discussion, great, couln't think of anything better! I will present you a mix of things you should know about Angular and we try to dig deeper. Let us also talk about best practice and problems from your daily job.
 
 ### Code Challenges
 The challenges are six individual coding sessions with a total duration of roughly 6 hours over two days. In the end you will hold a fully working card game in the hand, with animations and AI-like CPU players. There is a lot of code involved and we couldn't programe everything from scratch in 6 hours. Some parts would be tedious and boring, others too complex and elaborated.
@@ -44,7 +44,7 @@ We will get serious by providing a welcome page, instructions, a gameover page a
 
 ## Schedule - Day 02
 
-### Chapter 04: RxJs
+### Chapter 04: RxJS
 Learn the difference between cold & hot, some important rxjs operators and how to test. In the challenge we will Oscar 🐙 an card playing AI with the power of RxJs.
 
 + [Lession](docs/04-rxjs.md)
