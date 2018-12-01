@@ -5,7 +5,7 @@ Great source to learn rxjs: https://reactive.how/
 
 
 ## Debugging
-I see myslef using tap a lot.
+I see myself using tap a lot.
 You might find [rxjs-spy](https://github.com/cartant/rxjs-spy) useful.
 
 [withLatestFrom vs combineLatest](https://medium.com/@martinkonicek/rx-combinelatest-vs-withlatestfrom-ccd98cc1cd41)
@@ -17,14 +17,14 @@ toArray() to collect everything
 ```
  const keyPressed = (key: string) => fromEvent(window, 'keydown')
       .pipe(filter((event: KeyboardEvent) => event.key === key));
-	
+
 	keyPressed('r').pipe(first())
 ```
 
 common shortcut with underscore if your are not interested in the value
 ```
 subscribe(_ => {
-  
+
 })
 ```
 
@@ -85,13 +85,13 @@ If you have a subject just for signaling something you usually use a Subject.
 ```
 class YourComponent {
 	changed: Subject<any> = new Subject();
-	
+
 	notify() {
 		this.changed.next()
 	}
 }
 ```
-The problem here: You expose the subject directly and you would allow any listener to forward a value with `yourComponentInstance.changed.next()`. That's a private action 
+The problem here: You expose the subject directly and you would allow any listener to forward a value with `yourComponentInstance.changed.next()`. That's a private action
 and should be implemented as such. That's where `subject.asObservable()` comes to help you.
 
 ```
@@ -101,7 +101,7 @@ get changed(): Observable<any> {
 }
 ```
 
-This way you can protect it from forwarding values. 
+This way you can protect it from forwarding values.
 
 > **Learning:** Have a private subject and only expose it through the asObservable() method.
 
@@ -109,7 +109,7 @@ This way you can protect it from forwarding values.
 ### BehaviourSubject
 That's a pretty important part of RxJs if you use subjects for some kind of state where you don't know when listeners are subscribing.
 
-Imagine a service loading some data at the application startup and you have a router navigating through your page components. Your interested page might come to life quite some time the data arrived. 
+Imagine a service loading some data at the application startup and you have a router navigating through your page components. Your interested page might come to life quite some time the data arrived.
 
 If you subscribe to such a hot observable where the data might have been produced already you won't get any data when you subscribe too late.
 
@@ -151,7 +151,7 @@ produceValue(13);
 > **Learning:** A BehaviorSubject ensures that you always retrieve the latest data even when you subscribe after the last value has been produced.
 
 ### destroy & takeUntil
-You must ensure that you don't get dangling subscriptions like you don't want event listeners to be alive far after a component has been detroyed. That way you create unintended side effects and you create memory leaks as the garbage collector can't get rid of all involved resources.
+You must ensure that you don't get dangling subscriptions like you don't want event listeners to be alive far after a component has been destroyed. That way you create unintended side effects and you create memory leaks as the garbage collector can't get rid of all involved resources.
 
 It's easy to create a dangling subscription:
 
@@ -176,7 +176,7 @@ initService() {
 ngOnDestroy() {
 	this._subscription.unsubscribe();
 }
-  
+
 ```
 But if you habe more than one subscription this gets tedious. You can use the power of rxjs to unsubscribe automatically. The only thing you need in addition is a signal when the component is destroyed.
 
@@ -200,14 +200,14 @@ this.yourService
 
 Neat isn't it? There is another good [article](https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87) from Ben Lesh about it.
 
-### toArray 
+### toArray
 collect all values and return them once the stream completes
 ```
 range(1, 10)
     .pipe(
       toArray()
     ).subscribe(values => console.log(values));
-```    
+```
 > (10) [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 ### tap
@@ -222,7 +222,7 @@ fromEvent(document, 'click')
 
 > click occured
 > click occured
-> 
+>
 
 ### merge
 Merge can be used as an operator or standalone to begin a stream. You use it to merge multiple stream and dispatch them as one source. You can use it for example as an abort signal. Here whenever a click or a keydown event appears the signal would fire.
@@ -254,7 +254,7 @@ Those operators are seen often but understanding them is not so easy when you ar
 The map suffix tells you that those operators (like any other `*Map` operator) will convert any observable produced to its raw value. That's important. We want to have inner observable to do stuff like loading.
 
 Here to show the flattening. It's a made up example. We have a value of 1 `of(1)` and map it to an observable containing a single value. The only goal is here to get an output that let us know we received an Observable.
- 
+
 ```
 of(0)
 .pipe(
@@ -314,7 +314,7 @@ Whereas if you use `switchMap` you output looks so:
 > received new data
 > new polled data arrived
 
-That's because switchMap will always unsubscribe from the inner observable when another value arrives. The inner observable 
+That's because switchMap will always unsubscribe from the inner observable when another value arrives. The inner observable
 
 ```
 of(1).pipe(

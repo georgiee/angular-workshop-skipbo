@@ -11,10 +11,22 @@ I also extended the `PlayerService` and `GameService` to build a bridge to the `
 
 In the past two challenges we created something that already felt like a card game, it's now time to make it an game application by providing different pages where the user is welcomed, where he can read the rules, configure and start a game. Of course the actually playing and a gameover page should also be included.
 
-## Install Routes
-I already added and registered all page components and prefillde them with content. But it's your duty to install the router. I created the routing modules `app-routing.module.ts` and `game/game-routing.module.ts` for you — now fill them and fix the specs, they will tell you what to do.
+You have 4 tasks to complete in this challenge:
+
++ Task 1: Install Routes
++ Task 2: Lazy Loading
++ Task 3: Guard the game
++ Task 4: CanDeactivate
+
+## Task 1: Install Routes
+I already added and registered all page components and filled them with content. But it's your duty to install the router. I created the routing modules `app-routing.module.ts` and `game/game-routing.module.ts` for you — now fill them and fix the specs, they will tell you what to do.
 
 ![](specs.png)
+
+Work in the `game-routing.module.ts` file.
+
+> ⏱ Start Developing now and come back after ⏱
+---
 
 Are you done? Nice! Now take a look at all the pages you have created.
 
@@ -26,7 +38,7 @@ Are you done? Nice! Now take a look at all the pages you have created.
 + [Rulebook](http://localhost:4200/game/rules): All you need to know about playing the game.
 
 
-## Lazy Loading
+## Task 2: Lazy Loading
 Switch to branch `workshop/03-routing-progress-01` to catch up.
 
 ### Disable Specs
@@ -101,7 +113,7 @@ path: 'game', component: GameComponent,
 
 Did you fix it? Well done!
 
-## Guard the game
+## Task 3: Guard the game
 Start here if you want to catch up: `workshop/03-routing-progress-02`.
 
 At the moment you can navigate straight to the game by open the url [http://localhost:4200/game/play](http://localhost:4200/game/play). This works because there is no real logic yet involved — but in reality you want to have full control about whether a route can be opened. That way you can ensure
@@ -150,7 +162,7 @@ So all tests are green? You should now **not** be able to open the page [http://
 
 That's exactly what we wanted to achieve. Done! Your game is now guarded 🛡👊
 
-### CanDeactivate
+## Task 4: CanDeactivate
 Checkout branch `workshop/03-routing-progress-04` as I have added some more specs to fulfill.
 
 Let us add another guard. We want to protect our users from leaving a game by mistake by navigating to the previous page. We can do this by providing a CanDeactivate guard. To add a `CanDeactivate` guard you have to implement the interface `CanDeactivate` in your class. We will further extend our existing GameGuard. Look into the file `game.guard.ts`. You will see that I have already prepared everything so that you can implement it.
@@ -174,16 +186,18 @@ Implement it and turn the specs green again.
 
 canUserLeave on the component will check if the game is over — if yes we are fine to leave if not we will show a native confirm dialog to ask the user for confirmation. `window.confirm` is script blocking, so you can use the return value like it's coming from a synchronous method call.
 
+## Completed
 Congratulations — your completed another challenge 🏅🍻
+You reached branch `workshop/03-routing-end` by completing the following tasks.
 
-----
++ Task 1: Install Routes ✅
++ Task 2: Lazy Loading ✅
++ Task 3: Guard the game ✅
++ Task 4: CanDeactivate ✅
 
-You reached branch `workshop/03-routing-end` by completing this lesson.
-
-## Branches
+Those are all branches involved in this challenges:
 + workshop/03-routing-start
 + workshop/03-routing-progress-01 (_catch up_)
 + workshop/03-routing-progress-02 (_catch up_)
 + workshop/03-routing-progress-04 (_mandatory_)
 + workshop/03-routing-end
-

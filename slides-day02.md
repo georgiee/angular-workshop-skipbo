@@ -2,7 +2,7 @@
 ### _Skip-Bo Edition_
 
 ---
-# [fit] Recap Day 01
+# [fit] Recap Day 1
 
 + Chapter 01 — Modules & Injection
 + Chapter 02 — Components
@@ -15,7 +15,7 @@
 + Chapter 06 — Animation
 
 ---
-# [fit] Day 1
+# [fit] Day 2
 
 ---
 [.background-color: #5ccfe6]
