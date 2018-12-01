@@ -8,8 +8,20 @@ Start with the branch `workshop/05-testing-start` and you will see the following
 I created some two components to display your opponent players and also a display for the stock card count of each player. There is no logic involved, it's just passing data into a template and use card piles or faces to display the data (presentational components).
 
 ## Your challenge
-+ Task 1: Stock Bug - Part 1 🐛
-+ Task 2: RxJS Testing with Oscar 🐙
+We will investigate a bug in a component and fix it by looking at the given tests.
+After that will we go back to Oscar and implement some tests to ensure he is always playing correctly.
+
+This challenge is a little bit longer as we cover two different parts with some difficult task.
+
+Those are all tests involved:
+
++ Task 1: Stock Bug (Investigate) 🐛
++ Task 2: Stock Bug — Part 1
++ Task 3: Stock Bug — Part 2
++ Task 4: Stock Bug — Part 3
++ Task 5: Test RxJS with Oscar 🐙 — CPUs
++ Task 6: Test RxJS with Oscar 🐙 — Humans
++ Task 7: Can Oscar play multiple cards ?
 
 ## Task 1: Stock Bug (Investigate) 🐛
 I start the game, click on `Play Stock` and o play card 1. I'm lucky there is another card 1 in my stock pile so I can just play that stock card too!
@@ -181,7 +193,7 @@ We are highly interested in `newGame$` which starts a new stream for each new ga
 The `Player` instance delivered by `nextTurn` is the second thing we need to mock. Oscar 🐙 only access a few parts of a player instance (hidden in the `naivePlacementStrategyObservable`).
 
 ```
-const player = {
+const playerMock = {
   _cpu: false,
   autoPlaceAction: () => false,
   discardHandCard: () => {},
@@ -192,6 +204,38 @@ const player = {
 
 ```
 
+### Spying
+Mocking a function is only one part, in many cases you also want to check if the given method was called.
+
+You do this with a spy. The Jasmine testing framework gives you great spy functionality.
+Take the object `playerMock` with the method `autoPlaceAction`. You want to check if the method was called at some point.
+
+You use the `spyOn` function which is globally available during a test.
+You pass in the object reference and the method as a string to create a spy.
+
+```typescript
+const spyAutoPlace = spyOn(playerMock, 'autoPlaceAction');
+```
+
+If anyone is calling that function, the spy will record it and depending on the implementation returning nothing or values you can specify.
+
+```typescript
+const spyAutoPlace = spyOn(playerMock, 'autoPlaceAction');
+
+playerMock.autoPlaceAction();
+expect(spyAutoPlace).toHaveBeenCalled();
+```
+
+You can also define return values and even values changing after each call.
+
+```
+spyOn().and.returnValue('foo');
+spyOn().and.returnValues('foo', 'bar', 123);
+```
+
+There are different matchers like `toHaveBeenCalledWith` (to check the arguments) or `toHaveBeenCalledTimes`
+to count how many times a method was called. Spies are a pretty powerful technique you will need in many tests — also in this challenge.
+
 With those information at hand let's test our powerful AI we developed earlier 👊
 
 ### Instructions
@@ -200,18 +244,19 @@ With those information at hand let's test our powerful AI we developed earlier �
 npm run test
 ```
 
-You will see two successful tests. I did that for you - this was the easiest part 🤓
-
-Can you use the following things to create a test to ensure that only CPU players are able to play?
+You will see two successful tests. I did that for you - this was the easiest part 🤓 Can you use the following things to create a test to ensure that only CPU players are able to play?
 
 + gameMock.newGame$ (to simulate a new game has started)
 + gameMock.nextTurn (to simulate that a player received a turn)
 + playerMock (variable player) to change the `_cpu` flag (either true or false)
-+ tick (to simualte time progress as the involved interval and delays in Oscar are working over time)
++ tick (to simulate time progress as the involved interval and delays in Oscar are working over time)
 + discardPeriodicTasks (to ignore the remaining (infinite) interval calls)
 + spyOn: to check if autoPlaceAction was called.
++ Don't forget to call `ai.watch();` as this will start the AI and initialize all streams.
 
-Implement it in the following `it` block. See that `fakeAsync`? Our stream has delays and intervals involved so we are dealing with async RxJS. RxJS by itself is synchronous.
+**Notice:** You know if a player is playing if the method `autoPlaceAction` on the playerMock was called.
+
+Implement it in the following `it` block. Do you see the `fakeAsync`? Our stream has delays and intervals involved so we are dealing with async RxJS. RxJS by itself is synchronous. You will need to fast forward the time with `tick()` before you use the matchers.
 
 ```typescript
 it('will play for cpus', fakeAsync(() => {
@@ -221,44 +266,97 @@ it('will play for cpus', fakeAsync(() => {
 ```
 
 <details>
-<summary>Hint</summary>
+<summary>Hint 1</summary>
+You prepare a game and give the turn to a player with the two observables:
+
+```typescript
+gameMock.newGame$.next();
+gameMock.nextTurn.next(playerInstance);
+```
+
+Place the matcher after and the spy before it.
 
 </details>
 
+<details>
+<summary>Hint 2</summary>
+You could count how many ms you need for tick (depends on the interval and the delay).
+But you are only interested in a rough value — was a function called. The exact timing doesn't play a role here, just fast forward by a second. Everything that exceeds the delays and interval is fine here.
+
+```
+tick(1000)
+```
+
+</details>
+
+> ⏱ Start Developing now and come back after ⏱
+
 ## Task 6: Test RxJS with Oscar 🐙 — Humans
 Catch up with `workshop/05-testing-progress-04`
-Can you quickly write another spec to ensure humans will never be played by the AI ?
+
+Can you write another test to ensure humans will never be played by the AI ?
 
 
 ```typescript
-it('will not play for non-cpus', fakeAsync(() => {
+it('will not play for non cpus', fakeAsync(() => {
   pending('build me 🤞');
 }));
-
 ```
 
-## Task 7: Grande Finale
-You did really great! Can you now write another last test?
+<details>
+<summary>Hint</summary>
+It's the same test as for cpus but you set the cpu flag to false (playerMock._cpu = false)
+and you check if a function has not beed called with  `expect(...).not.toHaveBeenCalled();`.
+</details>
 
-You can mock a function to return different values after each call
-with `spyOn(object, "method").and.returnValues`.
+> ⏱ Start Developing now and come back after ⏱
 
-You know that `autoPlaceAction` is called by your AI RxJS stream as it's trying to place a card. Can you ensure that the AI is trying another cards after the first one was successful ?
+## Task 7: Can Oscar play multiple cards ?
+You did really great!
+Catch up with `workshop/05-testing-progress-05`
 
-use `and.returnValues` together with `toHaveBeenCalledTimes`.
+Can you now write another last test? I added the following test shell.
+
+```typescript
+it('will try a second time after successfully placing a card', fakeAsync(() => {
+  pending('build me 🤞');
+}));
+```
+
+You can find the implementation of `autoPlaceAction` in the `player.ts` file of `skipbo-core`. Go ahead and take a look. The return value is a boolean and will be used to set the value of `cardPlayed` (remember `PlayerTryResult` ?) later.
+
+At the moment we only tested if the AI tried to play for a player by spying on the `autoPlaceAction` method in general. Now you want to check if the method `autoPlaceAction` is called multiple times — to ensure that Oscar really plays multiple cards (we teached that to Oscar with interval() in the last challenge).
+
+Here the facts:
+
++ `autoPlaceAction` needs to return a true value to have the chance being called a second time.
++ `autoPlaceAction` needs to return a false at some point otherwise the AI would play forever.
+
+What to do? Can our spy return different values? Yes it can 🤩 ! You can mock a function to return different values after each call with `spyOn(object, "method").and.returnValues(a, b, c, ...)` and you can check how many times a function have been called with the matcher `toHaveBeenCalledTimes`.
+
+Now you should be able to write the test with all those information.
 Good luck 💪
 
+<details>
+<summary>Hint</summary>
+It's the same test as for cpus but you set the cpu flag to false (playerMock._cpu = false)
+and you check if a function has not beed called with  `expect(...).not.toHaveBeenCalled();`.
+</details>
+
+> ⏱ Start Developing now and come back after ⏱
+
 ---
+
 ## Completed
 Awesome. You did it again!🏅 You reached branch `workshop/05-testing-end` by completing the following tasks.
 
-+ Task 1: Stock Bug (Investigate) 🐛
-+ Task 2: Stock Bug — Part 1
-+ Task 3: Stock Bug — Part 2
-+ Task 4: Stock Bug — Part 3
-+ Task 5: Test RxJS with Oscar 🐙 — CPUs
-+ Task 6: Test RxJS with Oscar 🐙 — Humans
-+ Task 7: Grande Finale
++ Task 1: Stock Bug (Investigate) 🐛 ✅
++ Task 2: Stock Bug — Part 1 ✅
++ Task 3: Stock Bug — Part 2 ✅
++ Task 4: Stock Bug — Part 3 ✅
++ Task 5: Test RxJS with Oscar 🐙 — CPUs ✅
++ Task 6: Test RxJS with Oscar 🐙 — Humans ✅
++ Task 7: Can Oscar play multiple cards ? ✅
 
 Those are all branches involved in this challenges:
 
@@ -267,6 +365,7 @@ Those are all branches involved in this challenges:
 + workshop/05-testing-progress-02 (_catch up_)
 + workshop/05-testing-progress-03 (_mandatory_)
 + workshop/05-testing-progress-04 (_catch up_)
++ workshop/05-testing-progress-05 (_catch up_)
 + workshop/05-testing-end
 
 
