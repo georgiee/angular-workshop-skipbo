@@ -168,12 +168,7 @@ Then you fulfill the transition `void => front` because you are created from the
 
 Your task: Can you create the same transition for `void => front` ? If everything works it should look like this when clicking a lot:
 
-<details>
-<summary>Result</summary>
-
 ![](flip-party.gif)
-
-</details>
 
 You can also add a small delay to the `animate` function, so you can actually see the back side when a new card appears before flipping to the front side. Can you add a delay of 250ms to the existing 500ms duration in the given animation call?
 
@@ -190,12 +185,7 @@ Catch up with `workshop/06-animation-progress-04`
 Did you try to use space key? That looks okay'ish:
 
 
-<details>
-<summary>Result</summary>
-
 ![](flip-parallel.gif)
-
-</details>
 
 It would look awesome if we could delay the animation so that every element flips after each other instead of rushing into the view like now. That's called `staggering` and Angular helps us creating this effect. You can't do this in the `FlipCardComponent`, staggering is controlled by the parent component (or parent animation if everything is in one template) — in this case the `ScratchpadComponent`.
 
@@ -214,12 +204,7 @@ Given the following information, can you stagger the animation that you see when
 
 The result should look like this
 
-<details>
-<summary>Result</summary>
-
 ![](stagger.gif)
-
-</details>
 
 > ⏱ Start Developing now and come back after ⏱
 
@@ -258,16 +243,11 @@ Time to integrate your wonderful flip animation in the game. We want to animate 
 + Copy over the animations from the `ScratchpadComponent` into the `HandComponent` to enable staggering.
 + You have to add the query (`:enter`) to the transition otherwise you won't query the cards that are already created when the hand component starts up (all cards will flip if you only provide the `:increment` transition). `:enter` is a keyword for `void => *`
 
-<details>
-<summary>Result</summary>
 First Hand<br>
-
 ![](hand-01.gif)
 
 Receive new cards:<br>
-
 ![](hand-02.gif)
-</details>
 
 > ⏱ Start Developing now and come back after ⏱
 
