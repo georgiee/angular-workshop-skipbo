@@ -86,3 +86,14 @@ git clone --recurse-submodules https://github.com/georgiee/angular-workshop-skip
 Switch in branch `workshop/start` and install all dependencies with `npm install`.
 
 → The workshop will start with the first chapter: [01-modules](docs/01-modules.md)
+
+
+
+## Resources
++ [Understanding Angular Modules (Cyrille Tuzi)](https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407)
++ [Angular Dependency Injection tree (Alexey Zuev)](https://blog.angularindepth.com/angular-dependency-injection-and-tree-shakeable-tokens-4588a8f70d5d)
++ [A curious case of the @Host decorator (Max, ngWizard)](https://blog.angularindepth.com/a-curios-case-of-the-host-decorator-and-element-injectors-in-angular-582562abcf0a)
++ [Transclusion, Injection and Procrastination (Uri Shaked)](https://blog.angularindepth.com/transclusion-injection-and-procrastination-8e1581c7a34e)
++ [@Self or @Optional @Host?  (Tomek Sułkowski)](https://medium.com/frontend-coach/self-or-optional-host-the-visual-guide-to-angular-di-decorators-73fbbb5c8658)
++ [Angular DI Multi Option (Netanel Basal)](https://netbasal.com/better-code-organization-with-angular-di-multi-option-31f691918655)
+

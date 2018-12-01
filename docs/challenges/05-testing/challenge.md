@@ -1,4 +1,4 @@
-# Testing
+# Challenge: Testing
 
 Start with the branch `workshop/05-testing-start` and you will see the following updated UI.
 
@@ -6,6 +6,8 @@ Start with the branch `workshop/05-testing-start` and you will see the following
 
 ## Code Changes
 I created some two components to display your opponent players and also a display for the stock card count of each player. There is no logic involved, it's just passing data into a template and use card piles or faces to display the data (presentational components).
+
+---
 
 ## Your challenge
 We will investigate a bug in a component and fix it by looking at the given tests.

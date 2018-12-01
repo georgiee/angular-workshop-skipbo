@@ -1,23 +1,11 @@
-# RxJS
+# Challenge: RxJS
 
 You start with this branch `workshop/04-rxjs-start`.
 
-## Your challenge
-We are modelling our AI called Oscar 🐙 by completing the following tasks. This challenge will be longer than the previous ones.
-
-+ Task 1: Redirect to the Gameover Page
-+ Task 2: AI Autoplay V1 (Single Card)
-+ Task 3: AI Autoplay V2 (Research)
-+ Task 4: AI Autoplay V2 (Implement)
-+ Task 5: AI Autoplay V3 (Codename Awesome)
-+ Task 6: Stop the AI after gameover
-
----
 ## Code changes
-
 I disabled the guard specs to give you some room for other specs we might encounter.
 
-Most changes come from integrating more parts of the  `skipbo-core`. `PlayerService` & `GameService` now expose data and functionality from the core. The `GameplayComponent`  displays some of the new data. You will see references to the following classes, all imported from `skipbo-core`.
+Most changes come from integrating more parts of the `skipbo-core`. `PlayerService` & `GameService` now expose data and functionality from the core. The `GameplayComponent`  displays some of the new data. You will see references to the following classes, all imported from `skipbo-core`.
 
 + **Player:** Holding the stock pile, discard pile, hand cards and the player name.
 + **Card:** That class was already used by the `CardFaceComponent`. It's an enum type to hold the different card values.
@@ -39,8 +27,20 @@ You can already play. If it's your turn your box (at the bottom) has a hotpink b
 
 That means whenever you are pressing a button to place a card and there a multiple cards to chose from or multiple piles to select from then the Skipbo Game Core will decide automatically what's possible. You can use the same controls if any other play takes turn — although you have to play _blind_ as you don't see any cards from the opponent yet.
 
-## Challenge
-Let's start with the challenge. We will program an AI so we can play against CPU Players 🤓 Our AI is an Octopus 🐙 called Oscar — as he is a natural fit to card games with his eight arms. You will see some log messages from him in the browser console when you interact with the game. Many of those log messages are a mix of custom `console.log` messages and logs coming from a helper tool called [rxjs-spy](https://github.com/cartant/rxjs-spy).
+---
+
+## Your challenge
+Let's start with the challenge. We will program an AI so we can play against CPU Players 🤓 Our AI is an Octopus 🐙 called Oscar — as he is a natural fit to card games with his eight arms. This challenge will be longer than the previous ones.
+
++ Task 1: Redirect to the Gameover Page
++ Task 2: AI 🐙 Autoplay V1 (Single Card)
++ Task 3: AI 🐙 Autoplay V2 (Research)
++ Task 4: AI 🐙 Autoplay V2 (Implement)
++ Task 5: AI 🐙 Autoplay V3 (Codename Awesome)
++ Task 6: Stop the AI after gameover
+
+## RxJS Spy
+You will see some log messages from him in the browser console when you interact with the game. Many of those log messages are a mix of custom `console.log` messages and logs coming from a helper tool called [rxjs-spy](https://github.com/cartant/rxjs-spy).
 
 RxJS Spy can hook into any RxJS stream by placing a pipeable `tag`. It won't interact with the stream— just like the rxjs operator `tap`. After the tag is registered you will get infos about everything that's happening with the Observable like subscriptions, unsubscriptions and of course next, errors and complete.
 
@@ -58,8 +58,6 @@ A tag message looks like so:
 You can recognize the rxjs-spy messages as they begin with a `Tag =` followed by the name of the tag (_🐙: Game just finished 🏅_) and the action that just happened. In this case someone subscribed to the prepared observable for example. Tagging is powerful and helps following a stream — I recommend you to try it out and use it already in this challenge.
 
 Let's head to our first task.
-
----
 
 ## Task 1: Redirect to the Gameover Page
 
