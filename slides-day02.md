@@ -31,12 +31,21 @@
 + How to test
 
 ---
-# [fit] Challenge
-+ Say hello to Oscar 🐙
-+ Automagically play cards for the CPUs
-+ Power of RxJS
+### Challenge
++ Task 1: Redirect to the Gameover Page
++ Task 2: AI 🐙 Autoplay V1 (Single Card)
++ Task 3: AI 🐙 Autoplay V2 (Research)
++ Task 4: AI 🐙 Autoplay V2 (Implement)
++ Task 5: AI 🐙 Autoplay V3 (Codename Awesome)
++ Task 6: Stop the AI after gameover
 
 ---
+![fit](images/challenge-04-end.gif)
+
+^ You can now play against the CPU players!
+
+---
+
 [.background-color: #5ccfe6]
 [.header: #202840]
 ### __Chapter 05__
