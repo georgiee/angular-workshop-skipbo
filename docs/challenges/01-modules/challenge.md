@@ -1,13 +1,13 @@
-# Modules & Injection
+# Challenge: Modules & Injection
+Start with branch `workshop/01-modules-service-start`
 
 ## Your challenge
-Checkout branch `workshop/01-modules-service-start`. Install everything and start the project with `npm start`. You start with the following blank screen. You will create a module, two services, tinker around with the Injection and reflect about how you make services accessible.
+You start with the following blank screen. You will create a module, two services, tinker around with the Injection and reflect about how you make services accessible.
 
 ![Blank Project](blank-project.png)
 
-
-## 1. Create & Implement
-Use the CLI (ng generate module, ng generate service etc) to create the following parts of our Application.
+## Task 1: Create & Implement
+Use the CLI (`ng generate module`, `ng generate service` etc) to create the following parts of our Application.
 
 **Your Task:**<br>
 + Create a new feature module `game`
@@ -15,11 +15,11 @@ Use the CLI (ng generate module, ng generate service etc) to create the followin
 + Create a new service `game/services/player`
 + Import the `GameModule` into your application module.
 
-Now run the test `npm run test` and you will see plenty if failing tests, fix them by implementing them.
+Now run the `npm run test` to start the unit tests. You will see plenty of failing tests, fix them by implementing them.
 
 ![](failing-specs.png)
 
-*Watch out:☝️* <br> You may see `✔ 0 tests completed` on the first run. Just make a change and save on of your services.
+*Watch out:☝️* <br> You may see `✔ 0 tests completed` on the first run. Just make a change and save one of your services.
 
 If you have to return a value double check the tests as they will tell you what to return.
 

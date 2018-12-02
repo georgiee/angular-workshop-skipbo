@@ -1,37 +1,34 @@
-# Components
+# Challenge: Components
+Start with branch `workshop/02-components-start`
 
 ## Your challenge
-You are in this branch to start: `workshop/02-components-start`
-
 I'm sorry, your project is still blank but I promise we will change this soon.
 
 ![Blank Project](blank-project.png)
 
-Ensure your Application is still running under 4200 and that your specs are running too.
+You will create several components in this challenge, fix a bug and try out to inject a component instance. All by completing the following tasks:
 
-You will create several components in this challenge
-+ `pages/gameplay` to hold our game stage
-+ a card image
-+ a card
-+ and a pile
++ Task 1: Components all over
++ Task 2: Cards & Piles
++ Task 3: Inject Parent Example
 
-## Components all over
-Create those component shells with the Angular CLI:
-<details>
-  <summary>Hint</summary>
-  (`ng g c games/...`)
-</details>
+Have fun 🙌
+
+---
+
+## Task 1: Components all over
+
+Create those component shells with the Angular CLI (`ng g c games/...`)
 
 + game/pages/gameplay
 + game/components/card
 + game/components/card-face
 + game/components/card-pile
 
+All those components have been automatically added to the `GameModule` (take a look, field `declarations`). This means they can use each other — as all of them are inside the module. If you want to use it outside you have to put the component manually in the export array.
 
-All those components have been automatically added to the `GameModule` (take a look, field `declarations`). This means they can use each other — as all of them are inside the module. But if you want to use it outside you have to put the component manually in the export array.
-
-## Outside vs. Inside
-Let's try to use one of the component first outside then inside the module to see the differences. Add the following markup to your `app.component.html` (which is empty at the moment).
+### Outside vs. Inside
+Let's try to use one of the components first outside the module then inside to see the differences. Add the following markup to your `app.component.html` (which is empty at the moment).
 
 ```html
 <skipbo-gameplay></skipbo-gameplay>
@@ -46,7 +43,7 @@ Save it and watch what happens in your browser console.
 
 Well that's what I said. It won't work. We can fix it in two ways — just like the error message tells us.
 
-## Pretend to be a real component
+### Pretend to be a real component
 Put the following line into your `app.module.ts`.
 
 ```typescript
@@ -59,10 +56,7 @@ export class AppModule { }
 
 The error magically disappears, but you won't see any content from the the Gameplay Component you wanted to mount. We just told Angular that it should ignore all tags with dashes case (see [reference](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA)) which is required to use self-bootstrapping Angular Elements or any other Web Component. We are not using a Web Component here, so this is clearly not our solution.
 
-Remember:
-> You have to use CUSTOM_ELEMENTS_SCHEMA to suppress Angular errors regarding unknown html tags when using Web Components & Angular Elements.
-
-## Export
+### Export
 Remove the schema entry from the application module so you see the error in the browser console again. Now do the following. Open file `game.module.ts` and provide `GameplayComponent` in the exports array:
 
 ```typescript
@@ -81,7 +75,7 @@ Did it work? Indeed, you should see this 💪
 
 Why did this work? You just put the `GameplayComponent` in the export list of the GameModule. The module itself is imported in the `ApplicationModule`. By doing to you allowed any component defined in the ApplicationModule (like the ApplicationComponent) to use the `GameplayComponent` with its tag `<skipbo-gameplay></skipbo-gameplay>`.
 
-## Private Components
+### Private Components
 Let's try to use a component inside that GameplayComponent. Put the following template content into `gameplay.component.html`
 
 ```html
@@ -96,11 +90,9 @@ We did not export `CardPileComponent` and still it works. That's because both co
 
 We will continue with a slightly updated branch to save you from writing some scss, html and also some code. Prepare to switch the branch.
 
----
+## Task 2: Cards & Piles
 
-## Cards & Piles
-
-⏭  Switch to branch `workshop/02-components-progress-01` (_mandatory_) to continue.
+Switch to branch `workshop/02-components-progress-01` (_mandatory_) to continue.
 I added some markup and scss to save you time and to display real cards finally.
 
 ![](two-piles.png)
@@ -122,9 +114,9 @@ There is a bug when you interact with the build and back button. Look at the hei
   and insert the elements. Use ES6 [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) or `array.concat`
 </details>
 
-Do not continue before fixing the bug.
+> ⏱ Start Developing now and come back after ⏱
 
-## Inject Parent Example
+## Task 3: Inject Parent Example
 Catch up branch to begin with: `workshop/02-components-progress-02`
 
 A good programmer creates only loosely coupled systems. You learn this for a good reason as it makes your code more maintainable. The main method of doing so in React for example is by passing data, functions, references and even children with properties (which equals the composition pattern).
@@ -169,12 +161,15 @@ In other scenarios where you would call methods or bind events oof the parent co
 
 You are done with this challenge. Congratulations 🏅🌟
 
-----
-
+## Completed
 You reached branch `workshop/02-components-end` by completing this lesson.
 
++ Task 1: Components all over ✅
++ Task 2: Cards & Piles ✅
++ Task 3: Inject Parent Example ✅
 
-## Branches
+Those are all branches involved in this challenge:
+
 + workshop/02-components-start
 + workshop/02-components-progress-01 (_mandatory_)
 + workshop/02-components-progress-02 (_catch up_)

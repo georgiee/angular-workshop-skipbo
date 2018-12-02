@@ -1,5 +1,5 @@
 # Challenge: Animation
-Star with branch `workshop/06-animation-start`
+Start with branch `workshop/06-animation-start`
 
 ## Code Changes
 Time to get serious. I updated the game a last time to integrate Drag & Drop with the help of Angular CDK.
@@ -315,7 +315,7 @@ You reached branch `workshop/06-animation-end` by completing the following tasks
 + Task 5: Make the Hand Cards flip ✅
 + Task 6: Animate Stock Flip ✅
 
-Those are all branches involved in this challenges:
+Those are all branches involved in this challenge:
 
 + workshop/06-animation-start
 + workshop/06-animation-progress-01 (catch up)
