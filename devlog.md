@@ -45,3 +45,5 @@ Cherry picking to the resuce.
 + Should I do housekeeping across all branches or not 🤔
 + Decided to create previews of all completed challenges with netlify. Again, cherry picking the commit where I provide the necessary _redirect file (to allow pushState).
 
+
++ Forgot to create the theory file for components so I'm doign this now after I already finished everything else. Well "finished" we will see.
