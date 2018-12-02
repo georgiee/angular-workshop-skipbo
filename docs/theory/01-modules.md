@@ -1,4 +1,6 @@
 # Modules & Injection
+
+## Introduction
 Let me begin with a question and an answer:
 
 > Question: What would you have ripped out of Angular if you had one breaking change for free. ?
@@ -11,8 +13,7 @@ That question got asked at the Angular Panel at the Angular Connect conference i
 
 But it's learnable and I guess everyone already has some kind of internal image already. I want to start slow with this workshop by going over all the parts of a module.
 
-## Module Recap
-Here the interface.
+Heres the interface of NgModule.
 
 ```typescript
 export interface NgModule {
@@ -27,7 +28,14 @@ export interface NgModule {
 }
 ```
 
-That's it. Nothing more. Let's look at each property.
+That's it. Nothing more. Let's look at each property with the following parts:
+
++ Module 1: Providers
++ Module 2: Declarations
++ Module 3: Imports/Exports
++ Module 4: EntryComponents
++ Module 5: Bootstrap
++ Module 6: Schema
 
 ## Module 1: Providers
 Branch `modules/providers`
@@ -223,31 +231,6 @@ ngAfterViewInit() {
 
 **Notice:** This won't run any change detection inside the generated unicorn components (because you have not created any input bindings).
 
-###  Module 6: bootstrap
-From the Angular Docs:
-
-> Among other things, the bootstrapping process creates the component(s) listed in the bootstrap array and inserts each one into the browser DOM.
-
-Usually one is fine.
-
-By the way you can access all root elements with `getAllAngularRootElements()` in the console
-
-### Module 7: schemas
-Place a random tag name in your main application template you find in Angular.
-<not-existing></not-existing>
-
-You will get an error:
-> 'not-existing' is not a known element:
-
-Now place this in your app module:
-```
-schemas: [
-  CUSTOM_ELEMENTS_SCHEMA
-]
-```
-This will tell Angular to ignore elements not known to the framework. That way you can inser [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). The schema is only valid in the current module. If your component is declared in another module you have to unlock the schema in its module.
-
-
 ## Module 5: Bootstrap
 
 That is the place to put in any component you want to use as an app root. Usually you have only a single app root but actually you could create multiple whereas each component will be a separate DOM tree
@@ -283,6 +266,8 @@ Now list it in your `index.html` together with the default app root tag.
   <other-app-root></other-app-root>
 </body>
 ```
+
+You can access all root elements with `getAllAngularRootElements()` in the console
 
 ## Module 6: Schema
 Have you ever used this part of NgModules ? Probably if you tinkered around with Angular Elements or if you have some advanced tests.
