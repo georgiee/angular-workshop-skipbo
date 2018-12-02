@@ -196,3 +196,6 @@ Injector Types:
 ## Resource
 + [Great post by Cyrille Tuzi](https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407)
 + [Before ngAfterViewInit](https://blog.angularindepth.com/here-is-how-to-get-viewcontainerref-before-viewchild-query-is-evaluated-f649e51315fb)
+
+## Challenge
+Continue with [Chapter 01 - Modules & Injection (Challenge)](../challenges/01-modules.md)

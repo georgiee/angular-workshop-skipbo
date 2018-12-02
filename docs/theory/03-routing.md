@@ -242,3 +242,5 @@ If you now navigate to the url you will notice a delay of 1 second and then the 
 
 To display an application wide loading spinner you would implement a spinner component in the application template and control it through a service inside your guards by turning it on or off.
 
+## Challenge
+Continue with [Chapter 03 - Routing (Challenge)](../challenges/03-routing.md)

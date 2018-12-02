@@ -1,6 +1,6 @@
 # Testing
 
-Testing in Angular is done with karma as the test runner (serving your tests in the browser) and jasmine as the testing framework (giving you the `describes` and `its`). There is a nice [thesis](https://github.com/karma-runner/karma/blob/master/thesis.pdf) from the maker of karma if you want to dig deep and understand the differences. 
+Testing in Angular is done with karma as the test runner (serving your tests in the browser) and jasmine as the testing framework (giving you the `describes` and `its`). There is a nice [thesis](https://github.com/karma-runner/karma/blob/master/thesis.pdf) from the maker of karma if you want to dig deep and understand the differences.
 
 Angular provides a working set of defaults but there are things you want to change.
 
@@ -94,7 +94,7 @@ TestBed.configureTestingModule({
 it('should create', () => {
 	const fixture: ComponentFixture<TestFooComponent> = TestBed.createComponent(TestFooComponent);
 	const testInstance: TestFooComponent = fixture.componentInstance;
-	
+
 	expect(testInstance.fooInstance).toBeTruthy();
 });
 ```
@@ -109,12 +109,12 @@ TestBed.configureTestingModule({
 })
 ```
 
-With such a setup you can test your inputs easily and you can prepare edge cases of how your component being used. 
+With such a setup you can test your inputs easily and you can prepare edge cases of how your component being used.
 
 ### Abstract Test Wrapper
 To create other components easily you use an abstract class, to reflect the fact that every component you test will query for your actual component. Let's refactor this.
 
-Rename `TestFooComponent` to `FooTest`, remove the component decorator and prepend a `abstract`. 
+Rename `TestFooComponent` to `FooTest`, remove the component decorator and prepend a `abstract`.
 
 ```typescript
 abstract class FooTest {
@@ -160,7 +160,7 @@ it('should create', () => {
 
 ```
 
-This is nice but nothing more than a little refactoring so far. Where's the benefit you're asking ? Let's create a new feature. Our component should greet us now. 
+This is nice but nothing more than a little refactoring so far. Where's the benefit you're asking ? Let's create a new feature. Our component should greet us now.
 
 ### Test an Input
 We start with how we expect to use that feature. That's easily possible now, as we have the test wrappers to create different scenarios.
@@ -249,13 +249,13 @@ promise2
 setTimeout
 ```
 
-The output is a direct result of how the JavaScript event loop works. 
+The output is a direct result of how the JavaScript event loop works.
 One for each web worker and each websites — the ones from the same origin share a event loop.
 
-**(Macro) Tasks:** Work on JavaScript/DOM in a sequential way. So queue them up. Between tasks, the browser may render updates. 
+**(Macro) Tasks:** Work on JavaScript/DOM in a sequential way. So queue them up. Between tasks, the browser may render updates.
 Members: scripts, setTimeout
 
-**Microtasks:** queued up and executed at the end of each task. 
+**Microtasks:** queued up and executed at the end of each task.
 Members:  mutation observer callbacks, Promises (event settled ones)
 
 There is also a whatwg proposal [queueMicrotask](https://github.com/whatwg/html/issues/512) but it's still only in the specs.
@@ -269,7 +269,7 @@ document.appendChild(el);
 el.style.display = 'none';
 ```
 
-You will never see this flash 
+You will never see this flash
 
 setTimeout(cb, 0) is in reality setTimeout(cb, 4.7)
 
@@ -332,7 +332,7 @@ but body.click() is already on the stack, soo the event listeners will execute s
 ## Async Test Utilities
 Let's talk about what asynchronicity is, how Angular get controls over it.
 
-+ done 
++ done
 + fakeAsync & tick + flush (zone)
 + async & fixture.whenstable (zone)
 
@@ -362,7 +362,7 @@ But full control over micro and macro tasks is also exactly what we want when te
 ### fakeAsync & tick + flush (zone)
 With the poweer of zones we can test our asynchronious code synchroniously. Because Tasks and Microstasks are queued up and the developer tells when everything is ready to be process just before the testing is happening.
 
-Those are your best friends when handling async function calls in your test — that includes timers & events. 
+Those are your best friends when handling async function calls in your test — that includes timers & events.
 
 You open a zone with `fakeAsync` to gain control over all micro and macro tasks. If you do so the docs clearly tell you what helpers you want to use: `tick()` and `flushMicrotasks();`.
 
@@ -371,15 +371,15 @@ You can use tick() without any argument to flush micro tasks and execute pending
 ```
 it('setTimeout(0) & tick ', fakeAsync(() => {
 	let state = [];
-	
+
 	setTimeout(() => { state.push('timeout called'); });
 	setTimeout(() => { state.push('timeout called after 2s'); }, 2000);
-	
+
 	expect(state).toEqual([]);
-	
+
 	tick();
 	expect(state).toEqual(['timeout called']);
-	
+
 	tick(2000);
 	expect(state).toEqual(['timeout called', 'timeout called after 2s']);
 }
@@ -391,12 +391,12 @@ There is a third one called `flush()`. It's the newest member (well since Angula
 ```
 it('setTimeout(0) & tick ', fakeAsync(() => {
 	let state = [];
-	
+
 	setTimeout(() => { state.push('timeout called'); });
 	setTimeout(() => { state.push('timeout called after 2s'); }, 2000);
-	
+
 	expect(state).toEqual([]);
-	
+
 	flush();
 	expect(state).toEqual(['timeout called', 'timeout called after 2s']);
 }
@@ -483,7 +483,7 @@ There is no initial navigation triggered in specs so either do it manually to te
 
 Let's add a test for our default route redirect:
 
-In file `app.component.spec.ts` add the router test module together with the routes you want to test. 
+In file `app.component.spec.ts` add the router test module together with the routes you want to test.
 
 
 ```typescript
@@ -502,13 +502,13 @@ beforeEach(async(() => {
 	    AppComponent
 	  ],
 	}).compileComponents();
-	
+
 	router = TestBed.get(Router);
 	location = TestBed.get(Location);
-	
+
 	fixture = TestBed.createComponent(AppComponent);
 }));
-  
+
 describe('application routing', () => {
 	it('navigate to "" redirects you to /welcome', fakeAsync(() => {
 	  fixture.ngZone.run(() => router.navigate(['']));
@@ -523,7 +523,7 @@ We run navigate inside ngZone otherwise we get a warning. It's a bug filed here:
 The rest is normal testing business. fakeAsync with tick because routing is async by nature and we use the location to test our expectations.
 
 ### Lazy Load Testing
-I also found that snippet in the `router_testing_module.ts` source file. Drop it in your application spec and import all missing modules. 
+I also found that snippet in the `router_testing_module.ts` source file. Drop it in your application spec and import all missing modules.
 
 ```
 it('can test lazy loaded modules too', () => {
@@ -551,3 +551,6 @@ it('can test lazy loaded modules too', () => {
 
 ## other
 schemas: [ NO_ERRORS_SCHEMA ] to disable errors about referenced components if this is what you want.
+
+## Challenge
+Continue with [Chapter 05 - Testing (Challenge)](../challenges/05-testing.md)

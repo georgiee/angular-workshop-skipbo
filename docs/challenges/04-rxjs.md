@@ -21,7 +21,7 @@ I also added two simple components in addition to the existing card-face, card a
 
 They help displaying data from the core, feel free to look into their templates, there are just cards, piles or group of piles. All those changes yielded to an updated UI when you start the application.
 
-![](start.png)
+![](images/04-rxjs/start.png)
 
 You can already play. If it's your turn your box (at the bottom) has a hotpink border. You can then choose between play stock, play hand, play discard and discard actions. None of those actions involves selecting a card yet to reduce complexity - selecting specific cards will be part of an upcoming challenge.
 
@@ -104,7 +104,7 @@ The idiomatic way of implementing this task is to use two streams, one for each 
 
 There is no gameover or abort being triggered in the game yet. Therefore I prepared two tests to tell you if it's working.
 
-![](specs.png)
+![](images/04-rxjs/specs.png)
 
 Remember to use the [theory](../../04-rxjs.md) docs if you are unsure.
 > ⏱ Start Developing now and come back after ⏱
@@ -116,7 +116,7 @@ Next up is our AI, we will work solely in the file `skipbo-ai.ts` for this task.
 I changed the game to a more random looking set of cards while still being predictable and not random so you can compare your results with this document. This will only be the case if you jump directly to the Gameplay, do not use the Start Page to start a game — it will be random.
 
 That's the current gameplay screen:
-![](ai-start.png)
+![](images/04-rxjs/ai-start.png)
 
 > **Your task:** Make Oscar 🐙 play the turns for the two CPU players by using the `naivePlacementStrategyObservable`
 
@@ -350,7 +350,7 @@ Let's put the `last()` back in and continue.
 
 ### Interval & SwitchMap
 Click on button `discard` in the UI and watch the logs.
-![](debug-interval.png)
+![](images/04-rxjs/debug-interval.png)
 
 That's a lot of logging to process. I only want to show you that the interval is working and that the same player is delivered 5 times (so we can try 5 times).
 
@@ -375,7 +375,7 @@ createSpy({
 
 Now click `discard` again and watch the log.
 
-![](debug-interval2.png)
+![](images/04-rxjs/debug-interval2.png)
 
 That's much better. We can clearly see that the interval is running 5 times. If you enable logging for the `current player` tag again
 
@@ -490,7 +490,7 @@ Discard your first hand and then your second hand.
 
 Player 2 will be lucky and can place many, many cards (> 35) — so many cards that the player will win the game. The redirect to the game over page is working but when you watch the console you see the following exception.
 
-![](gameover-exception.png)
+![](images/04-rxjs/gameover-exception.png)
 
 If you look closer you see this up in the log:
 > Tag = 🐙: Game just finished 🏅; notification = next; matching /.+/; value = undefined
@@ -529,3 +529,5 @@ Those are all branches involved in this challenges:
 + workshop/04-rxjs-progress-05 (_mandatory_)
 + workshop/04-rxjs-progress-06 (_catch up_)
 + workshop/04-rxjs-end
+
+Continue with [Chapter 05 - Testing (Theory)](../theory/05-testing.md)

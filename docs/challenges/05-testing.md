@@ -2,7 +2,7 @@
 
 Start with the branch `workshop/05-testing-start` and you will see the following updated UI.
 
-![](start.png)
+![](images/05-testing/start.png)
 
 ## Code Changes
 I created some two components to display your opponent players and also a display for the stock card count of each player. There is no logic involved, it's just passing data into a template and use card piles or faces to display the data (presentational components).
@@ -30,7 +30,7 @@ I start the game, click on `Play Stock` and o play card 1. I'm lucky there is an
 
 Oh something is wrong. The stock number decreased after the first card (1) was played but I get an exception with the second stock card (again card 1) I want to build. See the following gif.
 
-![](bug.gif)
+![](images/05-testing/bug.gif)
 
 The error tells me I wanted to play card 4 — where I was clearly playing another card 1.
 > This looks like a display problem. A card 1 is displayed while it's actually a card 4.
@@ -44,7 +44,7 @@ We are responsible programmers so we wrote some tests for the new `StockComponen
 npm run test
 ```
 
-![](failed-specs.png)
+![](images/05-testing/failed-specs.png)
 
 Oh.. at least our tests know that something is wrong. Phew.
 
@@ -370,5 +370,4 @@ Those are all branches involved in this challenges:
 + workshop/05-testing-progress-05 (_catch up_)
 + workshop/05-testing-end
 
-
-
+Continue with [Chapter 06 - Animation (Theory)](../theory/06-animation.md)

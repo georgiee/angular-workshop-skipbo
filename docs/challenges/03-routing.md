@@ -3,13 +3,12 @@ You are in this branch to start: `workshop/03-routing-start`.
 
 ## Code Changes
 You should see the following screen.
-![](start.png)
+
+![](images/03-routing/start.png)
 
 That's basically where we stopped in the last challenge but I made some additions. You actually see only one visual change: There is a footer with some links which are not working. In the sources you will notice some new components mainly to be displayed as pages (like Gameover, Rulebook etc).
 
 I also extended the `PlayerService` and `GameService` to build a bridge to the `Skipbo Core` I prepared for the workshop which included the whole game logic to play the game without any visual representation — that's what we are building here 💪 If you are interested in how I implemented the Skip-Bo Core you can checkout the sources (bundled in the workshop) after the Workshop and also ask me questions anytime.
-
----
 
 ## Your challenge
 In the past two challenges we created something that already felt like a card game, it's now time to make it an game application by providing different pages where the user is welcomed, where he can read the rules, configure and start a game. Of course the actually playing and a gameover page should also be included.
@@ -21,10 +20,12 @@ The task you will work on:
 + Task 3: Guard the game
 + Task 4: CanDeactivate
 
+---
+
 ## Task 1: Install Routes
 I already added and registered all page components and filled them with content. But it's your duty to install the router. I created the routing modules `app-routing.module.ts` and `game/game-routing.module.ts` for you — now fill them and fix the specs, they will tell you what to do.
 
-![](specs.png)
+![](images/03-routing/specs.png)
 
 Work in the `game-routing.module.ts` file.
 
@@ -45,7 +46,7 @@ Are you done? Nice! Now take a look at all the pages you have created.
 Switch to branch `workshop/03-routing-progress-01` to catch up.
 
 ### Disable Specs
-Find file `test-routes.spec.ts` and disable all tests by replacing the first describe with the following:
+Find file `test-routes.spec.ts` and disable all tests by replacing the first describe with the following line of code.
 
 ```typescript
 xdescribe('workshop routing', () => {
@@ -81,7 +82,7 @@ You could also just remove the injection in the `app.component` as we won't need
 ### Load it
 You want to load the game module now. Use the path `game` and figure out the path for loadChildren yourself. Work in the file `app-routing.module`. You know that the module is processed as a separate chunk and saved to be loaded later if you check your shell. You should see a new chunk appearing:
 
-![](new-chunk.png)
+![](images/03-routing/new-chunk.png)
 
 The large size of `446 kB` is coming from the `StartComponent` as it's using the FormModule. Because we are not using the form modules anywhere else that's what we are saving now when the application initially loaded the welcome page. It's only loaded when the user decides to interact with the game.
 
@@ -144,7 +145,7 @@ cp src/app/workshop-files/game.guard src/app/game/guards/game.guard.spec.ts
 
 Ensure your specs are running (restart if you still see 0 tests) and you get three failing specs.
 
-![](spec2.png)
+![](images/03-routing/spec2.png)
 You will implement the guard by fixing those errors. Continue reading first. To enable the just created guard, pass it to the route you want to protect (work in file `game-routing.module.ts`)
 
 ```typescript
@@ -193,7 +194,7 @@ You can use this question to ask the user:<br>
 > Your game is not finished — do you still want to leave?
 
 There are some specs to help you building it.
-![](specs3.png)
+![](images/03-routing/specs3.png)
 
 > ⏱ Start Developing now and come back after ⏱
 
@@ -222,3 +223,5 @@ Those are all branches involved in this challenges:
 + workshop/03-routing-progress-02 (_catch up_)
 + workshop/03-routing-progress-04 (_mandatory_)
 + workshop/03-routing-end
+
+Continue with the [Chapter 04 - RxJS (Theory)](../theory/04-rxjs.md)

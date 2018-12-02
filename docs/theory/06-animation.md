@@ -195,7 +195,7 @@ The leaving animation is easier. We simply shrink the elements down to zero heig
 Pretty, isn't it ?
 
 ## Numeric Triggers
-Assume our trigger is not a state with values on & off but a numeric value. 
+Assume our trigger is not a state with values on & off but a numeric value.
 
 ```
 public boxCounter = 0;
@@ -373,8 +373,8 @@ group([
 ```
 
 
-animations: [ trigger, trigger ] 
-trigger: [ state ] 
+animations: [ trigger, trigger ]
+trigger: [ state ]
 
 ## Router Animations
 That sound very special but after everything you learned around animations this is going to be pretty easy. There is only one thing to remember: Your state is the current router patj and you read it from your outlet by exposing the outlet state through the outlet template reference accessor.
@@ -404,7 +404,7 @@ It will output the current route as a string that you will use as your trigger t
  //...
   animations: [
     trigger('routeAnimations', [
-      
+
     ])
   ]
 })
@@ -436,13 +436,13 @@ animations: [
       ])
     ])
   ]
-  
+
 ```
 
 Once you get the hand on nesting trigger, transition, animate, query, style and so on you can quickly create nice animations but it can get crowded. That's why you can read in animations from external files and also reuse animations with paramaters.
 
 ## Animate Children
-If you mount the created examples in a router and you apply a routing animation on the router outlet you will see that neither of the children will animate. 
+If you mount the created examples in a router and you apply a routing animation on the router outlet you will see that neither of the children will animate.
 
 You have to use animateChild() together with query to target the elements that contain your animation (full component tag name, nested class names or target the animation itself with the trigger Name @animationName. You can also target all animations if you want with the following query. It's important to pass optional as no every element with an animation is ready at that point of time.
 
@@ -496,7 +496,7 @@ stateOne() {
 	  }
 	};
 }
-    
+
 ```
 
 Each time you assign a new value to `triggerState` you trigger the animation system because the value of the trigegr changes (here explicitly given with the value fields).
@@ -557,7 +557,7 @@ You can listen for start and done events to know about the state of the animatio
 </div>
 ```
 
-### Animate same router component 
+### Animate same router component
 when you have {path: ':index', component: ViewComponent}
 your route component won't change so you do not get a :enter.
 
@@ -582,3 +582,6 @@ The animation system won't get triggered. You can try to override `RouteReuseStr
 
 ### 3d
 Be careful, opacity force a flat 3d style so you will loose preserve-3d
+
+## Challenge
+Continue with [Chapter 06 - Animation (Challenge)](../challenges/06-animation.md)

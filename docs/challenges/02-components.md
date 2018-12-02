@@ -1,10 +1,11 @@
+
 # Challenge: Components
 Start with branch `workshop/02-components-start`
 
 ## Your challenge
 I'm sorry, your project is still blank but I promise we will change this soon.
 
-![Blank Project](blank-project.png)
+![Blank Project](images/02-components/blank-project.png)
 
 You will create several components in this challenge, fix a bug and try out to inject a component instance. All by completing the following tasks:
 
@@ -71,7 +72,7 @@ export class GameModule { }
 ```
 
 Did it work? Indeed, you should see this 💪
-![gameplay-works](gameplay-works.png)
+![gameplay-works](images/02-components/gameplay-works.png)
 
 Why did this work? You just put the `GameplayComponent` in the export list of the GameModule. The module itself is imported in the `ApplicationModule`. By doing to you allowed any component defined in the ApplicationModule (like the ApplicationComponent) to use the `GameplayComponent` with its tag `<skipbo-gameplay></skipbo-gameplay>`.
 
@@ -84,7 +85,7 @@ Let's try to use a component inside that GameplayComponent. Put the following te
 ```
 
 Does it work ? Yes again!
-![card-pile-works](card-pile-works.png)
+![card-pile-works](images/02-components/card-pile-works.png)
 
 We did not export `CardPileComponent` and still it works. That's because both components `GameplayComponent` and `CardPileComponent` are declared (`declarations:[]`) in the same module (`GameModule`). It's kind of a private/protected component limited to the scope of the module.
 
@@ -95,15 +96,17 @@ We will continue with a slightly updated branch to save you from writing some sc
 Switch to branch `workshop/02-components-progress-01` (_mandatory_) to continue.
 I added some markup and scss to save you time and to display real cards finally.
 
-![](two-piles.png)
+![](images/02-components/two-piles.png)
 
 ### Start the game
 The `GameService` will provide the necessary deck list data — but you have to start the game first by calling `start` on the GameService. Do this in the given `ngOnInit` callback in the `GameplayComponent`. Your screen should look like this if it's working and you can continue.
 
-![](started.png)
+![](images/02-components/started.png)
 
 ### Fix the bug
 There is a bug when you interact with the build and back button. Look at the height of the piles — they are supposed to change when growing or shrinking! Can you identify what's wrong and can you fix it ?
+
+![](images/02-components/bug.gif)
 
 > **Tip:** Watch for two failing specs
 
@@ -174,3 +177,5 @@ Those are all branches involved in this challenge:
 + workshop/02-components-progress-01 (_mandatory_)
 + workshop/02-components-progress-02 (_catch up_)
 + workshop/02-components-end
+
+Continue with [Chapter 03 - Routing (Theory)](../theory/03-routing.md)

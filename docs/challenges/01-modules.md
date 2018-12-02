@@ -4,22 +4,31 @@ Start with branch `workshop/01-modules-service-start`
 ## Your challenge
 You start with the following blank screen. You will create a module, two services, tinker around with the Injection and reflect about how you make services accessible.
 
-![Blank Project](blank-project.png)
+![Blank Project](images/01-modules/blank-project.png)
+
+You will create several a module, two services, implement stub-like versions of the services with TDD and to complete this challenge break and fit a Service Injection.
+
++ Task 1: Create & Implement
++ Task 2: Inject, Break & Fix
++ Task 3: Question
+
+This is the smallest challenge of all — there will be more difficult ones so enjoy this one 🤓
 
 ---
 
 ## Task 1: Create & Implement
 Use the CLI (`ng generate module`, `ng generate service` etc) to create the following parts of our Application. You should use the given string as the input for the generator. The CLI will create all missing subfolders for you.
 
-**Your Task:**<br>
+Start with the following CLI operations:
+
 + Create a new module `game`
 + Create a new service `game/services/game`
 + Create a new service `game/services/player`
 + Import the `GameModule` into your application module.
 
-Now run the `npm run test` to start the unit tests. You will see plenty of failing tests.
+Run `npm run test` to start the unit tests. You will see plenty of failing tests.
 
-![](failing-specs.png)
+![](images/01-modules/failing-specs.png)
 
 Fix all tests by providing the expected methods and properties. You don't have to write any logic is all about providing a work shell we can use later.
 
@@ -92,7 +101,7 @@ That's how you import other modules into your TestBed. That's okay to do, but yo
 </details>
 
 ## Completed
-That's it. You completed the first challenge🏅 Was it too easy? I promise this will change 🤓☝️
+That's it. You completed the first challenge🏅
 
 You reached branch `workshop/01-modules-service-end` by completing the following tasks:
 
@@ -105,3 +114,5 @@ Those are all branches involved in this challenge:
 + workshop/01-modules-service-start
 + workshop/01-modules-service-progress-01 (_catch up only_)
 + workshop/01-modules-service-end
+
+Continue with [Chapter 02 - Components (Theory)](../theory/02-components.md)

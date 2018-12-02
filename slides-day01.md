@@ -2,10 +2,6 @@
 ### _Skip-Bo Edition_
 
 ---
-
-![](images/preview.jpg)
-
----
 # [fit] What's in the box
 
 ---
@@ -21,6 +17,14 @@ Everything is here:
 # [fit] Result
 
 ^ How we work through all chapters
+
+---
+
+# [fit] Result
+
+---
+
+![](images/preview.jpg)
 
 ---
 # [fit] Skip-Bo Core

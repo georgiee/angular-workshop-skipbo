@@ -388,3 +388,6 @@ it('generate the stream correctly', () => {
   });
 ```
 That testing is useful when creating your own observables and is probably too much of testing for your own rxjs code.
+
+## Challenge
+Continue with [Chapter 04 - RxJS (Challenge)](../challenges/04-rxjs.md)

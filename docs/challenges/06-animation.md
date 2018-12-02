@@ -5,7 +5,7 @@ Start with branch `workshop/06-animation-start`
 Time to get serious. I updated the game a last time to integrate Drag & Drop with the help of Angular CDK.
 I also disabled all components tests as they would fail with the new CDK directives — I didn't want to bother updating all spec files.
 
-![](drag-drop.gif)
+![](images/06-animation/drag-drop.gif)
 
 I had to add update Hand, Stock and the two group of piles as their cards should be dragable to they work as dropzones to place cards.
 
@@ -31,7 +31,7 @@ The task you will work on:
 ## Task 1: First Flip - Part 1
 Switch to branch `workshop/06-animation-start` and open the page [game/scratchpad](http://localhost:4200/game/scratchpad). You will see a lightweight page with only a single card. That is our playground to develop some animations in isolation before using them in the game.
 
-![](scratchpad-start.png)
+![](images/06-animation/scratchpad-start.png)
 
 Your current branch has two new components (beside the ones I created for the drag & drop feature).
 
@@ -98,7 +98,7 @@ Assign those values and use the examples state `myStateName` I just gave you as 
 
 We you are done, switch back to the frontend and you should see this:
 
-![](first-flip.gif)
+![](images/06-animation/first-flip.gif)
 
 Your first flip!!! 🤩🎉 No? Maybe you don't share my excitement so I have a backup plan: Transitions.
 
@@ -133,7 +133,7 @@ You can copy the transition snippet and fill in the following information:
 
 If you are successful, it will look so if you are clicking:
 
-![](first-real-flip.gif)
+![](images/06-animation/first-real-flip.gif)
 
 That's something, isn't it ? First flip done! 🙌
 
@@ -146,7 +146,7 @@ Now click anywhere and also try the space key.
 + Clicking will add a new card until three rows are full and then clear all cards again.
 + Space key will toggle between all three rows filled or an empty card set.
 
-![](start-03.gif)
+![](images/06-animation/start-03.gif)
 
 After working hard on the flipping before it's kind of disappointing not to see a single flip. We can easily change this. Go back into the `FlipCardComponent`. You will see your transition.
 
@@ -168,7 +168,7 @@ Then you fulfill the transition `void => front` because you are created from the
 
 Your task: Can you create the same transition for `void => front` ? If everything works it should look like this when clicking a lot:
 
-![](flip-party.gif)
+![](images/06-animation/flip-party.gif)
 
 You can also add a small delay to the `animate` function, so you can actually see the back side when a new card appears before flipping to the front side. Can you add a delay of 250ms to the existing 500ms duration in the given animation call?
 
@@ -185,7 +185,7 @@ Catch up with `workshop/06-animation-progress-04`
 Did you try to use space key? That looks okay'ish:
 
 
-![](flip-parallel.gif)
+![](images/06-animation/flip-parallel.gif)
 
 It would look awesome if we could delay the animation so that every element flips after each other instead of rushing into the view like now. That's called `staggering` and Angular helps us creating this effect. You can't do this in the `FlipCardComponent`, staggering is controlled by the parent component (or parent animation if everything is in one template) — in this case the `ScratchpadComponent`.
 
@@ -204,7 +204,7 @@ Given the following information, can you stagger the animation that you see when
 
 The result should look like this
 
-![](stagger.gif)
+![](images/06-animation/stagger.gif)
 
 > ⏱ Start Developing now and come back after ⏱
 
@@ -244,10 +244,10 @@ Time to integrate your wonderful flip animation in the game. We want to animate 
 + You have to add the query (`:enter`) to the transition otherwise you won't query the cards that are already created when the hand component starts up (all cards will flip if you only provide the `:increment` transition). `:enter` is a keyword for `void => *`
 
 First Hand<br>
-![](hand-01.gif)
+![](images/06-animation/hand-01.gif)
 
 Receive new cards:<br>
-![](hand-02.gif)
+![](images/06-animation/hand-02.gif)
 
 > ⏱ Start Developing now and come back after ⏱
 
@@ -264,7 +264,7 @@ I refactored the `FlipCardComponent` a little bit and integrated it in the `Card
 2. The `CardPileComponent` now uses the Flipcard component (just switched from `skipbo-card` to `skipbo-flipcard`) to display the top card. Any other card is still using the normal card. This had a huge impact, as all card piles flipped its top card. That's why I disabled it a new boolean input on the CardPileComponent `animateTopCardFlip` that get passed to the `FlipcardComponent`. There we set `[@.disabled]` in the template to disable the flip animation depending on the `animateTopCardFlip` flag. The flag is only set to true in the Stock Card Component.
 
 Your browser shows this now:
-![](stock-flip1.gif)
+![](images/06-animation/stock-flip1.gif)
 
 + The Stock card flips
 + Any other pile (like the building pile) is not animating
@@ -291,7 +291,7 @@ Work in this method.
 Can you reset the state to `back` when a new card value arrives and immediately after set it to front again ?
 
 Your result should look like this — the 4 underneath the Card 1 is now flipping like any other card that will following in the stock piles.
-![](stock-flip-complete.gif)
+![](images/06-animation/stock-flip-complete.gif)
 
 > ⏱ Start Developing now and come back after ⏱
 
