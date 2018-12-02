@@ -1,17 +1,20 @@
-# Routing
+# Challenge: Routing
+You are in this branch to start: `workshop/03-routing-start`.
 
-## Your challenge
-You are in this branch to start: `workshop/03-routing-start` and you should see the following screen.
-
+## Code Changes
+You should see the following screen.
 ![](start.png)
 
 That's basically where we stopped in the last challenge but I made some additions. You actually see only one visual change: There is a footer with some links which are not working. In the sources you will notice some new components mainly to be displayed as pages (like Gameover, Rulebook etc).
 
 I also extended the `PlayerService` and `GameService` to build a bridge to the `Skipbo Core` I prepared for the workshop which included the whole game logic to play the game without any visual representation — that's what we are building here 💪 If you are interested in how I implemented the Skip-Bo Core you can checkout the sources (bundled in the workshop) after the Workshop and also ask me questions anytime.
 
+---
+
+## Your challenge
 In the past two challenges we created something that already felt like a card game, it's now time to make it an game application by providing different pages where the user is welcomed, where he can read the rules, configure and start a game. Of course the actually playing and a gameover page should also be included.
 
-You have 4 tasks to complete in this challenge:
+The task you will work on:
 
 + Task 1: Install Routes
 + Task 2: Lazy Loading
@@ -153,9 +156,12 @@ You will implement the guard by fixing those errors. Continue reading first. To 
 
 Now you have a guard which implements the `CanActivate` interface (that's the default for the generator you used). From here use the official [documentation](https://angular.io/api/router/CanActivate) and the information from the theory part to complete your task.
 
-> **Hint:** When activation fails, the guard should manually redirect to a fallback location (use '/welcome'). If you don't do this, the router will stop when you try navigation to `/game/play` and display an empty page.
+> ⏱ Start Developing now and come back after ⏱
 
-Continue from here When you're done.
+<details>
+<summary>Hint</summary>
+When a guard stops navigation by returning false, the guard must redirect to a fallback location by itself. (use '/welcome'). If you don't do this, the router will stop when you try navigation to `/game/play` and display an empty page.
+</details>
 
 
 So all tests are green? You should now **not** be able to open the page [http://localhost:4200/game/play](http://localhost:4200/game/play) directly. You will be redirected to [/welcome](http://localhost:4200/game/play). If you properly start from the welcome page [/game/start](http://localhost:4200/game/start) page you can enter the game again.
@@ -180,11 +186,26 @@ canDeactivate(component: GameplayComponent): boolean {
   return false;
 }
 ```
+**Task:**<br>
+Check if the game is over — if yes we are fine to leave (`return true`) if not show a native `window.confirm` dialog to ask the user for confirmation. `window.confirm` is script blocking, so you can use the return value like it's coming from a synchronous method call.
 
-Implement it and turn the specs green again.
+You can use this question to ask the user:<br>
+> Your game is not finished — do you still want to leave?
+
+There are some specs to help you building it.
 ![](specs3.png)
 
-canUserLeave on the component will check if the game is over — if yes we are fine to leave if not we will show a native confirm dialog to ask the user for confirmation. `window.confirm` is script blocking, so you can use the return value like it's coming from a synchronous method call.
+> ⏱ Start Developing now and come back after ⏱
+
+<details>
+<summary>Hint</summary>
+You can use a confirm dialog
+
+```typescript
+const confirmation = window.confirm('your question'); // this is script blocking you will receive a plain boolean
+return confirmation;
+```
+</details>
 
 ## Completed
 Congratulations — your completed another challenge 🏅🍻
