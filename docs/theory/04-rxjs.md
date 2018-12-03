@@ -1,4 +1,4 @@
-# RxJS
+# Theory: RxJS
 
 ## Introduction
 RxJS in its version 6 is a core part of the Angular framework so it's worth to learn it. This being said it's hard to learn — this challenge will teach you some parts of it to bring you one step nearer to understand RxJS.
