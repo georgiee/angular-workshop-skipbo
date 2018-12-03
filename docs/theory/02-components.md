@@ -1,5 +1,6 @@
 # Theory: Components
 
+## Introduction
 Let me begin with a cite from the official Angular Documentation:
 
 >  A component controls a patch of screen called a view.
@@ -426,6 +427,18 @@ Also to get a reference to an outlet:
 ```html
 <router-outlet #myOutlet="outlet"></router-outlet>
 ```
+
+## Completed
+We looked at all those little things we can do with components:
+
++ Component 1: preserveWhitespaces
++ Component 2: Selectors on existing elements
++ Component 2: View Encapsulation
++ Component 4: Smart & Dumb Components
++ Component 5: OnPush
++ Component 6: Template References
+
+Now we are ready to head to our challenge!
 
 ## Challenge
 You are ready for the challenge.

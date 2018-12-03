@@ -42,7 +42,7 @@ Let's start with the challenge. We will program an AI so we can play against CPU
 ## RxJS Spy
 You will see some log messages from him in the browser console when you interact with the game. Many of those log messages are a mix of custom `console.log` messages and logs coming from a helper tool called [rxjs-spy](https://github.com/cartant/rxjs-spy).
 
-RxJS Spy can hook into any RxJS stream by placing a pipeable `tag`. It won't interact with the stream— just like the rxjs operator `tap`. After the tag is registered you will get infos about everything that's happening with the Observable like subscriptions, unsubscriptions and of course next, errors and complete.
+RxJS Spy can hook into any RxJS stream by placing a pipeable `tag`. It won't interact with the stream— just like the rxjs operator `tap`. After the tag is registered you will get infos about everything that's happening with the Observable like subscriptions, unsubscribes and of course next, errors and complete.
 
 ```typescript
 this._game.gameOver$

@@ -1,4 +1,4 @@
-# Modules & Injection
+# Theory: Modules & Injection
 
 ## Introduction
 Let me begin with a question and an answer:
@@ -232,6 +232,7 @@ ngAfterViewInit() {
 **Notice:** This won't run any change detection inside the generated unicorn components (because you have not created any input bindings).
 
 ## Module 5: Bootstrap
+Branch `modules/bootstrap`
 
 That is the place to put in any component you want to use as an app root. Usually you have only a single app root but actually you could create multiple whereas each component will be a separate DOM tree
 
@@ -269,7 +270,9 @@ Now list it in your `index.html` together with the default app root tag.
 
 You can access all root elements with `getAllAngularRootElements()` in the console
 
-## Module 6: Schema
+## Module 6: Schemas
+Branch `modules/schemas`
+
 Have you ever used this part of NgModules ? Probably if you tinkered around with Angular Elements or if you have some advanced tests.
 I tell you why.
 
@@ -322,8 +325,26 @@ And for what?
 1. To allow Web Components (Custom Element are part of the standard)
 2. You can use it for your tests to ignore elements instead of importing or mocking them.
 
+## Completed
+Yes we successfully worked through those parts of a module:
 
-## Injection
++ Module 1: Providers
++ Module 2: Declarations
++ Module 3: Imports/Exports
++ Module 4: EntryComponents
++ Module 5: Bootstrap
++ Module 6: Schema
+
+We are ready for the first challenge!
+
+## Challenge
+Continue with [Chapter 01 - Modules & Injection (Challenge)](../challenges/01-modules.md)
+
+## Resources
++ [Great post by Cyrille Tuzi about Modules in general](https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407)
+
+
+### Injection
 We covered Injection partially already in _Module 1: Providers_.
 
 The Injection Hierarchy is a difficult topic and I suggest you read dedicated resources about it to understand it beyond providing values occasionally. The official Angular Docs are great on the topic:
@@ -338,9 +359,3 @@ And there are some interesting deep dives from the community too.
 + [Transclusion Injection and Procrastination](https://blog.angularindepth.com/transclusion-injection-and-procrastination-8e1581c7a34e)
 + [Self or optional host the visual guide to angular di decorators](https://medium.com/frontend-coach/self-or-optional-host-the-visual-guide-to-angular-di-decorators-73fbbb5c8658)
 + [Better code organization with angular di multi option](https://netbasal.com/better-code-organization-with-angular-di-multi-option-31f691918655)
-
-## Resources
-+ [Great post by Cyrille Tuzi about Modules in general](https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407)
-
-## Challenge
-Continue with [Chapter 01 - Modules & Injection (Challenge)](../challenges/01-modules.md)

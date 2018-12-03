@@ -1,40 +1,55 @@
 # RxJS
+
+## Introduction
 RxJS in its version 6 is a core part of the Angular framework so it's worth to learn at least some basics.
+It's hard to learn this challenge will teach you some nice things to bring you one step nearer to understand RxJS.
 
-Great source to learn rxjs: https://reactive.how/
+## RxJS 1: Debugging
+Branch `rxjs/debug`
 
+### Tap
+I see myself using tap a lot to debug rxjs code. It's an operator that can look at what data is passing by without touching it.
 
-## Debugging
-I see myself using tap a lot.
+```typescript
+fromEvent(window, 'keydown')
+    .pipe(
+      tap(event => console.log('key pressed'))
+  ).subscribe();
+```
+
+You can use tap to debug or to create side effects like calling another method.
+
+### RxJS Spy
 You might find [rxjs-spy](https://github.com/cartant/rxjs-spy) useful.
 
-[withLatestFrom vs combineLatest](https://medium.com/@martinkonicek/rx-combinelatest-vs-withlatestfrom-ccd98cc1cd41)
+RxJS Spy can hook into any RxJS stream by placing a pipeable `tag`. It won't interact with the stream— just like the rxjs operator `tap`. After the tag is registered you will get infos about everything that's happening with the Observable like subscriptions, unsubscribes and of course next, errors and complete.
 
-takeLast vs last & error `EmptyError: no elements in sequence`
 
-toArray() to collect everything
+```typescript
+import { tag } from 'rxjs-spy/operators/tag';
+import { create } from 'rxjs-spy';
 
-```
- const keyPressed = (key: string) => fromEvent(window, 'keydown')
-      .pipe(filter((event: KeyboardEvent) => event.key === key));
+const spy = create();
+spy.log();
 
-	keyPressed('r').pipe(first())
-```
-
-common shortcut with underscore if your are not interested in the value
-```
-subscribe(_ => {
-
-})
+fromEvent(window, 'keydown')
+    .pipe(
+      tag('🎹 Key Pressed'),
+      take(2)
+  ).subscribe();
 ```
 
-static vs instance methods:
-pipe, merge, interval,
+Your console log will look like this after pressing key A and B
 
-mapTo(true)
+> Tag = 🎹 Key Pressed; notification = subscribe; matching /.+/<br>
+> Tag = 🎹 Key Pressed; notification = next; value = KeyboardEvent {key: "a", code: "KeyA" …}<br>
+> Tag = 🎹 Key Pressed; notification = next; value = KeyboardEvent {key: "b", code: "KeyB" …}<br>
+> 🎹 Key Pressed; notification = unsubscribe; matching /.+/<br>
 
-## Dollar Signs
-Have you encountered a dollar sign in source files using rxjs ? Angular has a [small description](https://angular.io/guide/rx-library) about it. Dollar signs help to separata Observables from values more easily.
+This means you are perfectly informed about what happens in your stream and what it contains. I love this way of debugging a rxjs stream.
+
+## RxJS 2: About Dollar Signs
+Have you encountered a dollar sign in source files using rxjs ? Angular has a [small description](https://angular.io/guide/rx-library) about it. Dollar signs help to separate Observables from values more easily.
 
 Actually the dollar sign usually stands for pluralization as an observables streams multiple values. It's called the [Finnish notation](https://medium.com/@benlesh/observables-and-finnish-notation-df8356ed1c9b).
 
@@ -44,30 +59,28 @@ const click$ = Observable.fromEvent(button, 'click');
 
 But it's no rule or a styleguide thing. I see myself not using it that strict.
 
-## Startign a stream
-fromEvent, of(array), of(...array)
+## RxJS 3: Cold vs Hot Observables
+Branch `rxjs/cold-hot`
 
-## Cold vs Hot
 I will cite Ben Lesh here from his excellent [article](https://medium.com/@benlesh/hot-vs-cold-observables-f8094ed53339) on the topic.
 
-A cold observable creates its producer on each susbcription, a hot observables closes of a and alreayd existing instance.
+> A cold observable creates its producer on each subscription, a hot observables closes over an already existing instance.
 
-
-```
+```typescript
 // COLD
 var cold = new Observable((observer) => {
-	var producer = new WebSocket();
-	producer.listen(() => {
-		observer.next()
-	});
+  var producer = new WebSocket();
+  producer.listen(() => {
+    observer.next()
+  });
 });
 
 // HOT
 var producer = new WebSocket();
 var hot = new Observable((observer) => {
-	producer.listen(() => {
-		observer.next()
-	});
+  producer.listen(() => {
+    observer.next()
+  });
 });
 ```
 
@@ -84,11 +97,11 @@ If you have a subject just for signaling something you usually use a Subject.
 
 ```
 class YourComponent {
-	changed: Subject<any> = new Subject();
+  changed: Subject<any> = new Subject();
 
-	notify() {
-		this.changed.next()
-	}
+  notify() {
+    this.changed.next()
+  }
 }
 ```
 The problem here: You expose the subject directly and you would allow any listener to forward a value with `yourComponentInstance.changed.next()`. That's a private action
@@ -97,7 +110,7 @@ and should be implemented as such. That's where `subject.asObservable()` comes t
 ```
 private _changed: Subject<any> = new Subject();
 get changed(): Observable<any> {
-	return this._changed.asObservable();
+  return this._changed.asObservable();
 }
 ```
 
@@ -157,11 +170,11 @@ It's easy to create a dangling subscription:
 
 ```
 class YourComponent {
-	initService() {
-		this.yourService.subscribe(data => {
-			// do something
-		})
-	}
+  initService() {
+    this.yourService.subscribe(data => {
+      // do something
+    })
+  }
 }
 ```
 
@@ -170,11 +183,11 @@ When your `YourComponent` is destroyed you have a subscription still listening t
 ```typescript
 private _subscription: Subscription = Subscription.EMPTY;
 initService() {
-	this._subscription = this.yourService.subscribe();
+  this._subscription = this.yourService.subscribe();
 }
 
 ngOnDestroy() {
-	this._subscription.unsubscribe();
+  this._subscription.unsubscribe();
 }
 
 ```
@@ -190,10 +203,10 @@ ngOnDestroy() {
 With that at your hand you can automatically complete and unsubscribe any stream you create.
 ```
 this.yourService
-	.pipe(takeUntil(this._destroyed))
-	.subscribe(data => {
-		// do something
-	})
+  .pipe(takeUntil(this._destroyed))
+  .subscribe(data => {
+    // do something
+  })
 ```
 
 `takeUntil` will complete the event.
@@ -318,8 +331,8 @@ That's because switchMap will always unsubscribe from the inner observable when 
 
 ```
 of(1).pipe(
-	delay(2000), // and that it takes 500ms
-	tap(value => console.log('received new data'))
+  delay(2000), // and that it takes 500ms
+  tap(value => console.log('received new data'))
 );
 ```
 
@@ -391,3 +404,33 @@ That testing is useful when creating your own observables and is probably too mu
 
 ## Challenge
 Continue with [Chapter 04 - RxJS (Challenge)](../challenges/04-rxjs.md)
+
+## Resources
+Great source to learn rxjs: https://reactive.how/
+
+
+
+
+toArray() to collect everything
+
+```
+ const keyPressed = (key: string) => fromEvent(window, 'keydown')
+      .pipe(filter((event: KeyboardEvent) => event.key === key));
+
+  keyPressed('r').pipe(first())
+```
+
+common shortcut with underscore if your are not interested in the value
+```
+subscribe(_ => {
+
+})
+```
+
+static vs instance methods:
+pipe, merge, interval,
+
+mapTo(true)
+
+## Starting a stream
+fromEvent, of(array), of(...array)
