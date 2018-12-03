@@ -59,8 +59,7 @@ Everything is here:
 # [fit] Day 1
 
 ---
-[.background-color: #5ccfe6]
-[.header: #202840]
+![original](images/slides/bg.png)
 
 ### __Chapter 01__
 # [fit] Modules

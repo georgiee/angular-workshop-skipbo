@@ -1,8 +1,19 @@
 # RxJS
 
 ## Introduction
-RxJS in its version 6 is a core part of the Angular framework so it's worth to learn at least some basics.
-It's hard to learn this challenge will teach you some nice things to bring you one step nearer to understand RxJS.
+RxJS in its version 6 is a core part of the Angular framework so it's worth to learn it. This being said it's hard to learn — this challenge will teach you some parts of it to bring you one step nearer to understand RxJS.
+
+We will look at the following things in RxJS:
+
++ RxJS 1: Debugging
++ RxJS 2: About Dollar Signs
++ RxJS 3: Cold vs Hot Observables
++ RxJS 4: Make Cold Observables Hot
++ RxJS 5: Into the Wild — asObservable vs Subject
++ RxJS 6: Into the Wild — BehaviourSubject
++ RxJS 7: Into the Wild — destroy & takeUntil
++ RxJS 8: Into the Wild — toArray
++ RxJS 9: Testing
 
 ## RxJS 1: Debugging
 Branch `rxjs/debug`
@@ -66,17 +77,26 @@ I will cite Ben Lesh here from his excellent [article](https://medium.com/@benle
 
 > A cold observable creates its producer on each subscription, a hot observables closes over an already existing instance.
 
+This means:
+> Cold Observables only start producing data with a subscription present and each subscription get its own stream of values. That's called **unicast**.
+Example: `timer()` and `interval()` observables are cold.
+
+> Hot Observables are streaming values regardless of the amount of subscribers and each one gets the same data. That's **multicast**.
+`fromEvent()` produces data without a subscription.
+
+Here another brief example.
+
 ```typescript
 // COLD
 var cold = new Observable((observer) => {
-  var producer = new WebSocket();
+  var producer = new Producer();
   producer.listen(() => {
     observer.next()
   });
 });
 
 // HOT
-var producer = new WebSocket();
+var producer = new Producer();
 var hot = new Observable((observer) => {
   producer.listen(() => {
     observer.next()
@@ -84,91 +104,156 @@ var hot = new Observable((observer) => {
 });
 ```
 
-A cold observable is therefore unicast, each subscription gets its own individual stream. A hot observable shares the stream between all subscriptions (multicast). It also creates values independent of the amount of subscriptions.
+It's important to understand the difference otherwise you create resource intensive producers with each new subscription. You also need the knowledge about hot & cold when dealing with operators like `switchMap` and `mergeMap` where the difference is when the inner observable is unsubscribed.
 
-It's important to understand the difference as you might create subscriptions with operators like switchMap/concaptMap and you really don't want to create individual instances of let's say web sockets where you only wanted one.
+## RxJS 4: Make Cold Observables Hot
+Can we make a cold observable hot? Can we make it multicast despites it's only producing values for a single observer ?
+Yes! It's our good old friend Subject that is tailored for this purpose.
 
+Let's get a little mit more concrete, we use an interval — which is cold by default.
 
-## RxJs in practice
-Here some things I use frequently so you get confident in using them.
-
-### asObservable vs Subject
-If you have a subject just for signaling something you usually use a Subject.
-
+```typescript
+const myInterval = interval(500).pipe(
+  take(5),
+  tap(value => console.log('interval produced a value'))
+);
 ```
+
+You would create a new `setIterval` with each subscription and each susbcription would receive its own stream of numbers.
+
+```typescript
+myInterval.subscribe(value => console.log('received a value', value));
+myInterval.subscribe(value => console.log('received a value', value));
+myInterval.subscribe(value => console.log('received a value', value));
+
+ /**
+  interval produced a value
+  received a value 0
+  interval produced a value
+  received a value 0
+  interval produced a value
+  received a value 0
+  interval produced a value
+*/
+```
+
+The 0 look similar but they are produced from different intervals. We can make it multicast with a Subject. The Subject will be some kind of mediator. Receiving the value and distribute to everyone who is interested. That's multicast.
+
+```typescript
+const subject = new Subject();
+  // 1. let this subject susbcribe to the cold observable
+  myInterval.subscribe(subject);
+
+  // 2. now let future observables subscribe to the subject instead of the interval
+  subject.subscribe(value => console.log('received a value', value));
+  subject.subscribe(value => console.log('received a value', value));
+  subject.subscribe(value => console.log('received a value', value));
+
+  /**
+  interval produced a value
+  received a value 0
+  received a value 0
+  received a value 0
+  */
+```
+
+Without changing the implementation of the given observable we were able to transform it into a multicasting stream.
+That's a powerful technique 💪
+
+There are some multicast operators in RxJS like publish, publishReplay, multicast & share, they all do the same thing with a Subject under the hood.
+
+<details>
+<summary>multicast operator</summary>
+You could have made your life a little bit easier with the `multicast` operator.
+
+```typescript
+const myHotObservable = interval(500).pipe(
+  take(5),
+  tap(value => console.log('interval produced a value')),
+  multicast(new Subject()) // make it a ConnectableObservable
+) as ConnectableObservable<number>;
+
+// all those subscribes will be delegated to the internal Subject by the multicast operator.
+myInterval2.subscribe(value => console.log('received a value', value));
+myInterval2.subscribe(value => console.log('received a value', value));
+myInterval2.subscribe(value => console.log('received a value', value));
+
+// let the internal subject subscribe to the given interval — no values are produced before this
+myInterval2.connect();
+```
+
+</details>
+
+## Into the wild
+Following some things I use frequently in real projects so you get confident in using them too 🙌
+
+## RxJS 5: Into the Wild — asObservable vs Subject
+Branch `rxjs/into-the-wild-as-observable`
+
+If you have a subject just for signaling something you usually use a Subject and expose it, right?
+
+```typescript
 class YourComponent {
-  changed: Subject<any> = new Subject();
+  changed$: Subject<any> = new Subject();
 
   notify() {
-    this.changed.next()
+    this.changed$.next()
   }
 }
 ```
-The problem here: You expose the subject directly and you would allow any listener to forward a value with `yourComponentInstance.changed.next()`. That's a private action
-and should be implemented as such. That's where `subject.asObservable()` comes to help you.
 
-```
+The problem here: A subject is both a observer and observable. It can observe by subscribing (otherObservable.subscribe(subject)) and you can subscribe to it as an Observable (subject.subscribe). By exposing a subject directly you allow other parties to use its observer side. Someone could get the idea to subscribe it to some source or just use the `next` method (as part of the observer pattern). You want to protect your subject from being used like this.
+
+That's where `subject.asObservable()` comes to your rescue.
+
+```typescript
 private _changed: Subject<any> = new Subject();
+
 get changed(): Observable<any> {
   return this._changed.asObservable();
 }
 ```
 
-This way you can protect it from forwarding values.
+This way it's only an observable — there are no observer functions like next available.
 
-> **Learning:** Have a private subject and only expose it through the asObservable() method.
+## RxJS 6: Into the Wild — BehaviourSubject
+Branch `rxjs/into-the-wild-behaviour`
 
+Hot Observables can produce values without someone listening. It's pretty sad to imagine someone telling important stuff and nobody is listening.
+This is often a real problem in your application. Imagine a service loading some data at the application startup and you have a router navigating through your page components. Your interested page might come to life quite some time the data arrived. If you subscribe such an observable where the data might have been produced already you won't get any data when you subscribe too late.
 
-### BehaviourSubject
-That's a pretty important part of RxJs if you use subjects for some kind of state where you don't know when listeners are subscribing.
+RxJS has a special Subject that will help you. A [BehaviorSubject](http://reactivex.io/rxjs/manual/overview.html).
 
-Imagine a service loading some data at the application startup and you have a router navigating through your page components. Your interested page might come to life quite some time the data arrived.
+```typescript
+const subjectA = new Subject();
+const subjectB = new BehaviorSubject(null);
 
-If you subscribe to such a hot observable where the data might have been produced already you won't get any data when you subscribe too late.
+subjectA.next('your loaded data');
+subjectB.next('your loaded data');
 
-```
-it('BehaviorSubject', () => {
-    const normalSbject: Subject<number> = new Subject();
-    const behaviourSubject: BehaviorSubject<number> = new BehaviorSubject(0);
-
-    const produceValue = value => {
-      normalSbject.next(value);
-      behaviourSubject.next(value);
-    };
-
-    produceValue(1);
-    produceValue(5);
-    produceValue(7);
-    normalSbject.subscribe(value => {
-      console.log('normalSbject: ', value);
-    });
-
-    behaviourSubject.subscribe(value => {
-      console.log('normalSbject: ', value);
-    });
-  });
+subjectA.subscribe(value => console.log('value from subjectA:', value));
+subjectB.subscribe(value => console.log('value from subjectB:', value));
 ```
 
-Your output is this:
-> LOG: 'normalSbject: ', 7
+Your output is this:<br>
+> value from subjectB: your loaded data
 
-and if another value is produced after subscription you get that output in addition.
+The subscription to the normal subject just missed the data — it was produced too early. The `BehaviorSubject` also
+produced the value before the subscription — but it's nice enough to tell every subscription about the last subscription.
 
-```
-produceValue(13);
-```
+A `BehaviorSubject` only retains the last single value. If you want to keep all values you could use the `ReplaySubject`.
 
-> LOG: 'normalSbject: ', 13
-> LOG: 'behaviourSubject: ', 13
+## RxJS 7: Into the Wild — destroy & takeUntil
+Branch `rxjs/into-the-wild-take-destroy`.
 
-> **Learning:** A BehaviorSubject ensures that you always retrieve the latest data even when you subscribe after the last value has been produced.
+That's a pretty nice pattern to learn.
 
-### destroy & takeUntil
-You must ensure that you don't get dangling subscriptions like you don't want event listeners to be alive far after a component has been destroyed. That way you create unintended side effects and you create memory leaks as the garbage collector can't get rid of all involved resources.
+When you use `addEvenListener` you must ensure that you call `removeEventListener` too at some moment. The same is true of subscriptions,
+that's the return value when you subscribe to an Observable. Otherwise you would create unintended side effects and you create memory leaks as the garbage collector can't get rid of all involved resources.
 
 It's easy to create a dangling subscription:
 
-```
+```typescript
 class YourComponent {
   initService() {
     this.yourService.subscribe(data => {
@@ -191,17 +276,19 @@ ngOnDestroy() {
 }
 
 ```
-But if you habe more than one subscription this gets tedious. You can use the power of rxjs to unsubscribe automatically. The only thing you need in addition is a signal when the component is destroyed.
 
-```
+What happens if you have more than one subscription? Yes this gets tedious. You can use the power of rxjs to unsubscribe automatically. The only thing you need in addition is a signal when the component is destroyed.
+
+```typescript
 private _destroyed: Subject<any> = new Subject();
 ngOnDestroy() {
-    this._destroyed.next();
+  this._destroyed.next();
 }
 ```
 
 With that at your hand you can automatically complete and unsubscribe any stream you create.
-```
+
+```typescript
 this.yourService
   .pipe(takeUntil(this._destroyed))
   .subscribe(data => {
@@ -209,13 +296,21 @@ this.yourService
   })
 ```
 
-`takeUntil` will complete the event.
+`takeUntil` will complete the event once the desotry signal arrives.
 
 Neat isn't it? There is another good [article](https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87) from Ben Lesh about it.
 
-### toArray
-collect all values and return them once the stream completes
-```
+## RxJS 8: Into the Wild — toArray
+
+You can collect all values from a stream with `toArray` and return them once the stream completes.
+The same thing is happening when you use `last()` but you only return the last received element.
+
+That's a pretty handy operator I discovered far too late. You will see it in action in one of the challenges.
+There I use it to block a stream until it reached a given result.
+
+Here a simple example:
+
+```typescript
 range(1, 10)
     .pipe(
       toArray()
@@ -223,172 +318,111 @@ range(1, 10)
 ```
 > (10) [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-### tap
-to-go tool for debugging without interfering with the stream.
+
+And one with `switchMap` involved to show you the blocking functionality.
 
 ```typescript
-fromEvent(document, 'click')
-    .pipe(
-      tap(_ => console.log('click occured'))
-    ).subscribe();
-```
-
-> click occured
-> click occured
->
-
-### merge
-Merge can be used as an operator or standalone to begin a stream. You use it to merge multiple stream and dispatch them as one source. You can use it for example as an abort signal. Here whenever a click or a keydown event appears the signal would fire.
-
-```typescript
-const abortSignal = merge(
-  fromEvent(document, 'click'),
-  fromEvent(document, 'keydown')
-);
-```
-
-If you now start some other stream (to load something or to run something automatically for the user) you can abort it:
-
-```typescript
-interval(1000)
-    .pipe(
-      takeUntil(abortSignal)
-    ).subscribe(value => {
-      console.log('new interval step');
-    });
-```
-
-`interval` will dispatch a value every second and together with the takeUntil operator (that you already know from the onDestroy example) we can complete the stream whenever we receive an abort signal. That's really pretty code coimpared to the imperative version where you would have to maintain boolean flags, timeout referernces etc.
-
-### flatMap (alias mergeMap) vs switchMap
-
-Those operators are seen often but understanding them is not so easy when you are confronted with the whole RxJs universe.
-
-The map suffix tells you that those operators (like any other `*Map` operator) will convert any observable produced to its raw value. That's important. We want to have inner observable to do stuff like loading.
-
-Here to show the flattening. It's a made up example. We have a value of 1 `of(1)` and map it to an observable containing a single value. The only goal is here to get an output that let us know we received an Observable.
-
-```
-of(0)
+timer(0, 5000)
 .pipe(
-  mapTo(_ => of(1))
-)
-.subscribe(value => {
-  console.log(value);
-});
+  tag('outer observable'),
+  // create an inner observable
+  switchMap(value => {
+    return interval(500)
+      .pipe(
+        take(2),
+        tag('inner observable'),
+        toArray() // block until it completes. It will collect the array of collected values: [0, 1]
+      );
+  }),
+  // here you will see only one value (always [0, 1]) arriving from the
+  // inner observable.
+  tag('after the switch'),
+).subscribe();
 ```
 
-> Observable {_isScalar: true, _subscribe: ƒ, value: 1}
+## RxJS 9: Testing
+Branch `rxjs/testing`.
 
-You don't want this. Imagine you are running a http request instead of the `of(1)`. So you need something that is returning the value of the observable — that's called flattening and rxjs has us covered with operators like `switchMap`, `flatMap/mergeMap`, `concatMap` & `exhaustMap`.
+RxJS is synchronous by default. This means testing of your streams can be easy! Just subscribe and watch for the correct data to arrive.
 
-```
-of(0)
-.pipe(
-  flatMap(_ => of(1))
-)
-.subscribe(value => {
-  console.log(value);
-});
-```
+If async things are involved you need to make sure that things like services are mocked (and act synchronous again)
+or if there is a timer or interval involved just use the power of `fakeAsync` & `tick`. We will take a look at those in the next challenge about Testing.
 
-This will correctly output the value of the observable.
-> 1
+When you create your own observables things get more complicated and you should do marble testing (see Variant C)
 
-With this understood let me show you whats the difference between flatMap and switchMap. Both can flatten a value but the difference is what's happening with the inner observable (here `of(1)`) when a new value arrives in the outer observable. The current conceived examples don't helps here because there is only one value and not a stream of values.
+But in most cases your RxJS code can be tested with the following two methods (Variant A & B). It depends on the complexity of your stream and how exposed it is.
+There will be some tests to implement in the testing challenge coming soon 🙌
 
-```
-interval(1000)
-    .pipe(
-      take(3),
-      mergeMap(_ => {
-        // simulate fetching http data
-        return of(1)
-          .pipe(
-            delay(2000), // and that it takes 500ms
-            tap(value => console.log('received new data'))
-          );
-      })
-    ).subscribe(value => {
-      console.log('new polled data arrived');
+You have this component given:
+
+```typescript
+export class AppComponent {
+  title = 'workshop-theory';
+  counter = 0;
+  change$ = new Subject();
+
+  constructor() {
+    this.change$.subscribe(value => {
+      this.counter++;
     });
-```
-What happens here is that the interval will stream every second three times (take(3)). mergeMap creates another observable (of, delay, tap) and resolves it after only two seconds.
+  }
 
-Your output with mergeMap will look like this:
-> received new data
-> new polled data arrived
-> received new data
-> new polled data arrived
-> received new data
-> new polled data arrived
-
-Whereas if you use `switchMap` you output looks so:
-> received new data
-> new polled data arrived
-
-That's because switchMap will always unsubscribe from the inner observable when another value arrives. The inner observable
-
-```
-of(1).pipe(
-  delay(2000), // and that it takes 500ms
-  tap(value => console.log('received new data'))
-);
+  doSomething() {
+    this.change$.next(true);
+  }
+}
 ```
 
-is canceled by `switchMap` where `mergeMap` simply enqueues every observable, wait for a it's completion and still streams the value.
+### Variant A: Subscribe directly to your observable
+If the stream is only used internally it's perfectly fine to test the effects only. Imagine a component like this.
 
-Depending of your use case you want the either or the other and you must understand what you are using. Otherwise you would receive oudated data (if using mergeMap with http for exeample).
+```typescript
+it('changes should be true', () => {
+  const fixture = TestBed.createComponent(AppTestComponent);
+  fixture.detectChanges();
 
-## forkJoin
+  const app: AppComponent = fixture.componentInstance.instance;
 
-## Testing
-RxJS is can easily be tested if no timers or asynchronious sources (like http, user input) are mocked. Even if just stick to the rules for any test, if there is asynchronity use fakeAsync & test or async if necessary.
-
-You can therefore test rxjs usually with the two following methods.
-
-### Subscribe directly to your observable
-
-```
-it('tests rxjs', () => {
-    let result = false;
-
-    component.changes.subscribe(value => {
-      result = value;
-    });
-
-    // this will cause a true value to be streamed
-    component.triggerSomeChanges();
-
-    expect(result).toBeTruthy();
+  let result = false;
+  app.change$.subscribe( value => {
+    result = value;
   });
+
+  app.doSomething();
+
+  expect(result).toBe(true);
+});
 ```
 
-### Or just monitor for expected changes (css/markup)
+### Variant B: Monitor for expected changes only
 That's even better in a component because you don't want to test implementation details but the things being exposed.
 
 For example, if you have a component that is incrementing a counter whenever a click occurs. You know that you are using rxjs to do it but in the end it only matters that the changes are reflected in the template. So just test the counter not the rxjs.
 
+
+```typescript
+it('counter should increment when clicked', () => {
+  const fixture = TestBed.createComponent(AppTestComponent);
+  fixture.detectChanges();
+
+  const app: AppComponent = fixture.componentInstance.instance;
+
+  const nativeElementCounter: HTMLElement = fixture.nativeElement.querySelector('.counter');
+  expect(nativeElementCounter.textContent.trim()).toBe('0');
+
+  app.doSomething();
+  fixture.detectChanges();
+
+  // rxjs implementation is not important just test the effect
+  expect(nativeElementCounter.textContent.trim()).toBe('1');
+});
 ```
-it('should increment', () => {
-    fixture = TestBed.createComponent(BaseTest);
-
-    const nativeElement: HTMLElement = fixture.nativeElement.querySelector('.counter');
-
-    expect(nativeElement.textContent.trim()).toBe('0');
-
-    nativeElement.click();
-    fixture.detectChanges();
-
-    expect(nativeElement.textContent.trim()).toBe('1');
-  });
-```
 
 
-### Marble Testing
+### Variant C: Marble Testing
 You might have seen [marble test](https://github.com/ReactiveX/rxjs/blob/de9d2e4cef759b358c6c5d53b85e337dbf1c9c45/doc/marble-testing.md) like those:
 
-```
+```typescript
 it('generate the stream correctly', () => {
   scheduler.run(helpers => {
     const { cold, expectObservable, expectSubscriptions } = helpers;
@@ -400,37 +434,30 @@ it('generate the stream correctly', () => {
     expectSubscriptions(e1.subscriptions).toBe(subs);
   });
 ```
-That testing is useful when creating your own observables and is probably too much of testing for your own rxjs code.
+
+That testing is useful when creating your own observables but in most cases far too much if you are only testing your streams.
+
+
+## Completed
+Finish 🙌  You gained knowledged about the following awesome things in RxJS and you are ready for the challenge.
+
++ RxJS 1: Debugging
++ RxJS 2: About Dollar Signs
++ RxJS 3: Cold vs Hot Observables
++ RxJS 4: Make Cold Observables Hot
++ RxJS 5: Into the Wild — asObservable vs Subject
++ RxJS 6: Into the Wild — BehaviourSubject
++ RxJS 7: Into the Wild — destroy & takeUntil
++ RxJS 8: Into the Wild — toArray
++ RxJS 9: Testing
+
 
 ## Challenge
-Continue with [Chapter 04 - RxJS (Challenge)](../challenges/04-rxjs.md)
+Let's continue with [Chapter 04 - RxJS (Challenge)](../challenges/04-rxjs.md)
 
 ## Resources
-Great source to learn rxjs: https://reactive.how/
-
-
-
-
-toArray() to collect everything
-
-```
- const keyPressed = (key: string) => fromEvent(window, 'keydown')
-      .pipe(filter((event: KeyboardEvent) => event.key === key));
-
-  keyPressed('r').pipe(first())
-```
-
-common shortcut with underscore if your are not interested in the value
-```
-subscribe(_ => {
-
-})
-```
-
-static vs instance methods:
-pipe, merge, interval,
-
-mapTo(true)
-
-## Starting a stream
-fromEvent, of(array), of(...array)
++ Great source to learn rxjs: https://reactive.how/
++ [RxJS: Understanding the publish and share Operators](https://blog.angularindepth.com/rxjs-understanding-the-publish-and-share-operators-16ea2f446635)
++ [RxJS: How to Use refCount](https://blog.angularindepth.com/rxjs-how-to-use-refcount-73a0c6619a4e)
++ [On The Subject Of Subjects (in RxJS)](https://medium.com/@benlesh/on-the-subject-of-subjects-in-rxjs-2b08b7198b93)
++ [RxJS Operators for Dummies](https://scotch.io/tutorials/rxjs-operators-for-dummies-forkjoin-zip-combinelatest-withlatestfrom)
