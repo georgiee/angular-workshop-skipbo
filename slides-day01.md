@@ -1,8 +1,10 @@
-# [fit] Angular Workshop
-### _Skip-Bo Edition_
+build-lists: true
+
+![](images/slides/intro.png)
 
 ---
-# [fit] What's in the box
+
+# [fit] What's in the box?
 
 ---
 Everything is here:
@@ -12,297 +14,174 @@ Everything is here:
 # [fit] 6 Chapters
 
 ---
-# [fit] Theory
-# [fit] Challenge
-# [fit] Result
 
-^ How we work through all chapters
+# [fit] THEORY
+# [fit] CHALLENGE
+# [fit] RESULT
+
+^ Mantra for our two days
+
+^ That's how we work through all six chapters
+
+---
+# [fit] END RESULT
 
 ---
 
-# [fit] Result
-
----
-
-![](images/preview.jpg)
+![](images/preview.gif)
 
 ---
 # [fit] Skip-Bo Core
-# & Oscar 🐙
+### & Oscar 🐙
 
 ^ You will find a package `skipbo-core`.
 ^ That's the whole SkipBo game implemented and tested and it runs basically headless.
 ^ This will save you A LOT of time. Yes it's interesting implementing a set of game rules but you won't get many different challenges from it. That's why I did this for you!
 
 ---
-# [fit] Schedule
+# [fit] SCHEDULE
 
 ---
-# Day 2
+# _Day 2_
 + Chapter 04 — RxJS
 + Chapter 05 — Testing
 + Chapter 06 — Animation
 
-^ That's tomorrow
+^ That's tomorrow first
 
 ---
-[.build-lists: true]
 
-# Day 1
-+ Chapter 01 — Modules & Injection
+# _Day 1_
++ Chapter 01 — Modules
 + Chapter 02 — Components
 + Chapter 03 — Routing
 
 ^ That's what we are doing today
 
 ---
-# [fit] Day 1
+![original](images/slides/bg.png)
+# [fit] DAY 1
 
 ---
 ![original](images/slides/bg.png)
 
-### __Chapter 01__
-# [fit] Modules
-#### &
-# [fit] Injection
+#### __Chapter I__
+# [fit] MODULES
 
 ---
-> What would you have ripped out of Angular if you had one breaking change for free ?
+> "What would you have ripped out of Angular if you had one breaking change for free ?"
 
 ---
 > NgModules
 -- Igor Minar, AngularConnect 2018
 
 ---
-# [fit] Theory
+# [fit] THEORY
 
 ^ After motivating you by telling you that even the makers of Angular don't like modules
 ^ we are ready to start with the theory.
 
 ---
++ Providers
++ Declarations
++ Imports/Exports
++ EntryComponents
++ Bootstrap
++ Schema
 
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
 
 ---
-
-[.code-highlight: 2]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
+# [fit] CHALLENGE
 
 ---
+# _Your tasks_
++ Create our GameService
++ Provide expected interface (TDD)
++ Inject the GameService
++ Break the Injection and fix it
++ Answer a quick question
 
-
-[.code-highlight: 3]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
-
----
-
-
-
-[.code-highlight: 4]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
-
----
-
-
-
-[.code-highlight: 5]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
-
----
-
-
-
-
-[.code-highlight: 6]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
-
----
-
-
-[.code-highlight: 7]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
-
----
-
-
-[.code-highlight: 8]
-```typescript
-export interface NgModule {
-  providers?
-  declarations?
-  imports?
-  exports?
-  entryComponents?
-  bootstrap?
-  schemas?
-}
-```
-[.footer: Chapter 01: Modules & Injection]
-
----
-# [fit] Injection
-
----
-# [fit] Challenge
-
----
-
-+ 1. Create our GameService
-+ 2. Provide expected interface (TDD)
-+ 3. Inject the GameService
-+ 4. Break the Injection and fix it
-+ 5. Answer a quick question
 
 ^ Go to your checked our workshop folder and open file docs/challenges/01-module/challenge.md
+
 ^ Or go to the github repository.
 
-
 ---
-### [fit] Result
+### [fit] RESULT
 
 ---
 ![original](images/challenge-01-end.jpg)
 
 ---
-[.background-color: #5ccfe6]
-[.header: #202840]
+![original](images/slides/bg.png)
 
-### __Chapter 02__
-# [fit] Components
-
----
-# [fit] Theory
+#### __Chapter II__
+# [fit] COMPONENTS
 
 ---
-+ Directive vs. Components
-+ Template Magic
-+ ChangeDetection
-+ Presentational vs. Smart Component
+# [fit] THEORY
 
 ---
-# [fit] Challenge
-
----
-+ 1. Create Components: Gameplay, Card, CardFace, CardPile
-+ 2. Use GameplayComponent outside GameModule
-+ 3. Use CardPile inside GameModule
-+ 4. Fix bug in the CardPile
-+ 5. Inject parent component
++ preserveWhitespaces
++ Selectors on existing elements
++ View Encapsulation
++ Smart & Dumb Components
++ OnPush
++ Template References
 
 
 ---
-### [fit] Result
+# [fit] CHALLENGE
+
+---
+# _Your tasks_
++ Create Components
++ Use Gameplay Component
++ Use CardPile Component
++ Fix Bug in the CardPile
++ Inject parent component
+
+
+---
+### [fit] RESULT
 
 ---
 ![](images/challenge-02-end.jpg)
 
 ---
-[.background-color: #5ccfe6]
-[.header: #202840]
+![original](images/slides/bg.png)
 
-### __Chapter 03__
-# [fit] Routing
-
----
-# [fit] Theory
+#### __Chapter III__
+# [fit] ROUTING
 
 ---
-+ Outlet & Parameters
-+ Lazy Loading (new & old way)
+# [fit] THEORY
+
+---
++ Router Outlet
++ Lazy Load
++ Manual Loading a Module
 + Guards
-+ Resolvers
++ Resolver
+
 
 ---
-# [fit] Challenge
+# [fit] CHALLENGE
 
 ---
-+ 1. Route to the new pages
-+ 2. Make GameModule lazy load
-+ 3. Routing Guards: CanActivate
-+ 4. Routing Guards: CanDeactivate with prompt
+# _Your tasks_
+
++ Route to the new pages
++ Make GameModule lazy load
++ Routing Guards: CanActivate
++ Routing Guards: CanDeactivate with prompt
 
 ---
-### [fit] Result
+### [fit] RESULT
 
 ---
 ![](images/routing-03-end.jpg)
 
-
-
+---
+![original](images/slides/bg.png)
+### [fit] END 1

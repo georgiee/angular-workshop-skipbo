@@ -5,21 +5,21 @@ You can use animations for state transitions and router transitions.  Simple ani
 
 This means: You can't animate what you can't animate in CSS.
 
-+ Animation 1: States & Transitions
-+ Animation 2: Target Element
-+ Animation 3: Appearing & Disappearing Elements
-+ Animation 4: Numeric Triggers
-+ Animation 5: Disable Animations
-+ Animation 6: Keyframes
-+ Animation 7: Complex Animations
-+ Animation 8: Router Animations
-+ Animation 9: Animate Children
-+ Animation 10: Reuse animations & params
-+ Animation 11: Other things
++ Animation 1: Animation Basics
++ Animation 2: Appear & Disappear
++ Animation 3: Numeric Triggers
++ Animation 4: Disable
++ Animation 5: Router Animations
++ Animation 6: Animate Children
 
-## Animation 1: States & Transitions
+Excluded from the workshop
++ Animation 6: Keyframes
++ Animation 7: Complex Arrangements
+
+## Animation 1: Animation Basics
 Branch `animation/01`
 
+### States & Transitions
 Let's start with a simple usage of the animation system. Our goal is to give the component different backgrounds depending of the current state.
 The state is reflected in a variables called `state` with values `on | off`. You can toggle between the values with the method `toggleState()`.
 
@@ -84,7 +84,7 @@ No worry, that's part of the story as both CSS transitions and Angular Animation
 
 Let's continue.
 
-## Animation 2: Target Element
+### Target Element
 You might have wondered where the element is being targeted to animate. That's happening through the trigger Name prefixed with an `@` sign (hidden in the `@HostBinding('@stateAnimation')`). That's a special annotation for animations only and you get an error if you refer to a trigger that is not existing.
 
 You can do this in your template
@@ -110,7 +110,7 @@ You can also reuse it across multiple elements if you want of course — the ani
 <div [@triggerName]='valueOrState'>content B</div>
 ```
 
-## Animation 3: Appearing & Disappearing Elements
+## Animation 2: Appear & Disappear
 Branch `animation/02`
 
 We can also animate an element that is being created for example by using a structural directive like `*ngIf` or `*ngFor`. Try the following.
@@ -187,7 +187,7 @@ The trigger defines zero height and and horizontal offset as the initial styles 
 
 Pretty, isn't it ?
 
-## Animation 4: Numeric Triggers
+## Animation 3: Numeric Triggers
 Assume our trigger is not a state with values on & off but a numeric value.
 
 ```typescript
@@ -205,7 +205,7 @@ get boxes() {
 
 Now you have a button that can add boxes. We want to animate those boxes so we create a new trigger referring to boxCounter.
 
-## Animation 5: Disable Animations
+## Animation 4: Disable
 When you want to disable animations depending on an expression you can use the special binding `@.disabled`. This will prevent all animations on the element all children.
 
 ```html
@@ -232,27 +232,6 @@ public animationsDisabled = true;
 
 You can even go as high as the bootstrapping app component to disable all animations (or use `NoopAnimationsModule` instead of the `BrowserAnimationsModule`) to disable it with no possibility to enable it during runtime.
 
-## Animation 6: Keyframes
-Instead of defining start and end values we can also describe an animation more granulary with keyframes just like in CSS.
-
-```typescript
-trigger('keyframeTest', [
-  transition(':enter', [
-    animate('1s', keyframes([
-      style({ backgroundColor: 'red' }), // offset = 0
-      style({ backgroundColor: 'blue' }), // offset = 0.33
-      style({ backgroundColor: 'orange' }), // offset = 0.66
-      style({ backgroundColor: 'black' }) // offset = 1
-    ]))
-  ])
-])
-```
-
-```html
-<div *ngFor="let items of boxes" @keyframeTest>some content</div>
-```
-
-## Animation 7: Complex Animations
 With trigger, state, transition and animations, we already have a nice bag of tools to work with animations. What's missing is the possibility to create complex ensembles of elements and animations.
 
 There are:
@@ -368,7 +347,7 @@ group([
 animations: [ trigger, trigger ]
 trigger: [ state ]
 
-## Animation 8: Router Animations
+## Animation 5: Router Animations
 That sound very special but after everything you learned around animations this is going to be pretty easy. There is only one thing to remember: Your state is the current router path and you read it from your outlet by exposing the outlet state through the outlet template reference accessor.
 
 ```typescript
@@ -434,7 +413,7 @@ animations: [
 
 Once you get the hang on nesting trigger, transition, animate, query, style and so on you can quickly create nice animations but it can get crowded. That's why you can read in animations from external files and also reuse animations with parameters.
 
-## Animation 9: Animate Children
+## Animation 6: Animate Children
 If you mount the created examples in a router and you apply a routing animation on the router outlet you will see that neither of the children will animate.
 
 You have to use `animateChild()` together with `query` to target the elements that contain your animation (full component tag name, nested class names or target the animation itself with the trigger Name `@animationName`. You can also target all animations if you want with the following query. It's important to pass `optional` as not every element with an animation is ready at that point of time.
@@ -447,7 +426,44 @@ query('@*', [
 
 The query + animateChild is basically the start signal for the child animation. Use it in combination with group or sequence if you animate anything else in your parent animation.
 
-## Animation 10: Reuse animations & params
+## Completed
+We are done 🙌  We tackled the following topics and can continue with the challenge which will be amazing!
+
++ Animation 1: Animation Basics
++ Animation 2: Appear & Disappear
++ Animation 3: Numeric Triggers
++ Animation 4: Disable
++ Animation 5: Router Animations
++ Animation 6: Animate Children
+
+## Challenge
+Continue with [Chapter 06 - Animation (Challenge)](../challenges/06-animation.md)
+
+# Excluded Content
+
+## Animation 6: Keyframes
+Instead of defining start and end values we can also describe an animation more granulary with keyframes just like in CSS.
+
+```typescript
+trigger('keyframeTest', [
+  transition(':enter', [
+    animate('1s', keyframes([
+      style({ backgroundColor: 'red' }), // offset = 0
+      style({ backgroundColor: 'blue' }), // offset = 0.33
+      style({ backgroundColor: 'orange' }), // offset = 0.66
+      style({ backgroundColor: 'black' }) // offset = 1
+    ]))
+  ])
+])
+```
+
+```html
+<div *ngFor="let items of boxes" @keyframeTest>some content</div>
+```
+
+## Animation 7: Complex Arrangements
+
+## Animation 10: Reuse Animations with Params
 Let's look how we can reuse animations and also use params to customize them.
 
 A trigger value has an undocumented second format. Instead of being a string you can use an object with the type {value:string, params: {}}. Params will be passed through to the animation and you can interpolate the values.
@@ -573,21 +589,3 @@ This will reuse a component and if you have a simple enter opacity effect on the
 
 The animation system won't get triggered. You can try to override `RouteReuseStrategy`. But did not work for me in a quick example.
 
-
-## Completed
-We are done 🙌  We tackled the following topics and can continue with the challenge which will be amazing!
-
-+ Animation 1: States & Transitions
-+ Animation 2: Target Element
-+ Animation 3: Appearing & Disappearing Elements
-+ Animation 4: Numeric Triggers
-+ Animation 5: Disable Animations
-+ Animation 6: Keyframes
-+ Animation 7: Complex Animations
-+ Animation 8: Router Animations
-+ Animation 9: Animate Children
-+ Animation 10: Reuse animations & params
-+ Animation 11: Other things
-
-## Challenge
-Continue with [Chapter 06 - Animation (Challenge)](../challenges/06-animation.md)

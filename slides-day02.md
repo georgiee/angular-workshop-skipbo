@@ -1,51 +1,67 @@
-# [fit] Angular Workshop
-### _Skip-Bo Edition_
+build-lists: true
+![](images/slides/intro.png)
+
+^ Angular Workshop
+
+^ Skip-Bo Edition
 
 ---
-# [fit] Recap
----
-# Day 1
-
-+ Chapter 01 — Modules & Injection
-+ Chapter 02 — Components
-+ Chapter 03 — Routing
+![original](images/slides/bg.png)
+# [fit] RECAP
 
 ---
-# [fit] Day 2
+# _Day 1_
+
++ Chapter I — Modules & Injection
++ Chapter II — Components
++ Chapter III — Routing
 
 ---
-# Schedule
-+ Chapter 04 — RxJS
-+ Chapter 05 — Testing
-+ Chapter 06 — Animation
+![original](images/slides/bg.png)
+# [fit] DAY 2
 
 ---
-[.background-color: #5ccfe6]
-[.header: #202840]
-
-### __Chapter 04__
-# [fit] RxJS
-
----
-# [fit] Theory
+# _Schedule_
++ Chapter IV — RxJS
++ Chapter V — Testing
++ Chapter VI — Animation
 
 ---
-+ Cold vs Hot
-+ Top Operators
-+ How to test
+![](images/slides/bg.png)
+#### Chapter IV
+# [fit] RXJS
 
 ---
-# [fit] Challenge
----
-+ Task 1: Redirect to the Gameover Page
-+ Task 2: AI 🐙 Autoplay V1 (Single Card)
-+ Task 3: AI 🐙 Autoplay V2 (Research)
-+ Task 4: AI 🐙 Autoplay V2 (Implement)
-+ Task 5: AI 🐙 Autoplay V3 (Codename Awesome)
-+ Task 6: Stop the AI after gameover
+![original](images/slides/bg.png)
+# [fit] THEORY
 
 ---
-# [fit] Result
++ Debugging
++ About Dollar Signs
++ Cold vs Hot Observables
++ Make Cold Observables Hot
++ RxJS in the wild
++ Testing
+
+
+---
+![original](images/slides/bg.png)
+
+# [fit] CHALLENGE
+
+---
+## _Your tasks_
+
++ Redirect to the Gameover Page
++ AI 🐙 Autoplay V1
++ AI 🐙 Autoplay V2
++ AI 🐙 Autoplay V3
++ Stop the AI after game is over
+
+---
+![original](images/slides/bg.png)
+# [fit] RESULT
+
 ---
 
 ![fit](images/abc.png)
@@ -53,67 +69,90 @@
 ^ You can now play against the CPU players!
 
 ---
+![original](images/slides/bg.png)
 
-[.background-color: #5ccfe6]
-[.header: #202840]
-### __Chapter 05__
-# [fit] Testing
-
----
-# [fit] Theory
----
-
-+ Headless Configuration
-+ Hosting Components in Test (Test Wrapper)
-+ tick & fakeSync to tame micro & macro tasks
+#### Chapter V
+# [fit] TESTING
 
 ---
-# [fit] Challenge
----
-+ Task 1: Stock Bug (Investigate) 🐛
-+ Task 2: Stock Bug — Part 1
-+ Task 3: Stock Bug — Part 2
-+ Task 4: Stock Bug — Part 3
-+ Task 5: Test RxJS with Oscar 🐙 — CPUs
-+ Task 6: Test RxJS with Oscar 🐙 — Humans
-+ Task 7: Can Oscar play multiple cards ?
+![original](images/slides/bg.png)
+
+# [fit] THEORY
 
 ---
-# [fit] Result
+
++ Setup
++ Component Testing
++ Micro & Macro Tasks (Theory)
++ Testing Async Code
++ Change Detection
++ Testing Routing
+
+
+---
+![original](images/slides/bg.png)
+
+# [fit] CHALLENGE
+
+---
+## _Your tasks_
++ Stock Bug (Investigate) 🐛
++ Stock Bug — Part 1, 2, 3
++ Test RxJS w/ Oscar 🐙 — CPUs
++ Test RxJS w/ Oscar 🐙 — Humans
++ Can Oscar play multiple cards ?
+
+---
+![original](images/slides/bg.png)
+
+# [fit] RESULT
+
 ---
 ![fit](images/challenge-05-end.jpg)
 
 ^ Well tested and we can see the opponent players finally!
 
 ---
-[.background-color: #5ccfe6]
-[.header: #202840]
+![original](images/slides/bg.png)
 
-### __Chapter 06__
-# [fit] Animation
-
----
-# [fit] Theory
+#### Chapter VI
+# [fit] ANIMATION
 
 ---
-+ Headless Configuration
-+ Hosting Components in Test (Test Wrapper)
-+ tick & fakeSync to tame micro & macro tasks
+![original](images/slides/bg.png)
+# [fit] THEORY
 
 ---
++ Animation Basics
++ Appear & Disappear
++ Numeric Triggers
++ Disable
++ Router Animations
++ Animate Children
 
-# [fit] Challenge
-
----
-+ Task 1: First Flip - Part 1 (Static)
-+ Task 2: First Flip - Part 2 (Transition)
-+ Task 3: Flip Party
-+ Task 4: Flip with Style
-+ Task 5: Make the Hand Cards flip
-+ Task 6: Animate Stock Flip
 
 ---
-# [fit] Result
+![original](images/slides/bg.png)
+# [fit] CHALLENGE
 
 ---
-![fit autoplay](images/animation-end.gif)
+## _Your tasks_
++ First Flip - Part 1 & 2
++ Flip Party
++ Flip with Style
++ Make the Hand Cards flip
++ Animate Stock Flip
+
+---
+![original](images/slides/bg.png)
+# [fit] RESULT
+
+---
+![fit](images/animation-end.gif)
+
+---
+![original](images/slides/bg.png)
+### [fit] END 2
+---
+![original](images/slides/bg.png)
+### [fit] THANKS

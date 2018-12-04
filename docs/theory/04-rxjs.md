@@ -9,11 +9,8 @@ We will look at the following things in RxJS:
 + RxJS 2: About Dollar Signs
 + RxJS 3: Cold vs Hot Observables
 + RxJS 4: Make Cold Observables Hot
-+ RxJS 5: Into the Wild — asObservable vs Subject
-+ RxJS 6: Into the Wild — BehaviourSubject
-+ RxJS 7: Into the Wild — destroy & takeUntil
-+ RxJS 8: Into the Wild — toArray
-+ RxJS 9: Testing
++ RxJS 5: RxJS in the wild
++ RxJS 6: Testing
 
 ## RxJS 1: Debugging
 Branch `rxjs/debug`
@@ -184,10 +181,10 @@ myInterval2.connect();
 
 </details>
 
-## Into the wild
+## RxJS 5: RxJS in the wild
 Following some things I use frequently in real projects so you get confident in using them too 🙌
 
-## RxJS 5: Into the Wild — asObservable vs Subject
+### asObservable vs Subject
 Branch `rxjs/into-the-wild-as-observable`
 
 If you have a subject just for signaling something you usually use a Subject and expose it, right?
@@ -216,7 +213,7 @@ get changed(): Observable<any> {
 
 This way it's only an observable — there are no observer functions like next available.
 
-## RxJS 6: Into the Wild — BehaviourSubject
+### BehaviourSubject
 Branch `rxjs/into-the-wild-behaviour`
 
 Hot Observables can produce values without someone listening. It's pretty sad to imagine someone telling important stuff and nobody is listening.
@@ -243,7 +240,7 @@ produced the value before the subscription — but it's nice enough to tell ever
 
 A `BehaviorSubject` only retains the last single value. If you want to keep all values you could use the `ReplaySubject`.
 
-## RxJS 7: Into the Wild — destroy & takeUntil
+### destroy & takeUntil
 Branch `rxjs/into-the-wild-take-destroy`.
 
 That's a pretty nice pattern to learn.
@@ -300,7 +297,7 @@ this.yourService
 
 Neat isn't it? There is another good [article](https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87) from Ben Lesh about it.
 
-## RxJS 8: Into the Wild — toArray
+### toArray
 
 You can collect all values from a stream with `toArray` and return them once the stream completes.
 The same thing is happening when you use `last()` but you only return the last received element.
@@ -340,7 +337,7 @@ timer(0, 5000)
 ).subscribe();
 ```
 
-## RxJS 9: Testing
+## RxJS 6: Testing
 Branch `rxjs/testing`.
 
 RxJS is synchronous by default. This means testing of your streams can be easy! Just subscribe and watch for the correct data to arrive.
@@ -445,10 +442,7 @@ Finish 🙌  You gained knowledged about the following awesome things in RxJS an
 + RxJS 2: About Dollar Signs
 + RxJS 3: Cold vs Hot Observables
 + RxJS 4: Make Cold Observables Hot
-+ RxJS 5: Into the Wild — asObservable vs Subject
-+ RxJS 6: Into the Wild — BehaviourSubject
-+ RxJS 7: Into the Wild — destroy & takeUntil
-+ RxJS 8: Into the Wild — toArray
++ RxJS 5: RxJS in the wild
 + RxJS 9: Testing
 
 
