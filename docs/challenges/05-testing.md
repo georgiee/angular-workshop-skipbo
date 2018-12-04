@@ -159,7 +159,7 @@ Otherwise you won't know if your changes & fixes in the components are really wo
 ## Task 4: Stock Bug — Part 3 🐛
 Catch up with `workshop/05-testing-progress-02`.
 
-**Task**: Can you summarize what went wrong or if you catched up look at the different comments to understand what happended?
+**Task**: Can you summarize what went wrong or if you caught up look at the different comments to understand what happened?
 
 
 ## Task 5: Test RxJS with Oscar 🐙 — CPUs
@@ -327,7 +327,7 @@ it('will try a second time after successfully placing a card', fakeAsync(() => {
 
 You can find the implementation of `autoPlaceAction` in the `player.ts` file of `skipbo-core`. Go ahead and take a look. The return value is a boolean and will be used to set the value of `cardPlayed` (remember `PlayerTryResult` ?) later.
 
-At the moment we only tested if the AI tried to play for a player by spying on the `autoPlaceAction` method in general. Now you want to check if the method `autoPlaceAction` is called multiple times — to ensure that Oscar really plays multiple cards (we teached that to Oscar with interval() in the last challenge).
+At the moment we only tested if the AI tried to play for a player by spying on the `autoPlaceAction` method in general. Now you want to check if the method `autoPlaceAction` is called multiple times — to ensure that Oscar really plays multiple cards (we taught that to Oscar with `interval()` in the last challenge).
 
 Here the facts:
 

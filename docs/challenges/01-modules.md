@@ -101,7 +101,7 @@ That's how you import other modules into your TestBed. That's okay to do, but yo
 </details>
 
 ## Completed
-That's it. You completed the first challenge🏅
+That's it. You completed the first challenge 🏅
 
 You reached branch `workshop/01-modules-service-end` by completing the following tasks:
 

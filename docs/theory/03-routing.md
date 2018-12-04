@@ -81,7 +81,7 @@ Before loading the module let's create another module to load. We don't want any
     CommonModule
   ],
   entryComponents: [
-    // we already learned, that whenever you want to creat a dynamic component
+    // we already learned, that whenever you want to create a dynamic component
     // it must appear in this list.
     LazyFeatureComponent,
     AComponent,
@@ -145,7 +145,7 @@ That's our loading mechanism.
 
 
 ```typescript
-// tag where we gonna inject the lazyload module and his default compononent "entry"
+// tag where we gonna inject the lazyload module and his default component "entry"
   @ViewChild('container', { read: ViewContainerRef }) viewRef: ViewContainerRef;
 
   constructor(

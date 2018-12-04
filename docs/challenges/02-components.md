@@ -1,4 +1,3 @@
-
 # Challenge: Components
 Start with branch `workshop/02-components-start`
 
@@ -158,7 +157,7 @@ The log shrinks to this:
 
 That's exactly what should happen. There is no parent `CardPileComponent` anymore. The card can really detect if there is a parent pile.
 
-That host injecting mechanic is kind of a tighter coupling but in reality not different to passing in properties — so you can absolutely use it when the classic methods are not working or if you would create too much boilercode by introducing services only for a single purpose that you could handle with such a host injection.  That being said: In most cases you shouldn't need such mechanics as you can simply pass in the information a card is interested in from the parent pile with `@Inputs`.
+That host injecting mechanic is kind of a tighter coupling but in reality not different to passing in properties — so you can absolutely use it when the classic methods are not working or if you would create too much boilerplate code by introducing services only for a single purpose that you could handle with such a host injection.  That being said: In most cases you shouldn't need such mechanics as you can simply pass in the information a card is interested in from the parent pile with `@Inputs`.
 
 In other scenarios where you would call methods or bind events oof the parent component you could inject a service in both components to work as the message bus. Angular for example uses the `@Host()` pattern heavily in the forms package to get information about how the controls are grouped and nested.
 

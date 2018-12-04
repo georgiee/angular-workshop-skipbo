@@ -193,9 +193,9 @@ You get those information from the `PlayerTryResult` that is returned from the `
 
 ### About the placing strategy
 
-`naivePlacementStrategyObservable` is a custom build Observable. It's working by trying different possibilities in a prioritozed order:
+`naivePlacementStrategyObservable` is a custom build Observable. It's working by trying different possibilities in a prioritized order:
 
-1. **Try to play a stock card** (Highest Priorty: We need to get rid of those cards)
+1. **Try to play a stock card** (Highest Priority: We need to get rid of those cards)
 2. **Try to play a hand card** (Medium Priority: If we can remove a hand card we get a different card the next turn)
 3. **Try to play from the discard piles** (Lowest Priority, those cards are helping building but we gain nothing else from playing them. Actually those cards are really important to create strategies but not for us yet)
 
@@ -474,7 +474,7 @@ You have the following error?
 > EmptyErrorImpl {message: "no elements in sequence", name: "EmptyError"}
 
 You use `takeWhile` before the `last` operator. If the stream is completed by `takeWhile`
-before anythign was emitted you will get that error. You can ensure at least one element being delivered to `last()`
+before anything was emitted you will get that error. You can ensure at least one element being delivered to `last()`
 by using `defaultIfEmpty`.
 </details>
 
@@ -509,7 +509,7 @@ It's near the `discardHandCard` action.
 ## Completed
 Awesome. You did it!🏅🏅🏅 This was a long and pretty difficult challenge. I hope you didn't have to use the catch up branches too often.
 
-RxJs is hard to learn because you need to gather a lot of experience with the dozens of operators and observables and then you still have to learn to build your own observables. That's a lot. I learnt a lot creating this challenge — I encourage you to learn RxJJ with a real project but it doesn't have to be a daily job project. Just build your favorite card or boardgame, some application you would like to build or anything else you enjoy. Reactive programming will be helpful in many places — it's a technology avaialble in many programming languages.
+RxJs is hard to learn because you need to gather a lot of experience with the dozens of operators and observables and then you still have to learn to build your own observables. That's a lot. I learnt a lot creating this challenge — I encourage you to learn RxJJ with a real project but it doesn't have to be a daily job project. Just build your favorite card or boardgame, some application you would like to build or anything else you enjoy. Reactive programming will be helpful in many places — it's a technology available in many programming languages.
 
 You reached branch `workshop/04-rxjs-end` by completing the following tasks.
 

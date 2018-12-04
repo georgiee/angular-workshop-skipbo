@@ -442,7 +442,7 @@ Continue with [Chapter 06 - Animation (Challenge)](../challenges/06-animation.md
 # Excluded Content
 
 ## Animation 6: Keyframes
-Instead of defining start and end values we can also describe an animation more granulary with keyframes just like in CSS.
+Instead of defining start and end values we can also describe an animation more granularly with keyframes just like in CSS.
 
 ```typescript
 trigger('keyframeTest', [
@@ -535,7 +535,7 @@ In your template or host binding use the async operator:
 
 ```typescript
 <div [@myTrigger]="triggerSignalObservable | async">
-  I will be changed by the poweer of a stream
+  I will be changed with the power of a stream
 </div>
 ```
 

@@ -133,9 +133,9 @@ ViewEncapsulation has four modes as today:
 + ViewEncapsulation.None
 + ViewEncapsulation.ShadowDom
 
-Emulated is the default and emulates encapsulation by introducing namespacing CSS classes that will bind the styles to your component. None will disable it and you will risk conflicting styles. If you are sure about your style system than this is perfectly fine.
+Emulated is the default and emulates encapsulation by introducing namespaced CSS classes that will bind the styles to your component. None will disable it and you will risk conflicting styles. If you are sure about your style system than this is perfectly fine.
 
-`ViewEncapsulation.Native` and `ViewEncapsulation.ShadowDom` are both refering to the web standard. Native is the V0 standard — it's a deprecated standard. If you are not using it at the moment forget its existence NOW! Chrome already disabled support for the V0 standard for examples.
+`ViewEncapsulation.Native` and `ViewEncapsulation.ShadowDom` are both referring to the web standard. Native is the V0 standard — it's a deprecated standard. If you are not using it at the moment forget its existence NOW! Chrome already disabled support for the V0 standard for examples.
 
 `ViewEncapsulation.ShadowDom` is what you want to use if your browser matrix is modern enough AND you are brave enough to accept breaking changes. This will enable native Shadow DOM V1 for your component.
 ![](images/02-components/shadow-dom-v1.png)
@@ -353,7 +353,7 @@ export class PushEnabledComponent {
 
   changeInput(value) {
     this.someInput = value;
-    // 2. Tell Angular that somethinng changed
+    // 2. Tell Angular that something changed
     this._cdr.markForCheck();
   }
 

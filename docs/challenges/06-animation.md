@@ -77,7 +77,7 @@ This will do two things:
 + 1. Assign all WebAnimation style changes to the element `card__inner`
 + 2. Bind the value of `flipState` to the trigger — so we can refer to the values `front` & `back` in the trigger.
 
-Save and checkout the browser view. Yyou should not have any error but nothing changed of course as we did not create anything that would be visible.
+Save and checkout the browser view. You should not have any error but nothing changed of course as we did not create anything that would be visible.
 
 
 ### States

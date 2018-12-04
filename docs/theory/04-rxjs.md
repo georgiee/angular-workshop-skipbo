@@ -116,7 +116,7 @@ const myInterval = interval(500).pipe(
 );
 ```
 
-You would create a new `setIterval` with each subscription and each susbcription would receive its own stream of numbers.
+You would create a new `setInterval` with each subscription and each subscription would receive its own stream of numbers.
 
 ```typescript
 myInterval.subscribe(value => console.log('received a value', value));
@@ -138,7 +138,7 @@ The 0 look similar but they are produced from different intervals. We can make i
 
 ```typescript
 const subject = new Subject();
-  // 1. let this subject susbcribe to the cold observable
+  // 1. let this subject subscribe to the cold observable
   myInterval.subscribe(subject);
 
   // 2. now let future observables subscribe to the subject instead of the interval
@@ -293,7 +293,7 @@ this.yourService
   })
 ```
 
-`takeUntil` will complete the event once the desotry signal arrives.
+`takeUntil` will complete the event once the destroy signal arrives.
 
 Neat isn't it? There is another good [article](https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87) from Ben Lesh about it.
 
