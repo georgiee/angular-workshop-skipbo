@@ -1,12 +1,12 @@
 build-lists: true
-![](images/slides/intro.png)
+![](../images/slides/intro.png)
 
 ^ Angular Workshop
 
 ^ Skip-Bo Edition
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 # [fit] RECAP
 
 ---
@@ -17,7 +17,7 @@ build-lists: true
 + Chapter III — Routing
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 # [fit] DAY 2
 
 ---
@@ -27,12 +27,11 @@ build-lists: true
 + Chapter VI — Animation
 
 ---
-![](images/slides/bg.png)
+![original](../images/slides/bg.png)
 #### Chapter IV
 # [fit] RXJS
 
 ---
-![original](images/slides/bg.png)
 # [fit] THEORY
 
 ---
@@ -45,8 +44,6 @@ build-lists: true
 
 
 ---
-![original](images/slides/bg.png)
-
 # [fit] CHALLENGE
 
 ---
@@ -59,24 +56,21 @@ build-lists: true
 + Stop the AI after game is over
 
 ---
-![original](images/slides/bg.png)
 # [fit] RESULT
 
 ---
 
-![fit](images/abc.png)
+![fit](../images/abc.png)
 
 ^ You can now play against the CPU players!
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 
 #### Chapter V
 # [fit] TESTING
 
 ---
-![original](images/slides/bg.png)
-
 # [fit] THEORY
 
 ---
@@ -90,8 +84,6 @@ build-lists: true
 
 
 ---
-![original](images/slides/bg.png)
-
 # [fit] CHALLENGE
 
 ---
@@ -103,23 +95,20 @@ build-lists: true
 + Can Oscar play multiple cards ?
 
 ---
-![original](images/slides/bg.png)
-
 # [fit] RESULT
 
 ---
-![fit](images/challenge-05-end.jpg)
+![fit](../images/challenge-05-end.jpg)
 
 ^ Well tested and we can see the opponent players finally!
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 
 #### Chapter VI
 # [fit] ANIMATION
 
 ---
-![original](images/slides/bg.png)
 # [fit] THEORY
 
 ---
@@ -132,7 +121,6 @@ build-lists: true
 
 
 ---
-![original](images/slides/bg.png)
 # [fit] CHALLENGE
 
 ---
@@ -144,15 +132,14 @@ build-lists: true
 + Animate Stock Flip
 
 ---
-![original](images/slides/bg.png)
 # [fit] RESULT
 
 ---
-![fit](images/animation-end.gif)
+![fit](../images/animation-end.gif)
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 ### [fit] END 2
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 ### [fit] THANKS

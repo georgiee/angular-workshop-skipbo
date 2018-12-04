@@ -1,6 +1,6 @@
 build-lists: true
 
-![](images/slides/intro.png)
+![](../images/slides/intro.png)
 
 ---
 
@@ -28,7 +28,7 @@ Everything is here:
 
 ---
 
-![](images/preview.gif)
+![](../images/preview.gif)
 
 ---
 # [fit] Skip-Bo Core
@@ -59,11 +59,11 @@ Everything is here:
 ^ That's what we are doing today
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 # [fit] DAY 1
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 
 #### __Chapter I__
 # [fit] MODULES
@@ -110,10 +110,10 @@ Everything is here:
 ### [fit] RESULT
 
 ---
-![original](images/challenge-01-end.jpg)
+![original](../images/challenge-01-end.jpg)
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 
 #### __Chapter II__
 # [fit] COMPONENTS
@@ -146,10 +146,10 @@ Everything is here:
 ### [fit] RESULT
 
 ---
-![](images/challenge-02-end.jpg)
+![](../images/challenge-02-end.jpg)
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 
 #### __Chapter III__
 # [fit] ROUTING
@@ -180,8 +180,8 @@ Everything is here:
 ### [fit] RESULT
 
 ---
-![](images/routing-03-end.jpg)
+![](../images/routing-03-end.jpg)
 
 ---
-![original](images/slides/bg.png)
+![original](../images/slides/bg.png)
 ### [fit] END 1

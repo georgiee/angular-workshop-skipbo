@@ -84,3 +84,5 @@ Learn about animations in Angular, how to apply and control them. In the challen
 ---
 
 [Completed Version](https://skipbo-angular-workshop.netlify.com/)
+
+Slides are for [Deckset](https://www.deckset.com/)

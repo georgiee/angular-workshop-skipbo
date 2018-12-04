@@ -1,4 +1,8 @@
 # Log
+That's my personal dev log, you should not read it 🙊
+
+----
+
 I started end of October around 30/31 with the project, as a project ended the plan was to have full 4 weeks to develop the workshop. Luckliy (or unluckily) we got landed a project — starting on 21.11 and removing 1.5 weeks from my schedule 😑 This means workign on the workshop weekends, before work and after work. But it's a fun challenge and totally worth.
 
 Did I mention I'm also 7 days in London for AngularConnect beginning of Novemeber ? Great planinng by me. See me working in London in some shared workspaces.
@@ -47,3 +51,10 @@ Cherry picking to the resuce.
 
 
 + Forgot to create the theory file for components so I'm doign this now after I already finished everything else. Well "finished" we will see.
+
++ Completed Theory for Modules, Created a fresh new (because I forget) Theory part for components and and touched the routing part before my girl friend stopped me
++ Next day I continue early in the morning with structuring and creating simple theory code examples for Rxjs & Testing. I briefly touched animations only. It was okay already but I did far too much of content. Removed many parts and moved them to the end of the file in case someone is intereseted.
++ Created all slides with Deckset and got two nice backgrounds from my colleague to create a customized theme.
++ The slides showed me that I had too many tasks in some challenges. Removed them or put them under the same headline at least.
++ Updated the Readme of the workshop project and put in the preview links
++ Provided a license to both projects, I decided for a MIT with https://choosealicense.com/. I want this workshop to be usable to other people too.
