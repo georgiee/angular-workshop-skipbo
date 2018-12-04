@@ -42,42 +42,42 @@ Here you can see all chapters to jump either in the theory or challenge part. Th
 We start slowly with a recap of what Modules are and their special role in Angular. The Injection System is tightly bound to the module world so it's a good moment to revise them in this chapter.
 
 + [Theory](docs/theory/01-modules.md)
-+ [Challenge](docs/challenges/01-modules/challenge.md)
++ [Challenge](docs/challenges/01-modules.md)
 + [Preview](https://5c01159cf6d5ea7fb5133562--skipbo-angular-workshop.netlify.com/)
 
 ### Chapter II: Components
 Learn all about Directive/Components, things you can to in templates, ChangeDetection and the difference between presentational and smart components. In the challenge we will create our first components: CardFace, Card, CardPile and our gaming stage.
 
 + [Theory](docs/theory/02-components.md)
-+ [Challenge](docs/challenges/02-components/challenge.md)
++ [Challenge](docs/challenges/02-components.md)
 + [Preview](https://5c0115b29a063f180bf0dcf5--skipbo-angular-workshop.netlify.com/)
 
 ### Chapter III: Routing
 We will get serious by providing a welcome page, instructions, a gameover page and a page to select our players. In the challenge you will map the routes, introduce lazy loading and routing guards.
 
 + [Theory](docs/theory/03-routing.md)
-+ [Challenge](docs/challenges/03-routing/challenge.md)
++ [Challenge](docs/challenges/03-routing.md)
 + [Preview](https://5c01469405c41743336caefd--skipbo-angular-workshop.netlify.com/)
 
 ### Chapter IV: RxJS
 Learn the difference between cold & hot, some important rxjs operators and how to test. In the challenge we will Oscar 🐙 an card playing AI with the power of RxJs.
 
 + [Theory](docs/theory/04-rxjs.md)
-+ [Challenge](docs/challenges/04-rxjs/challenge.md)
++ [Challenge](docs/challenges/04-rxjs.md)
 + [Preview](https://5c03b6c1e5cd161924fc7252--skipbo-angular-workshop.netlify.com/welcome)
 
 ### Chapter V: Testing
 How to use headless browsers, use hosting/wrapper components in tests and learn important details of the change detection system and how it impacts your testing (tick, fakeSync, micro, macro tasks). In the challenge we will fix a nasty component bug and test Oscar's 🐙 async rxjs stream.
 
 + [Theory](docs/theory/05-testing.md)
-+ [Challenge](docs/challenges/05-testing/challenge.md)
++ [Challenge](docs/challenges/05-testing.md)
 + [Preview](https://5c0115fa9a063f180bf0dd48--skipbo-angular-workshop.netlify.com/welcome)
 
 ### Chapter VI: Animation
 Learn about animations in Angular, how to apply and control them. In the challenge we will flip some cards 🙌
 
 + [Theory](docs/theory/06-animation.md)
-+ [Challenge](docs/challenges/06-animation/challenge.md)
++ [Challenge](docs/challenges/06-animation.md)
 + [Preview](https://5c0115fa9a063f180bf0dd48--skipbo-angular-workshop.netlify.com/welcome)
 
 
