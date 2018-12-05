@@ -24,16 +24,14 @@ In six chapters you will learn about advanced techniques in Angular, gain deeper
 Together we will make progress in the overall game to hold a fully working game in the hands after the workshop.
 
 ### Theory Part
-Theory is boring and especially in the case of Angular many, many things can be found in their [outstanding documentation](https://angular.io/docs) already.  Personally I like to read about best practice, untold facts and surprising functionality that isn't part of any documentation.
-
-Personally I like reading documentation and listening to people telling me some unknown facts about stuff I thought I knew already. If there is some room for discussion, great, couldn't think of anything better! I will present you a mix of things you should know about Angular and we try to dig deeper. Let us also talk about best practice and problems from your daily job.
+Theory is boring and especially in the case of Angular many, many things can be found in their [outstanding documentation](https://angular.io/docs) already. Personally I like to read about best practice, untold facts and surprising functionality that isn't part of any documentation. By creating this workshop I discovered some new and interesting things in Angular. I will present you a mix of awesome and interesting things in Angular and hope I can help you being a even better developer tomorrow 💪
 
 ### Code Challenges
-The challenges are six individual coding sessions with a total duration of roughly 6 hours over two days. In the end you will hold a fully working card game in the hand, with animations and AI-like CPU players. There is a lot of code involved and we can't implement everything from scratch in 6 hours. Some parts would be tedious and boring, others too complex and elaborated.
+The challenges are six individual coding sessions with a total duration of roughly 6 hours over two days. In the end you will hold a fully working card game in the hand, with animations and AI-like CPU players. There is a huge amount of code involved and we can't implement everything from scratch in six hours. Some parts would be tedious and boring, others too complex and elaborated.
 
 That's the reason why each session will start with a dedicated starting branch (`workshop/XX-chaptername-start`) — this allows me to provide you some code additions that brings the overall game forward without giving you everything. Trust me, you will have enough to code and think about.
 
-There are also some progress branches (`*--progress-01`, `*--progress-02`) during a challenge  I use those progress branches to add some more parts during a challenge. You need to check them out to follow the challenge. Some people will be quicker than others, that's the second reason for having those progress branches: That's the perfect moment to catch up with the rest if you want.
+There are also some progress branches (`*--progress-01`, `*--progress-02`) during a challenge  I use those progress branches to add some more parts during a challenge. You need to check them out to follow the challenge. Some people will be quicker than others, that's the second reason for having those progress branches: It's the perfect moment to catch up with the rest if you want.
 
 ### Chapters
 Here you can see all chapters to jump either in the theory or challenge part. The preview link shows the progress of the overall game we build together — and can be a black screen in the beginning too.

@@ -49,6 +49,12 @@ Everything is here:
 
 ^ That's tomorrow first
 
+^ 04 RxJS: Debugging to RxJS in the wild & testing + AI 🐙 Autoplay V1
+
+^ 05 Testing:  Async Code, Micro/Macro, ChangeDetection, Routing — Testing RxJS code from Oscar 🐙
+
+^ 06 Animation: Basics to Router Animation and we flip many cards in the challenge
+
 ---
 
 # _Day 1_
@@ -57,6 +63,12 @@ Everything is here:
 + Chapter 03 — Routing
 
 ^ That's what we are doing today
+
+^ 01: Modules + GameService
+
+^ 02: Components, Smart & Dumb Components, OnPush, Template and we will build our first components for the game
+
+^ 03: Routing: Lazy Load, Guards, Resolver and we will mount many new pages and guard our game.
 
 ---
 ![original](../images/slides/bg.png)
