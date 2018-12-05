@@ -199,7 +199,7 @@ class YourComponent {
 }
 ```
 
-The problem here: A subject is both a observer and observable. It can observe by subscribing (otherObservable.subscribe(subject)) and you can subscribe to it as an Observable (subject.subscribe). By exposing a subject directly you allow other parties to use its observer side. Someone could get the idea to subscribe it to some source or just use the `next` method (as part of the observer pattern). You want to protect your subject from being used like this.
+The problem here: A subject is both an observer and observable. It can observe by subscribing (otherObservable.subscribe(subject)) and you can subscribe to it as an Observable (subject.subscribe). By exposing a subject directly you allow other parties to use its observer side. Someone could get the idea to subscribe it to some source or just use the `next` method (as part of the observer pattern). You want to protect your subject from being used like this.
 
 That's where `subject.asObservable()` comes to your rescue.
 
@@ -455,3 +455,5 @@ Let's continue with [Chapter 04 - RxJS (Challenge)](../challenges/04-rxjs.md)
 + [RxJS: How to Use refCount](https://blog.angularindepth.com/rxjs-how-to-use-refcount-73a0c6619a4e)
 + [On The Subject Of Subjects (in RxJS)](https://medium.com/@benlesh/on-the-subject-of-subjects-in-rxjs-2b08b7198b93)
 + [RxJS Operators for Dummies](https://scotch.io/tutorials/rxjs-operators-for-dummies-forkjoin-zip-combinelatest-withlatestfrom)
+
++ [The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
