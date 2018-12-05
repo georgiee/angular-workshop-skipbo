@@ -33,7 +33,7 @@ You are using that Component Decorator very often but there are some really nice
 
 + Component 1: preserveWhitespaces
 + Component 2: Selectors on existing elements
-+ Component 2: View Encapsulation
++ Component 3: View Encapsulation
 + Component 4: Smart & Dumb Components
 + Component 5: OnPush
 + Component 6: Template References
@@ -71,7 +71,7 @@ Branch `components/multiple-components-attached`
 You usually learn to use Directives with a selector to be placed on an existing element
 and a component receives a full tag.
 
-```typescript
+```html
 <my-custom-component></my-custom-component>
 <some-component myDirective></some-component>
 ```
@@ -119,7 +119,7 @@ There is hope that we won't need to attach components in the future to get encap
 Igor Minar answered at AngularConnect 2018 in London that Directives with Styles is one of the top features to work on after Ivy is released. That request comes from the Material Design Team as they struggle with — guess what — yes with styling inputs and buttons.
 
 
-## Component 2: View Encapsulation
+## Component 3: View Encapsulation
 Branch `components/view-encapsulation`
 
 You can define styles per component. If all styles were global, this would be a mess in large projects as you would run into conflicting styles all the time without using other scoping techniques like `BEM`.

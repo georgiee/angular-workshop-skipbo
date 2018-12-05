@@ -165,7 +165,7 @@ export class UiModule { }
 1. We add the `ButtonModule` to the exports list. Whoever imports the `UiModule` will now be able to use the button inn its templates too.
 
 You can also see imports in action:<br>
-That's the place to import other modules to use their components/directives/pipes (only if they are listed in its `exports: []`). If you have decided to bind a service to a module (by explicitly list the service in their provider array) you can provide access to the service also by importing the module.
+That's the place to import other modules to use their components/directives/pipes (only if they are listed in its `exports: []`).
 
 ## Module 4: EntryComponents
 Branch: `modules/entry-components`
