@@ -201,7 +201,7 @@ Microtasks are queued up and executed at the end of a task.
 Members:
 
 + mutation observer callbacks
-+ Promises (event settled ones)
++ Promises (even settled ones)
 
 There is also a whatwg proposal [queueMicrotask](https://github.com/whatwg/html/issues/512) but it's still only in the specs.
 
