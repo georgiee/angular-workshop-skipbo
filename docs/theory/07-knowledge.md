@@ -184,3 +184,39 @@ where you can jump back to the last working directory with `cd -`
 Create a folder `~/opensource` and whenever you see an interesting project, don't stop with a start on github. Clone it and quickly browse through it. When you are working on a daily project, remember that project and if it fits in the overall complex browse through it again for inspiration about structure & code techniques.
 
 Angular Material is for examples my goto project to look for ideas around RxJS & Testing.
+\
+
+
+
+github y t
+
+
+twitter: 
+https://twitter.com/umaar?lang=en
+
+oh-my-zsh, (wenige plugins 🤓)
+
+https://github.com/sindresorhus/awesome
+
+https://pinboard.in/
+https://raindrop.io/
+
+
+https://www.npmjs.com/package/npm-check
+
+Lighthouse Audit
+web.dev
+
+
+https://github.com/ebidel/lighthouse-httparchive
+
+https://www.igvita.com/2013/06/20/http-archive-bigquery-web-performance-answers/
+
+Performance Trace: FTTI,
+
+webpack bundel analzyer
+
+
+
+ng build --stats-json
+
