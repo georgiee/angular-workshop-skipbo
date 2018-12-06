@@ -530,7 +530,7 @@ console.log('script end');
 
 ^ Question is from Jake Archibald (developer advocate for Google Chrome)
 
-[.footer: Chapter 04 — RxJS: Micro & Macro Tasks]
+[.footer: Chapter 05 — Testing: Micro & Macro Tasks]
 
 
 ---
@@ -585,7 +585,7 @@ setTimeout
 
 ^ Awesome Source: https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
 
-[.footer: Chapter 04 — RxJS: Micro & Macro Tasks]
+[.footer: Chapter 05 — Testing: Micro & Macro Tasks]
 
 ---
 What are Macro Tasks?
@@ -602,7 +602,7 @@ el.style.display = 'none';
 
 ^ You will never see this flash as the full script is executed as a single task
 
-[.footer: Chapter 04 — RxJS: Micro & Macro Tasks]
+[.footer: Chapter 05 — Testing: Micro & Macro Tasks]
 
 ---
 What are Microtasks?
@@ -613,7 +613,7 @@ They are queued up and executed at the end of a task. No browser action in betwe
 
 ^ Microtasks don't allow to breath, they can queue up endlessly if not used correctly.
 
-[.footer: Chapter 04 — RxJS: Micro & Macro Tasks]
+[.footer: Chapter 05 — Testing: Micro & Macro Tasks]
 
 ---
 
@@ -640,7 +640,7 @@ cb();
 
 ```
 
-[.footer: Chapter 04 — RxJS: Micro & Macro Tasks]
+[.footer: Chapter 05 — Testing: Micro & Macro Tasks]
 
 ---
 # _Testing Async Code_
@@ -651,7 +651,7 @@ cb();
 + async & fixture.whenStable
 + done (jasmine)
 
-[.footer: Chapter 04 — RxJS: Testing Async Code]
+[.footer: Chapter 05 — Testing: Testing Async Code]
 
 ---
 What is async?
@@ -680,7 +680,7 @@ Ever wondered what ngZone is ? Here a ngZone Primer
 
 ^ With full control over micro and macro task means: we can easily test
 
-[.footer: Chapter 04 — RxJS: Testing Async Code]
+[.footer: Chapter 05 — Testing: Testing Async Code]
 
 ---
 
@@ -709,7 +709,7 @@ it('setTimeout & tick & flushMicrotasks ', fakeAsync(() => {
 ```
 ^ see that? we are the master of all micro and macro tasks 💪
 
-[.footer: Chapter 04 — RxJS: Testing Async Code]
+[.footer: Chapter 05 — Testing: Testing Async Code]
 
 ---
 
@@ -730,7 +730,8 @@ it('setTimeout(0) & tick ', fakeAsync(() => {
 ```
 
 ^ `flush()` to ignore time and drain all queues
-[.footer: Chapter 04 — RxJS: Testing Async Code]
+
+[.footer: Chapter 05 — Testing: Testing Async Code]
 
 ---
 + async & fixture.whenStable
@@ -748,7 +749,7 @@ it('manually finish your spec', (done) => {
 
 ^ done is from jasmine
 
-[.footer: Chapter 04 — RxJS: Testing Async Code]
+[.footer: Chapter 05 — Testing: Testing Async Code]
 
 ---
 
@@ -756,13 +757,14 @@ it('manually finish your spec', (done) => {
 > 👉 `fixture.detectChanges()`
 
 
-[.footer: Chapter 04 — RxJS: Testing Async Code]
 
 ^ In tests we have no zone running, no zone automagic
 
 ^ So there is only one rule
 
 ^ ComponentFixtureAutoDetect Provider but use the moment to reflect about your component, don't use magic.
+
+[.footer: Chapter 05 — Testing: Testing Async Code]
 
 ---
 Testing Routing
@@ -841,8 +843,434 @@ describe('application routing', () => {
 + Router Animations
 + Animate Children
 
+---
+
+[.code-highlight: none]
+[.code-highlight: 6-12]
+[.code-highlight: 5, 17, 18]
+[.code-highlight: 20-23]
+
+```typescript
+@Component({
+  selector: 'app-my',
+  template: 'hello animations',
+  animations: [
+    trigger('stateAnimation', [
+      state('on', style({
+        backgroundColor: 'red'
+      })),
+
+      state('off', style({
+        backgroundColor: 'green'
+      })),
+    ])
+  ]
+})
+export class MyComponent {
+  @HostBinding('@stateAnimation')
+  public state = 'on';
+
+  @HostListener('click')
+  toggleState() {
+    this.state = this.state === 'on' ? 'off' : 'on';
+  }
+}
+```
+
+^ 1. Define a trigger name (will be used in bindings to receive values)
+
+^ 2. Values received are states and we can assign different styles per state
+
+^ 3. Toggle the values on click
+
+^ 4. The result looks not so selling. Red and Green are toggled
+
+[.footer: Chapter 06 — Animation: Basics]
 
 ---
+
+[.code-highlight: none]
+[.code-highlight: 5]
+[.code-highlight: 6]
+
+```typescript
+animations: [
+  trigger('stateAnimation', [
+    ...
+  ]),
+  transition('on => off', [
+     animate('1s')
+  ]),
+  transition('off => on', [
+     animate('1s')
+  ])
+]
+
+```
+
+![inline 100%](../images/slides/ani-01.gif)
+
+^ what was missing is a state transition — don't mix it up with CSS transitions
+
+^ Define which state change we target
+
+^ Define how long we want to transition then
+
+[.footer: Chapter 06 — Animation: Basics]
+
+---
+
+[.code-highlight: all]
+[.code-highlight: 5-9]
+[.code-highlight: 11-14]
+
+```typescript
+animations: [
+  trigger('stateAnimation', [
+    ...
+  ]),
+
+  // Variant A
+  transition('off => on, off => on', [
+     animate('1s')
+  ])
+
+  // Variant B
+  transition('* => *', [
+     animate('1s')
+  ])
+]
+
+```
+^ 1. Variant A: same same
+
+^ 2. Variant B: same same, but different, more greedy, accepting more states
+
+[.footer: Chapter 06 — Animation: Basics]
+
+---
+
+[.code-highlight: all]
+[.code-highlight: 1-2]
+[.code-highlight: 3]
+[.code-highlight: 4]
+[.code-highlight: 5]
+
+```typescript
+animate(1000);
+animate('1s');
+animate('5s 250ms');
+animate('5s 10ms cubic-bezier(.17,.67,.88,.1)');
+animate(500, style({ background: "blue" })));
+// ...
+
+```
+^ animate will take the target styles and transition to it from the current state (like CSS)
+
+^ 1. receive duration (ms number or string) (like CSS)
+
+^ 2. delay
+
+^ 3. easing function (like CSS)
+
+^ 4. you can also give some other styles to use as the target. After completion state styles get activated.
+
+^ Even if state is red this will transition to blue then replace with red (no animations)
+
+---
+😬
+
+```css
+:host {
+  transition: background-color 1s;
+}
+```
+
+![inline 100%](../images/slides/ani-01.gif)
+
+^ That's nice and easy — buuut it's no more than defining a CSS transition.
+
+^ No worry, that's part of the story as both CSS transitions and Angular Animations use the [Web Animations API]. So it's good you think it's CSS.
+
+^ There is more power in it
+
+[.footer: Chapter 06 — Animation: Basics]
+
+---
+
+```html
+<div [@stateAnimation]='valueOrState'></div>
+```
+
+```typescript
+@Component({...})
+class MyComponent {
+  @HostBinding('@stateAnimation')
+  public valueOrState: 'on'|'off' = 'on'
+}
+```
+
+[.footer: Chapter 06 — Animation: Basics (Target)]
+
+^ You might have wondered where the element is being targeted to animate
+
+^ That's a special annotation for animations only and you get an error if you refer to a trigger that is not existing.
+
+^ That's how we select where our styles should be applied
+
+[.footer: Chapter 06 — Animation: Basics]
+
+---
+
+# _Appear & Disappear_
+
+```typescript
+transition('void => *' ,...)
+transition(':enter' ,...)
+```
+
+```typescript
+transition('* => void' ,...)
+transition(':leavce' ,...)
+```
+---
+^ We have special transitions for entering and leaving elements
+
+```typescript
+animations: [
+    trigger('stateAnimation', [
+      state('on', style({
+        backgroundColor: 'yellow'
+      })),
+      state('off', style({
+        backgroundColor: 'green'
+      })),
+      transition('on => off, off => on', [
+        animate('0.5s')
+      ]),
+      transition(':enter', [
+        style({
+          height: 0,
+          backgroundColor: 'green',
+          overflow: 'hidden'
+        }),
+        animate('0.5s',
+          style({
+            height: '*',
+            overflow: 'auto'
+          })
+        )
+      ])
+    ])
+  ]
+```
+![left fit](../images/slides/ani02.gif)
+
+^ Transition from height 0 to the actual height of the element.
+
+^ Did you ever try this in pure CSS? It's simply not possible and we created it just by dropping in that transition 💪.
+
+^ actual height of the element (`height:'*'`).
+
+[.footer: Chapter 06 — Animation: Appear & Disappear]
+
+---
+# _Disable_
+
+[.code-highlight: all]
+[.code-highlight: 1-3]
+[.code-highlight: 5-8]
+
+```html
+<div [@boxCounter]="boxCounter" [@.disabled]="true">
+    <div *ngFor="let items of boxes" class="box"></div>
+</div>
+
+<!-- won't disable, parent is the master -->
+<div [@boxCounter]="boxCounter">
+    <div *ngFor="let items of boxes" class="box" [@.disabled]="true"></div>
+</div>
+```
+
+^ 1. When you want to disable animations depending on an expression you can use the special binding `@.disabled`
+
+^ 2. will still animate because the animation is on the parent and using :enter to target the entering children
+
+^ Disable can only disable animations bound to the specific element not effects down from parents.
+
+---
+# _Events_
+[.code-highlight: all]
+[.code-highlight: 3-4]
+[.code-highlight: 3, 7, 9]
+[.code-highlight: 4, 8]
+
+```html
+<div
+  [@animateAnyChange]="counter"
+  (@animateAnyChange.start)="start($event)"
+  (@animateAnyChange.done)="end($event)">
+</div>
+<!--
+{element: ..., triggerName: "animateAnyChange", fromState: 0, toState: 1, phaseName: "start", …}
+{element: ..., triggerName: "animateAnyChange", fromState: 0, toState: 1, phaseName: "done", …}
+{element: ..., triggerName: "animateAnyChange", fromState: 1, toState: 2, phaseName: "start", …}
+-->
+```
+^ You have events to always know about what value triggered which transition
+
+---
+More in the box:
+
++ Query to target children elements
++ Group vs. Sequence
++ Stagger to insert small delays between elements
+
+^ Multiple Animations with group and sequence
+
+---
+![right fit](../images/slides/ani03.gif)
+
+```typescript
+animations: [
+    trigger('animateAnyChange', [
+      transition('* => *', [
+        group([
+          query('h1', [
+            style({ backgroundColor: 'red'}),
+            animate('1s')
+          ]),
+          query('p', [
+            style({ backgroundColor: 'red'}),
+            animate('0.25s')
+          ]),
+          query('button', [
+            style({ backgroundColor: 'yellow'}),
+            animate('0.5s')
+          ]),
+        ]),
+      ])
+    ])
+  ]
+```
+^ Here you can see how we can use group and animate different elements inside a single transition
+
+^ We use query to find elements. Powerful function (optional, limit, multiple queries, enter/leave for each element)
+
+---
+![right fit](../images/slides/ani05.gif)
+
+```typescript
+animations: [
+    trigger('animateAnyChange', [
+      transition('* => *', [
+        sequence([
+          query('h1', [
+            style({ backgroundColor: 'red'}),
+            animate('1s')
+          ]),
+          query('p', [
+            style({ backgroundColor: 'red'}),
+            animate('0.25s')
+          ]),
+          query('button', [
+            style({ backgroundColor: 'yellow'}),
+            animate('0.5s')
+          ]),
+        ]),
+      ])
+    ])
+  ]
+```
+^ Here we replaced group with sequence
+
+---
+
+![right fit](../images/slides/ani07.gif)
+
+```typescript
+animations: [
+  trigger('animateAnyChange', [
+    transition('* => *', [
+      query('h1, p', [
+        style({ opacity: 0, transform: 'translateY(-100px)'}),
+        stagger(-250, [
+          animate('500ms cubic-bezier(0.35, 0, 0.25, 1)',
+            style({ opacity: 1, transform: 'none' })
+          )
+        ])
+      ])
+    ])
+  ])
+]
+```
+^ Staggering needs a query to collect multiple elements
+
+^ Each elements gets a small time offset before it starts which makes a pleasing effect — called staggering.
+
+---
+
+# _Router Animations_
+![right fit](../images/slides/ani07.gif)
+
+```typescript
+animations: [
+    trigger('routeAnimation', [
+      transition('* => *', [
+        group([
+          query(':enter', [
+            style({ transform: 'translateX(100%)' }),
+            animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
+          ], { optional: true }),
+
+          query(':leave', [
+            animate('0.5s ease-in-out', style({
+              transform: 'translateY(100%)',
+              opacity: 0
+            }))
+          ], { optional: true })
+        ])
+      ])
+    ])
+  ]
+```
+
+```html
+<a routerLink='a'>go to a</a><br>
+<a routerLink='b'>go to b</a>
+
+<div
+  [@routeAnimation]="yourOutlet.isActivated && yourOutlet.activatedRoute.routeConfig.path"
+  (@routeAnimation.start)="start($event)"
+  (@routeAnimation.done)="end($event)">
+  <router-outlet #yourOutlet="outlet"></router-outlet>
+</div>
+```
+
+^ access active route path and assign it to the trigger
+
+^ Transition from any page to any
+
+^ enter and leave are different
+
+^ Example: animation/04
+
+---
+
+# _animateChild_
+
+```typescript
+query('@yourNestedTrigger', [
+    animateChild()
+], { optional: true })
+```
+
+^ Parent Animation will block child animation (if queried)
+
+^ Use animateChild to start them
+
+---
+
 # [fit] CHALLENGE
 
 ---

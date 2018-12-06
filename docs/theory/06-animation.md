@@ -29,7 +29,7 @@ import { trigger, state, style } from '@angular/animations';
 
 @Component({
   selector: 'app-my',
-  template: 'hello my',
+  template: 'hello animations',
   animations: [
     trigger('stateAnimation', [
       state('on', style({
@@ -60,10 +60,10 @@ Modify your animations array and append a transition method call.
 
 ```typescript
 animations: [
-  trigger('stateAnimation', [
-    ...
+  transition('on => off', [
+     animate('1s')
   ]),
-  transition('* => *', [
+  transition('off => on', [
      animate('1s')
   ]),
 ]
@@ -90,7 +90,7 @@ You might have wondered where the element is being targeted to animate. That's h
 You can do this in your template
 
 ```html
-<div [@triggerName]='valueOrState'></div>
+<div [@stateAnimation]='valueOrState'></div>
 ```
 
 or you can directly target the component itself with a host binding
