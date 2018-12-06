@@ -106,7 +106,7 @@ There is no gameover or abort being triggered in the game yet. Therefore I prepa
 
 ![](images/04-rxjs/specs.png)
 
-Remember to use the [theory](../../04-rxjs.md) docs if you are unsure.
+Remember to use the [theory](../theory/04-rxjs.md) docs if you are unsure.
 > ⏱ Start Developing now and come back after ⏱
 
 ## Task 2: AI Autoplay V1 (Single Card)
