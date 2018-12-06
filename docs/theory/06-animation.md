@@ -187,24 +187,6 @@ The trigger defines zero height and and horizontal offset as the initial styles 
 
 Pretty, isn't it ?
 
-## Animation 3: Numeric Triggers
-Assume our trigger is not a state with values on & off but a numeric value.
-
-```typescript
-public boxCounter = 0;
-// transform our number into an array to use with ngFor
-get boxes() {
-  return Array.from(Array(this.boxCounter));
-}
-```
-
-```typescript
-<button (click)='boxCounter = boxCounter + 1 '>add</button>
-<div *ngFor="let items of boxes" class="box"></div>
-```
-
-Now you have a button that can add boxes. We want to animate those boxes so we create a new trigger referring to boxCounter.
-
 ## Animation 4: Disable
 When you want to disable animations depending on an expression you can use the special binding `@.disabled`. This will prevent all animations on the element all children.
 
