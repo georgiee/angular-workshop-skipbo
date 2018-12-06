@@ -118,7 +118,7 @@ I changed the game to a more random looking set of cards while still being predi
 That's the current gameplay screen:
 ![](images/04-rxjs/ai-start.png)
 
-> **Your task:** Make Oscar 🐙 play the turns for the two CPU players by using the `naivePlacementStrategyObservable`
+> **Your task:** Make Oscar 🐙 play the turns for the two CPU players by using the `naivePlacementStrategyObservable` (see file `placement-strategy.ts` in the ai folder)
 
 You will work in the following Observable.
 
