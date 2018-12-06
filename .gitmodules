@@ -1,3 +1,3 @@
 [submodule "skipbo-angular"]
 	path = skipbo-angular
-	url = git@github.com:georgiee/skipbo-angular.git
+	url = https://github.com/georgiee/skipbo-angular
