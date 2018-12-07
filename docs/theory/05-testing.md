@@ -373,6 +373,22 @@ it('setTimeout(0) & tick ', fakeAsync(() => {
 A simple `tick()` is not enough. You would have missed the timer from the future (2s ahead). A `tick(2000)` would have worked
 but if the exact timing is not interesting you can just use `flush` instead.
 
+Important: As of today (12/2018) Angular's flush implementation uses the zone.js flush method without giving you the opportunity to pass all arguments.
+
+Here zone.js
+```typescript
+flush(limit = 20, flushPeriodic = false, doTick?: (elapsed: number) => void): number {
+```
+
+vs how Angular exposes it
+
+```typescript
+export function flush(maxTurns?: number): number {
+```
+
+You can't use flush for periodic timers (setInterval) and you should stick to the explicit `tick(duration)` instead.
+
+
 ### async & fixture.whenStable
 What about the friends `async` & `whenStable` ?
 
