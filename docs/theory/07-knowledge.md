@@ -96,30 +96,12 @@ and compare it ith this
 > $0
 ```
 
-## components are directives
-You can see it in the sources. Components are Directives with template and css. And CSS for Directives is in the top feature list that will get added to Angular once Ivy is released. Igor Minar told us in the Q&A Panel at Angular Connect.
-
-## Inject Host Component
-You can inject any parent component if you get your hands on the class reference. Be careful with this as this is a sign of tight coupling which is a bad sign is most cases. But it's sometimes useful for examples to create tight binding between Dropdown and its items. But as with most things there is always another, better way of doing such a coupling. Before injecting some parent component create a service to mediate between both components. Here is a nice examples how to do it:
-
-https://blog.angularindepth.com/here-is-how-to-get-viewcontainerref-before-viewchild-query-is-evaluated-f649e51315fb
-
-search for `shared.registerContainer(vc);`
-
 ## Chrome Stack Traces.
 Did you know, you can hide parts of the framework you are sure will never take part in any error. That makes a stack trace more readable.
 
 Look here 💪
 ![](../images/blackbox-before.png)
 ![](../images/blackbox-after.png)
-
-## forRoot vs forChild
-The FAQ is co clear about it in case you are undecided when to use which method and when to use it in your own modules.
-
-> forRoot() and forChild() are conventional names for methods that configure services in root and feature modules respectively.
-
-> Angular doesn't recognize these names but Angular developers do. Follow this convention when you write similar modules with configurable service providers.
->
 
 ## Injection Debugging
 
@@ -133,6 +115,7 @@ You can use ng.probe to access injectors of components:
 ```
 ng.probe($0).injector.get('MyToken');
 ```
+
 ## Web Componist
 If that's one of the things that pop up in your mind when thinking of web developing — congratulations you are a web component developer.
 
@@ -141,37 +124,6 @@ If that's one of the things that pop up in your mind when thinking of web develo
   display: block;
 }
 ```
-
-## Template Export
-You all know template references.
-
-```
-<div #yourReference>content</div>
-```
-
-You might have seen this:
-
-```
-<div #yourReference="someKeyword">content</div>
-```
-
-That's the template pendant to something that is more common in your component code:
-
-```
-@ContentChild('yourReference', {read: ElementRef})
-```
-
-
-That read option is what you tell Angular with the keyword. By default it's mostly ElementRef. But if you have multiple directives and you want the instance of a single directive you can use the keyword of the directive. When you create a directive there is a field to name that keyword:
-
-```
-@Directive({
-  selector: '[myDirective]',
-  exportAs: 'someKeyword',
-```
-
-That's nice handy in many situations.
-
 
 ## Bash
 Did you know that you can jump back to the last branch?
@@ -184,40 +136,37 @@ where you can jump back to the last working directory with `cd -`
 Create a folder `~/opensource` and whenever you see an interesting project, don't stop with a start on github. Clone it and quickly browse through it. When you are working on a daily project, remember that project and if it fits in the overall complex browse through it again for inspiration about structure & code techniques.
 
 Angular Material is for examples my goto project to look for ideas around RxJS & Testing.
-\
 
+## Lost & Found
+Here some ideas from the workshop when we exchanged tips & tricks.
 
++ github: While being on a repository, try to press the key `t` to find any file
 
-github y t
++ github: While being on a file in a repository presse key `y` to get the full url including the sha of the commit — that way you can link a file that will never change even if the code in the repository changes.
 
-
-twitter:
++ Interesting Twitter User for daily coding tips
 https://twitter.com/umaar?lang=en
 
-oh-my-zsh, (wenige plugins 🤓)
++ oh-my-zsh (with few plugins only 🤓) is a great supplement to zsh.
 
-https://github.com/sindresorhus/awesome
++ Others are not fan of oh-my-zsh as it can slow down the boot time of your shell.
 
-https://pinboard.in/
-https://raindrop.io/
++ List of Awesome Lists: https://github.com/sindresorhus/awesome
 
++ Tools to help you manage bookmarks.
+  + https://pinboard.in/
+  + https://raindrop.io/
 
-https://www.npmjs.com/package/npm-check
++ Interactive alternative to `npm outdated`: https://www.npmjs.com/package/npm-check
 
-Lighthouse Audit
-web.dev
++ We have seen the Lighthouse Audit applied to your agency page
 
++ web.dev can run lighthouse tests without an extension. web.dev is a page curated by google to help developers with tools and lear material.
 
-https://github.com/ebidel/lighthouse-httparchive
++ I briefly mentioned how Lighthouse calcualtes the score with a formula based on the httparchive and the results in the Google BigQUery DB. Here some links:
+  + https://github.com/ebidel/lighthouse-httparchive
+  + https://www.igvita.com/2013/06/20/http-archive-bigquery-web-performance-answers/
 
-https://www.igvita.com/2013/06/20/http-archive-bigquery-web-performance-answers/
++ We briefly looked at the webpack bundle analzyer to analzye the bundel content. Steps are: ng build with stats-json and use the jsinjson to generate a visualization. Either with the webpack bundle analyzer or some online tool.
 
-Performance Trace: FTTI,
-
-webpack bundel analzyer
-
-
-
-ng build --stats-json
-
-[Jake Archibald Micro Macro Tasks Vortrag](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
++ Micro & Macro was heard, here he amazing and very recent talk from Jake: [Jake Archibald Micro Macro Tasks 2018](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
