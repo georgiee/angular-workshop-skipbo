@@ -585,6 +585,8 @@ setTimeout
 
 ^ Awesome Source: https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
 
+^ Jake Vortrag 2018: https://www.youtube.com/watch?v=cCOL7MC4Pl0
+
 [.footer: Chapter 05 — Testing: Micro & Macro Tasks]
 
 ---

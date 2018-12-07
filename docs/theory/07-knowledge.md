@@ -38,9 +38,9 @@ ng.probe($0).injector.elDef.element
 ```
 
 How to get an injected token:
-> If we ask for some token in child component it will first look at child element injector, where checks elRef.element.allProviders|publicProviders, then goes up through all parent view elements and also checks providers in element injector. 
+> If we ask for some token in child component it will first look at child element injector, where checks elRef.element.allProviders|publicProviders, then goes up through all parent view elements and also checks providers in element injector.
 
-> If the next parent view element equals null(2) then it returns to startView(3), checks startView.rootData.elnjector(4) and only then, 
+> If the next parent view element equals null(2) then it returns to startView(3), checks startView.rootData.elnjector(4) and only then,
 
 > if token won’t be found, checks startView.rootData module.injector
 
@@ -81,7 +81,7 @@ Past anywhere your clipboard content:
 ```
 
 ## console.dir
-So you already knew about `$0` and friends? 
+So you already knew about `$0` and friends?
 If yout output the values you get a representation of the DOM, but if you want to list & access the actual JavaScript properties. What do you then ?
 
 Try this (while a DOM element is selected)
@@ -107,7 +107,7 @@ https://blog.angularindepth.com/here-is-how-to-get-viewcontainerref-before-viewc
 search for `shared.registerContainer(vc);`
 
 ## Chrome Stack Traces.
-Did you know, you can hide parts of the framework you are sure will never take part in any error. That makes a stack trace more readable. 
+Did you know, you can hide parts of the framework you are sure will never take part in any error. That makes a stack trace more readable.
 
 Look here 💪
 ![](../images/blackbox-before.png)
@@ -119,7 +119,7 @@ The FAQ is co clear about it in case you are undecided when to use which method 
 > forRoot() and forChild() are conventional names for methods that configure services in root and feature modules respectively.
 
 > Angular doesn't recognize these names but Angular developers do. Follow this convention when you write similar modules with configurable service providers.
-> 
+>
 
 ## Injection Debugging
 
@@ -191,7 +191,7 @@ Angular Material is for examples my goto project to look for ideas around RxJS &
 github y t
 
 
-twitter: 
+twitter:
 https://twitter.com/umaar?lang=en
 
 oh-my-zsh, (wenige plugins 🤓)
@@ -220,3 +220,4 @@ webpack bundel analzyer
 
 ng build --stats-json
 
+[Jake Archibald Micro Macro Tasks Vortrag](https://www.youtube.com/watch?v=cCOL7MC4Pl0)

@@ -7,6 +7,8 @@ Welcome to this card game themed Angular Workshop. We will develop & play Skip-B
 
 **Jump into action:** [Workshop Preparations](docs/preparations.md)
 
+Do you have a question?<br> Find me on [Twitter](https://twitter.com/deluxee)?
+
 ---
 
 ## What's in the box ?
