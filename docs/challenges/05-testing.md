@@ -83,13 +83,13 @@ Therefore it displays `Card 1` while it's actually a `Card 4`. That's by the way
 
 It looks for the expected top facing card:
 
-```
+```typescript
 expect(fixture.nativeElement.querySelector('.card--3')).toBeTruthy();
 ```
 
 And just to make sure it's accessing explicitly the last element too:
 
-```
+```typescript
 const [lastElement] = fixture.nativeElement.querySelectorAll('skipbo-card:last-child skipbo-card-face .card');
 expect(lastElement.classList).toContain('card--3');
 ```
@@ -100,6 +100,8 @@ You will tackle this bug in the next three tasks with the following questions:
 + 1. Can you fix the test only by adding code to the spec?
 + 2. Can you find the actual problem in our code?
 + 3. Can you explain what went wrong ?
+
+Note: These are questions you wil answer by working on the following three parts ⬇️. Don't stop here and try to fix the bug yourself.
 
 Good luck!
 
@@ -163,7 +165,7 @@ Catch up with `workshop/05-testing-progress-02`.
 
 
 ## Task 5: Test RxJS with Oscar 🐙 — CPUs
-Start in branch `workshop/05-testing-progress-03` (_mandatory_).
+⏭ Start in branch `workshop/05-testing-progress-03` (_mandatory_).
 
 Remember Oscar 🐙? We did not provide any tests. Testing RxJS is actually easier or at least there is less boilerplate involved than you would expect. Just deliver the input streams and mock the resulting actions we expect.
 
