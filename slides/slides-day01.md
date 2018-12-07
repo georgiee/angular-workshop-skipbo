@@ -4,6 +4,13 @@ build-lists: true
 
 ---
 
++ [@deluxee](https://twitter.com/deluxee) (Twitter)
++ [@georgiee](https://github.com/georgiee/) (Github)
++ [Workshop Repository](https://github.com/georgiee/angular-workshop-skipbo)
++ [Workshop Project](https://github.com/georgiee/skipbo-angular)
+
+---
+
 # [fit] What's in the box?
 
 ---

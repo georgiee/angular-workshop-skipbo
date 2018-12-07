@@ -80,9 +80,26 @@ Learn about animations in Angular, how to apply and control them. In the challen
 + [Challenge](docs/challenges/06-animation.md)
 + [Preview](https://5c0115fa9a063f180bf0dd48--skipbo-angular-workshop.netlify.com/welcome)
 
+### Knowledge
+I created a rough list of random interesting things for a developer.
++ [Knowledge.md](docs/theory/07-knowledge.md)
 
 ---
+### Resources & Links
+Here some mixed links for the time after workshop 👌
 
-[Completed Version](https://skipbo-angular-workshop.netlify.com/)
++ [Completed Version](https://skipbo-angular-workshop.netlify.com/)
++ [@deluxee](https://twitter.com/deluxee) (My Twitter Handle)
++ [@georgiee](https://github.com/georgiee/) (My Github Handle)
++ [Workshop Repository](https://github.com/georgiee/angular-workshop-skipbo)
++ [Workshop Project](https://github.com/georgiee/skipbo-angular)
++ [My Skip-Bo Core](https://github.com/georgiee/skipbo-typescript-jest)
++ [Theory Snippets](https://github.com/georgiee/angular-workshop-skipbo-theory)
++ [Tasks, microtasks, queues and schedules (Jake Archibald)](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
++ [Jake Archibald — Event Loop/Micro/Macro (Video, 2018)](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
++ [Reactive (Standard behind RxJS), Marble Diagrams )](http://reactivex.io)
++ [Ben Lesh @ Twitter (RxJs)](https://twitter.com/BenLesh)
++ [Jake Archibald @ Twitter (Micro/Macro)](https://twitter.com/jaffathecake)
++ [Igor Minar @ Twitter (Angular)](https://twitter.com/igorminar)
 
-Slides are for [Deckset](https://www.deckset.com/)
+The slide files (*.md) are made to be used with [Deckset](https://www.deckset.com/). There will be a slideshare link soon.

@@ -6,6 +6,12 @@ build-lists: true
 ^ Skip-Bo Edition
 
 ---
++ [@deluxee](https://twitter.com/deluxee) (Twitter)
++ [@georgiee](https://github.com/georgiee/) (Github)
++ [Workshop Repository](https://github.com/georgiee/angular-workshop-skipbo)
++ [Workshop Project](https://github.com/georgiee/skipbo-angular)
+
+---
 ![original](../images/slides/bg.png)
 # [fit] RECAP
 
@@ -1295,3 +1301,8 @@ query('@yourNestedTrigger', [
 ---
 ![original](../images/slides/bg.png)
 ### [fit] THANKS
+
++ [@deluxee](https://twitter.com/deluxee) (Twitter)
++ [@georgiee](https://github.com/georgiee/) (Github)
++ [Workshop Repository](https://github.com/georgiee/angular-workshop-skipbo)
++ [Workshop Project](https://github.com/georgiee/skipbo-angular)
