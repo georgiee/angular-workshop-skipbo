@@ -339,14 +339,6 @@ What to do? Can our spy return different values? Yes it can 🤩 ! You can mock 
 Now you should be able to write the test with all those information.
 Good luck 💪
 
-<details>
-<summary>Hint</summary>
-It's the same test as for cpus but you set the cpu flag to false (playerMock._cpu = false)
-and you check if a function has not beed called with  `expect(...).not.toHaveBeenCalled();`.
-</details>
-
-> ⏱ Start Developing now and come back after ⏱
-
 ---
 
 ## Completed
