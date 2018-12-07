@@ -124,24 +124,25 @@ The CardPile Component by itself works (all tests are green). So maybe it's a pr
   <summary>Hint2</summary>
   It's about ChangeDetection, OnPush & Object Mutation.
   <details>
-    <summary>More? Are you sure?</summary>
+  <summary>More? Are you sure?</summary>
 
-    Add the following call just before `fixture.detectChanges();` is called inside the test `display pile of cards`.
+  Add the following call just before `fixture.detectChanges();` is called inside the test `display pile of cards`.
 
-    ```
-    stockInstance.pile.cdr.markForCheck();
-    fixture.detectChanges();
-    ```
+  ```typescript
+  stockInstance.pile.cdr.markForCheck();
+  fixture.detectChanges();
+  ```
 
-    Is the test green now? That's not a fix, but you just found the reason for the bug. By calling markForCheck on the PileComponent you forced Angular to compile the template again. And this works! This means: Angular could not detect any changes in the bindings of the CardPileComponent. There are only two. See the stock.component.html where you find the bindings to the CardPile.
+  Is the test green now? That's not a fix, but you just found the reason for the bug. By calling markForCheck on the PileComponent you forced Angular to compile the template again. And this works! This means: Angular could not detect any changes in the bindings of the CardPileComponent. There are only two. See the stock.component.html where you find the bindings to the CardPile.
 
-    ```html
-      <skipbo-card-pile
-        [cards]="cards"
-        [autoRevealCard]="true">
-      </skipbo-card-pile>
-    ```
-    If you have problems with the binding then the parent component is to blame. Go to Task 2 — Part 2 and start looking around in `StockComponent`. You can find the fixed spec in the branch `workshop/05-testing-progress-01`.
+  ```html
+    <skipbo-card-pile
+      [cards]="cards"
+      [autoRevealCard]="true">
+    </skipbo-card-pile>
+  ```
+
+  If you have problems with the binding then the parent component is to blame. Go to Task 2 — Part 2 and start looking around in `StockComponent`. You can find the fixed spec in the branch `workshop/05-testing-progress-01`.
   </details>
 </details>
 
