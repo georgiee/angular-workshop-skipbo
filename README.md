@@ -1,14 +1,12 @@
 # Angular Workshop
-[👉 Play with the final project!](https://skipbo-angular-workshop.netlify.com)
+[👉 Play with the final project!](https://skipbo-angular-workshop.netlify.com)<br>
+[🏋 Start with the workshop](docs/preparations.md)
 
 ![](images/intro.jpg)
 
 Welcome to this card game themed Angular Workshop. We will develop & play Skip-Bo, a famous and easy to learn card game. The making of this will be so much more fun than creating another todo list manager while being more challenging 💪
 
 [![](images/preview.gif)](https://skipbo-angular-workshop.netlify.com)
-
-
-**Jump into action:** [Workshop Preparations](docs/preparations.md)
 
 Do you have a question?<br> Find me on [Twitter (@deluxee)](https://twitter.com/deluxee)
 
