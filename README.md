@@ -86,7 +86,14 @@ I created a rough list of random interesting things for a developer.
 + [Knowledge.md](docs/theory/07-knowledge.md)
 
 ---
-### Resources & Links
+
+## Slides
+
+Here the slides we used.
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/fEm9f3F9uTlSEj" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+## Resources & Links
 Here some mixed links for the time after workshop 👌
 
 + [Completed Version](https://skipbo-angular-workshop.netlify.com/)
@@ -102,6 +109,7 @@ Here some mixed links for the time after workshop 👌
 + [Igor Minar @ Twitter (Angular)](https://twitter.com/igorminar)
 
 The slide files (*.md) are made to be used with [Deckset](https://www.deckset.com/). There will be a slideshare link soon.
+
 
 ---
 
