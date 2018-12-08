@@ -7,7 +7,7 @@ Welcome to this card game themed Angular Workshop. We will develop & play Skip-B
 
 **Jump into action:** [Workshop Preparations](docs/preparations.md)
 
-Do you have a question?<br> Find me on [Twitter](https://twitter.com/deluxee)?
+Do you have a question?<br> Find me on [Twitter (@deluxee)](https://twitter.com/deluxee)
 
 ---
 
@@ -89,8 +89,6 @@ I created a rough list of random interesting things for a developer.
 Here some mixed links for the time after workshop 👌
 
 + [Completed Version](https://skipbo-angular-workshop.netlify.com/)
-+ [@deluxee](https://twitter.com/deluxee) (My Twitter Handle)
-+ [@georgiee](https://github.com/georgiee/) (My Github Handle)
 + [Workshop Repository](https://github.com/georgiee/angular-workshop-skipbo)
 + [Workshop Project](https://github.com/georgiee/skipbo-angular)
 + [My Skip-Bo Core](https://github.com/georgiee/skipbo-typescript-jest)
@@ -103,3 +101,14 @@ Here some mixed links for the time after workshop 👌
 + [Igor Minar @ Twitter (Angular)](https://twitter.com/igorminar)
 
 The slide files (*.md) are made to be used with [Deckset](https://www.deckset.com/). There will be a slideshare link soon.
+
+---
+
+Do you have a question?<br> Find me on [Twitter (@deluxee)](https://twitter.com/deluxee)
+
+💼  My employer [Satellytes](http://www.satellytes.com) made it possible to work on this project for a client and to share it with with the public in this repository.
+
+And you know what?
+> Satellytes (Munich) is hiring Frontend & Backend (**junior** & **senior**) developers. <br> Yes, dear Junior Developers — we would love to mentor you and to grow with us!
+
+See [www.satellytes.com](http://www.satellytes.com) or write me on [Twitter](https://twitter.com/deluxee). We are happy to hear from you ✌️
