@@ -6,7 +6,7 @@
 
 Welcome to this card game themed Angular Workshop. We will develop & play Skip-Bo, a famous and easy to learn card game. The making of this will be so much more fun than creating another todo list manager while being more challenging 💪
 
-[![](images/preview.gif)](https://skipbo-angular-workshop.netlify.com)
+[![](images/preview3.gif)](https://skipbo-angular-workshop.netlify.com)
 
 Do you have a question?<br> Find me on [Twitter (@deluxee)](https://twitter.com/deluxee)
 
@@ -89,9 +89,7 @@ I created a rough list of random interesting things for a developer.
 
 ## Slides
 
-Here the slides we used.
-
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/fEm9f3F9uTlSEj" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+You can find the slides on [slideshare](https://www.slideshare.net/GeorgiosKaleadis/angular-advanced-workshop-challenges?ref=)
 
 ## Resources & Links
 Here some mixed links for the time after workshop 👌
